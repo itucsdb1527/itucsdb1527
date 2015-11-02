@@ -3,7 +3,9 @@
 {% block title %} Home Page {% endblock %}
 
 {% block content %}
-    	<h1>About Us</h1><hr>
-        <p>Fastbook Company was founded in 2005. Our company offers system solutions to our esteemed customers with our powerful computers at your disposal. In november catalog; web offer our new products to you.<p>
+    	<h1>Home Page</h1><hr>
+        <a href="{{ url_for('initialize_database') }}">Init DB</a><br>
+        <a href="{{ url_for('counter_page') }}">Counter Page</a>
+
         <img style="float:right" src="{{ url_for('static', filename='img/logo.png') }}" title="Fastbook" alt="Fastbook">
 {% endblock %}
