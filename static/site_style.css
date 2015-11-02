@@ -1,0 +1,226 @@
+@charset "utf-8";
+
+/* Main Description */
+body{
+	margin:0 0 5px 0;
+	padding:0px;
+	background-color:#9CF;
+	overflow-y:scroll;
+	overflow-x:hidden;
+}
+img{
+	border:none;
+}
+h1{
+	font-size:30px;
+	font:Arial, sans-serif;
+	font-style:italic;
+	font-weight:bold;
+	color:#900;
+	text-indent:15px;
+}
+h2{
+	font-size:25px;
+	font:Arial, sans-serif;
+	font-style:normal;
+	font-weight:bold;
+	color:#F00;
+	text-indent:40px;
+	border-bottom:#000 1px solid;
+	border-bottom-right-radius:10px;
+	border-bottom-left-radius:10px;
+
+}
+
+ div{
+	border:double;
+	}
+
+#main {
+	position:relative;
+	margin:0 auto 0 auto;
+	width:1100px;
+	background-color:#99F;
+	}
+
+#header{
+	background-color:#CCF;
+	}
+
+#content{
+	padding: 5px 5px 5px 10px;
+}
+
+#footer{
+	padding:15px;
+	background-color:#CCF;
+	border-top:#F60 2px solid;
+	border-top-right-radius:50px;
+	border-top-left-radius:50px;
+	border-bottom:#F60 2px solid;
+	border-bottom-right-radius:50px;
+	border-bottom-left-radius:50px;
+}
+
+/* Content */
+#content p{
+	font-size:14px;
+	font:Arial, sans-serif;
+	font-style:oblique;
+	font-weight:bolder;
+	color:#222;
+	text-indent:20px;
+}
+#content table,th,td{
+	border:1px #000000 solid;
+	border-collapse:collapse;
+	padding:0;
+}
+
+/* Footer */
+#footerLinks{
+	float:left;
+}
+#footerLinks a{
+	color: #000;
+	text-decoration: none;
+}
+#footerLinks a:hover{
+	color: #666;
+	text-decoration: underline;
+}
+#footerDesigned{
+	color:#222;
+	float:right;
+}
+#footerDesigned a{
+	color:#F60;
+	text-decoration:none;
+}
+#footerDesigned a:hover{
+	color:#FC0;
+}
+
+
+/* Models Table */
+#modelTable {
+	width:600px;
+	margin-left:25px;
+}
+#modelTable a{
+	color:#F60;
+}
+#modelTable a:hover{
+	color:#C03;
+}
+#modelTable th{
+	font-size:20px;
+	font-style:italic;
+	font-weight:bold;
+	color:#F60;
+	background-color:#CCC;
+}
+#modelTable td{
+	padding:0 10px 0 10px;
+	font-size:16px;
+	font-style:italic;
+	font-weight:100;
+	color:#C03;
+	background-color:#FFF;
+	vertical-align:middle;
+}
+#modelTable .center{
+	text-align:center;
+}
+#modelTable .right{
+	text-align:right;
+}
+
+/* Model Details */
+#modelDetails{
+	margin-left:55px;
+}
+#modelDetails .productName{
+	font-size:21px;
+	font-style:italic;
+	font-weight:800;
+	color:#060;
+	line-height:40px;
+	margin-top:40px;
+}
+#modelDetails ul{
+	font-size:18px;
+	font-style:italic;
+	font-weight:normal;
+	line-height:25px;
+	color:#111;
+}
+
+/* Adress */
+#adress{
+	float:left;
+	margin: 10px 0 0 100px;
+
+}
+.adressImage{
+	width:200px;
+	height:200px;
+}
+
+/* Contact Form */
+#contactForm{
+	float:right;
+	margin:5px 50px 0 auto;
+}
+#contactTable{
+	width:600px;
+}
+#contactTable caption{
+	font-size:21px;
+	font-style:italic;
+	font-weight:800;
+	color:#F00;
+	line-height:40px;
+}
+#contactTable .buttonArea{
+	margin-right:15px;
+	float:right;
+}
+.formArea{
+	width:250px;
+}
+.textArea{
+	margin: 5px 0 1px 3px;
+
+}
+
+/* Top Menu */
+#topMenu{
+	margin-left:20px;
+	margin-top:80px;
+	float:left;
+}
+.topMenuItem{
+	float:left;
+	margin-left:20px;
+	border-bottom:#09F 3px solid;
+	font-size:20px;
+	font-weight:bold;
+}
+.topMenuItem a{
+	color: #C00;
+	text-decoration: none;
+}
+.topMenuItem a:hover{
+	color:#900;
+}
+.topMenuItem:hover {
+	border-bottom:#00C 3px solid;
+	font-size:20px;
+	font-weight:bold;
+}
+
+/* Logo */
+.logo {
+	float:left;
+}

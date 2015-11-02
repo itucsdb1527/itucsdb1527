@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Adress of Volleyball - VolleyBASE">
+<meta name="keywords" content="Volleyball, Database">
+
+<title>VolleyBASE - Blank</title>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site_style.css') }}">
+</head>
+
+<body>
+<div id="main">
+    <div id="header">
+        <a href="{{ url_for('home_page') }}"><img src="{{ url_for('static', filename='img/logo.png') }}" class="logo" alt="VolleyBASE" title="VolleyBASE"></a>
+        <div id="topMenu">
+            <div class="topMenuItem"><a href="{{ url_for('home_page') }}"><i>Home</i></a></div>
+            <div class="topMenuItem"><a href="{{ url_for('leagues_page') }}"><i>Leagues</i></a></div>
+            <div class="topMenuItem"><a href="{{ url_for('teams_page') }}"><i>Teams</i></a></div>
+            <div class="topMenuItem"><a href="{{ url_for('matches_page') }}"><i>Matches</i></a></div>
+            <div class="topMenuItem"><a href="{{ url_for('players_page') }}"><i>Players</i></a></div>
+            <div class="topMenuItem"><a href="{{ url_for('referees_page') }}"><i>Referees</i></a></div>
+            <div class="topMenuItem"><a href="{{ url_for('arenas_page') }}"><i>Arenas</i></a></div>
+        </div>
+    <div style="clear:both;"></div>
+    </div>
+
+    <div id="content">
+    <!-- Sadece bu tagların arasına kod yazılacak BEGIN-->
+
+    	<h1>About Us</h1><hr>
+        <p>Fastbook Company was founded in 2005. Our company offers system solutions to our esteemed customers with our powerful computers at your disposal. In november catalog; web offer our new products to you.<p>
+        <img style="float:right" src="{{ url_for('static', filename='img/logo.png') }}" title="Fastbook" alt="Fastbook">
+
+    <!-- Sadece bu tagların arasına kod yazılacak END-->
+        <div style="clear:both;"></div>
+    </div>
+
+    <div id="footer">
+		 <div id="footerLinks"><a href="{{ url_for('home_page') }}"><i>Home</i></a> | <a href="{{ url_for('leagues_page') }}"><i>Leagues</i></a> | <a href="{{ url_for('teams_page') }}"><i>Teams</i></a> | <a href="{{ url_for('matches_page') }}"><i>Matches</i></a> | <a href="{{ url_for('players_page') }}"><i>Players</i></a> | <a href="{{ url_for('referees_page') }}"><i>Referees</i></a> | <a href="{{ url_for('arenas_page') }}"><i>Arenas</i></a><br>
+		 	<b>VolleyBASE Company&copy;2015</b></div>
+		 <div id="footerDesigned"><b>Designed:</b> <a href="mailto:cfkuyucu@gmail.com" title="Click for Contact to Designer">Cemal F. Kuyucu</a></div>
+         <div style="clear:both;"></div>
+    </div>
+</div>
+
+</body>
+</html>
