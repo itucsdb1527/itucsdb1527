@@ -16,7 +16,7 @@
    <form action="{{ url_for('players_page') }}" method = "post">
 		<table id="playerpool">
 
-		{% for name, number, team, country, age in players %}
+		{% for ID, name, number, team, country, age in players %}
 		<tr>
 			<td class="playerItem">{{name}}</td>
 			<td class="playerItem">{{number}}</td>
