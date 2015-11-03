@@ -71,8 +71,8 @@ def teams_page():
         VALUES ('"""+name+"')"
         cursor.execute(query)
         connection.commit()
-        return redirect(url_for('teams_page'))    
-    
+        return redirect(url_for('teams_page'))
+
 @app.route('/teams/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
 def teams_page_delete(DELETEID):
         connection = dbapi2.connect(app.config['dsn'])
@@ -81,16 +81,35 @@ def teams_page_delete(DELETEID):
 
         cursor.execute("""DELETE FROM TEAMS WHERE ID = %s""", (int(DELETEID),))
         connection.commit()
-        return redirect(url_for('teams_page'))    
-    
-    
+        return redirect(url_for('teams_page'))
+
+
 @app.route('/matches')
 def matches_page():
     return render_template('matches.html')
 
 @app.route('/players')
 def players_page():
-    return render_template('players.html')
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+if request.method == 'GET':
+    query = "SELECT * FROM PLAYERS"
+    cursor.execute(query)
+    return render_template('players.html', players = cursor)
+else:
+    name_in = request.form.get("name"),
+    number_in = request.form.get("number"),
+    team_in = request.form.get("team"),
+    country_in = request.form.get("country"),
+    age_in = request.form.get("age"),
+    bat_in = request.form.get("bat"),
+    throw_in = request.form.get("throw"),
+    position_in = request.form.get("position")
+    query = """INSERT INTO PLAYERS (name,number,team,country, age, bat, throw, position)VALUES ('"""+name_in+"', '"+number_in+"', '"+country_in+"' , '"+age_in+"', '"+bat_in+"', '"+throw_in+"', '"+position_in+"')"
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('players_page'))
 
 @app.route('/referees')
 def referees_page():
@@ -120,7 +139,7 @@ def initialize_database():
     cursor.execute(query)
     query = """INSERT INTO LEAGUES (League_Name,League_Logo,Country_ID) VALUES ('Premier Lig','http://dwmdwmdk.com/img/logo1.jpg',2)"""
     cursor.execute(query)
-    
+
     query = """DROP TABLE IF EXISTS TEAMS"""
     cursor.execute(query)
     query = """CREATE TABLE TEAMS (ID SERIAL PRIMARY KEY, Team_Name VARCHAR NOT NULL)"""
@@ -128,9 +147,9 @@ def initialize_database():
     query = """INSERT INTO TEAMS (Team_Name) VALUES ('Galatasaray')"""
     cursor.execute(query)
     query = """INSERT INTO TEAMS (Team_Name) VALUES ('Besiktas')"""
-    cursor.execute(query)    
-    
-    
+    cursor.execute(query)
+
+
     connection.commit()
     return redirect(url_for('home_page'))
 
