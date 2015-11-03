@@ -99,10 +99,10 @@ def players_page():
         return render_template('players.html', players = cursor)
     else:
         name_in = request.form['name']
-        number_in = request.form["number"]
-        team_in = request.form["teamID"]
-        country_in = request.form["countryID"]
-        age_in = request.form["age"]
+        number_in = request.form['number']
+        team_in = request.form['teamID']
+        country_in = request.form['countryID']
+        age_in = request.form['age']
         query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('"""+name_in+"', '"+number_in+"', '"+country_in+"' , '"+age_in+"')"
         cursor.execute(query)
         connection.commit()
