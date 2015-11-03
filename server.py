@@ -150,11 +150,11 @@ def initialize_database():
     cursor.execute(query)
     query = """CREATE TABLE PLAYERS (ID SERIAL PRIMARY KEY, name VARCHAR NOT NULL, number INTEGER NOT NULL, team INTEGER, country INTEGER NOT NULL, age INTEGER NOT NULL)"""
     cursor.execute(query)
-    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('Babe Ruth', 3, 4,1, 24)"""
+    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('BabeRuth',3,4,1,24)"""
     cursor.execute(query)
-    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('MEral', 1, 17,2, 20)"""
+    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('MEral',1,17,2,20)"""
     cursor.execute(query)
-    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('Cemal', 16, 17,1, 24)"""
+    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('Cemal',16,17,1,24)"""
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('home_page'))
