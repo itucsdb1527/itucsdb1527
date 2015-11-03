@@ -100,10 +100,10 @@ def players_page():
     else:
         name_in = request.form['name']
         number_in = request.form["number"]
-        team_in = request.form["team"]
-        country_in = request.form["country"]
+        team_in = request.form["teamID"]
+        country_in = request.form["countryID"]
         age_in = request.form["age"]
-        query = """INSERT INTO PLAYERS (name,number,team,country, age)VALUES ('"""+name_in+"', '"+number_in+"', '"+country_in+"' , '"+age_in+"')"
+        query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('"""+name_in+"', '"+number_in+"', '"+country_in+"' , '"+age_in+"')"
         cursor.execute(query)
         connection.commit()
         return redirect(url_for('players_page'))
