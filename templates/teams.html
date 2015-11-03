@@ -6,7 +6,12 @@
     <h1>About Us - Meric</h1><hr>
     <form action="{{ url_for('teams_page') }}" method = "post">
 		<table id="teamsTable">
-
+		
+		<tr>
+			<th>Team ID</th>
+    		<th>Team Name</th>
+  		</tr>			
+		
 		{% for ID, Team_Name in teams %}
 		<tr>
 			<td class="TeamsTableItem">{{ID}}</td>
