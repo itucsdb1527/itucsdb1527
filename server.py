@@ -56,10 +56,34 @@ def leagues_page_delete(DELETEID):
         return redirect(url_for('leagues_page'))
 
 
-@app.route('/teams')
+@app.route('/teams', methods=['GET', 'POST'])
 def teams_page():
-    return render_template('teams.html')
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
 
+    if request.method == 'GET':
+        query = "SELECT * FROM TEAMS"
+        cursor.execute(query)
+        return render_template('teams.html', teams = cursor)
+    else:
+        name = request.form['name']
+        query = """INSERT INTO TEAMS (Team_Name)
+        VALUES ('"""+name+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('teams_page'))    
+    
+@app.route('/teams/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
+def teams_page_delete(DELETEID):
+        connection = dbapi2.connect(app.config['dsn'])
+        cursor = connection.cursor()
+
+
+        cursor.execute("""DELETE FROM TEAMS WHERE ID = %s""", (int(DELETEID),))
+        connection.commit()
+        return redirect(url_for('teams_page'))    
+    
+    
 @app.route('/matches')
 def matches_page():
     return render_template('matches.html')
@@ -96,7 +120,17 @@ def initialize_database():
     cursor.execute(query)
     query = """INSERT INTO LEAGUES (League_Name,League_Logo,Country_ID) VALUES ('Premier Lig','http://dwmdwmdk.com/img/logo1.jpg',2)"""
     cursor.execute(query)
-
+    
+    query = """DROP TABLE IF EXISTS TEAMS"""
+    cursor.execute(query)
+    query = """CREATE TABLE TEAMS (ID SERIAL PRIMARY KEY, Team_Name VARCHAR NOT NULL)"""
+    cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Galatasaray')"""
+    cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Besiktas')"""
+    cursor.execute(query)    
+    
+    
     connection.commit()
     return redirect(url_for('home_page'))
 
@@ -113,7 +147,7 @@ def counter_page():
     cursor.execute(query)
     count = cursor.fetchone()[0]
 
-    return "This page was accesed %d times." % count
+    return "This page was accessed %d times." % count
 
 
 if __name__ == '__main__':
