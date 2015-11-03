@@ -4,6 +4,38 @@
 
 {% block content %}
     	<h1>About Us - Meral</h1><hr>
-        <p>Fastbook Company was founded in 2005. Our company offers system solutions to our esteemed customers with our powerful computers at your disposal. In november catalog; web offer our new products to you.<p>
-        <img style="float:right" src="{{ url_for('static', filename='img/logo.png') }}" title="Fastbook" alt="Fastbook">
+
+       	<style>
+		 #section {
+		    width:350px;
+		    float:left;
+		    padding:10px;
+		}
+		</style>
+
+   <form action="{{ url_for('players_page') }}" method = "post">
+		<table id="playerpool">
+
+		{% for NAME, NUMBER, TEAM, COUNTRY, AGE in players %}
+		<tr>
+			<td class="playerItem">{{NAME}}</td>
+			<td class="playerItem">{{NUMBER}}</td>
+			<td class="playerItem">{{TEAM}}</td>
+			<td class="playerItem">{{COUNTRY}}</td>
+			<td class="playerItem">{{AGE}}</td>
+		</tr>
+		{% endfor %}
+		<tr>
+
+			<td class="newPlayer"><input type="text" name="name" required="required"></td>
+			<td class="newPlayer"><input type="number" name="number" required="required"></td>
+			<td class="newPlayer"><input type="number" name="teamID" required="required"></td>
+			<td class=newPlayer><input type="number" name="countryID" required="required"></td>
+			<td class=newPlayer><input type="number" name="age"></td>
+		</tr>
+		<tr>
+			<td colspan="5"><input value="Add New League" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
 {% endblock %}

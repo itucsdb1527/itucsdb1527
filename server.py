@@ -88,28 +88,25 @@ def teams_page_delete(DELETEID):
 def matches_page():
     return render_template('matches.html')
 
-@app.route('/players')
+@app.route('/players', methods=['GET', 'POST'])
 def players_page():
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
 
-if request.method == 'GET':
-    query = "SELECT * FROM PLAYERS"
-    cursor.execute(query)
-    return render_template('players.html', players = cursor)
-else:
-    name_in = request.form.get("name"),
-    number_in = request.form.get("number"),
-    team_in = request.form.get("team"),
-    country_in = request.form.get("country"),
-    age_in = request.form.get("age"),
-    bat_in = request.form.get("bat"),
-    throw_in = request.form.get("throw"),
-    position_in = request.form.get("position")
-    query = """INSERT INTO PLAYERS (name,number,team,country, age, bat, throw, position)VALUES ('"""+name_in+"', '"+number_in+"', '"+country_in+"' , '"+age_in+"', '"+bat_in+"', '"+throw_in+"', '"+position_in+"')"
-    cursor.execute(query)
-    connection.commit()
-    return redirect(url_for('players_page'))
+    if request.method == 'GET':
+        query = "SELECT * FROM PLAYERS"
+        cursor.execute(query)
+        return render_template('players.html', players = cursor)
+    else:
+        name_in = request.form['name']
+        number_in = request.form["number"]
+        team_in = request.form["team"]
+        country_in = request.form["country"]
+        age_in = request.form["age"]
+        query = """INSERT INTO PLAYERS (name,number,team,country, age)VALUES ('"""+name_in+"', '"+number_in+"', '"+country_in+"' , '"+age_in+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('players_page'))
 
 @app.route('/referees')
 def referees_page():
@@ -149,7 +146,16 @@ def initialize_database():
     query = """INSERT INTO TEAMS (Team_Name) VALUES ('Besiktas')"""
     cursor.execute(query)
 
-
+    query = """DROP TABLE IF EXISTS PLAYERS"""
+    cursor.execute(query)
+    query = """CREATE TABLE PLAYERS (ID SERIAL PRIMARY KEY, name VARCHAR NOT NULL, number INTEGER NOT NULL, team INTEGER, country INTEGER NOT NULL, age INTEGER NOT NULL)"""
+    cursor.execute(query)
+    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('Babe Ruth', 3, 4,1, 24)"""
+    cursor.execute(query)
+    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('MEral', 1, 17,2, 20)"""
+    cursor.execute(query)
+    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('Cemal', 16, 17,1, 24)"""
+    cursor.execute(query)
     connection.commit()
     return redirect(url_for('home_page'))
 
