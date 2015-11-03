@@ -3,7 +3,31 @@
 {% block title %} Leagues {% endblock %}
 
 {% block content %}
-    	<h1>About Us - Cemal</h1><hr>
-        <p>Fastbook Company was founded in 2005. Our company offers system solutions to our esteemed customers with our powerful computers at your disposal. In november catalog; web offer our new products to you.<p>
-        <img style="float:right" src="{{ url_for('static', filename='img/logo.png') }}" title="Fastbook" alt="Fastbook">
+    <h1>About Us - Cemal</h1><hr>
+    <form action="{{ url_for('leagues_page') }}" method = "post">
+		<table id="leaguesTable">
+
+		{% for ID, League_Name, League_Logo, League_Start_Date, Country_ID in leagues %}
+		<tr>
+			<td class="LeaguesTableItem">{{ID}}</td>
+			<td class="LeaguesTableItem">{{League_Name}}</td>
+			<td class="LeaguesTableItem"><img src="{{League_Logo}}" ></td>
+			<td class="LeaguesTableItem">{{League_Start_Date}}</td>
+			<td class="LeaguesTableItem">{{Country_ID}}</td>
+			<td class="LeaguesTableItem"><a href="{{ url_for('leagues_page_delete', DELETEID=ID) }}">Delete</a></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td class="LeaguesTableNewItem"> </td>
+			<td class="LeaguesTableNewItem"><input type="text" name="name" required="required"></td>
+			<td class="LeaguesTableNewItem"><input type="text" name="logo"></td>
+			<td class="LeaguesTableNewItem"><input type="number" min="1000" max="2016" name="year"></td>
+			<td class="LeaguesTableNewItem"><input type="number" name="country" required="required"></td>
+			<td class="LeaguesTableNewItem"> </td>
+		</tr>
+		<tr>
+			<td colspan="5"><input value="Add New League" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
 {% endblock %}

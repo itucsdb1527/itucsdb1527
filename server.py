@@ -6,6 +6,7 @@ import psycopg2 as dbapi2
 
 from flask import render_template
 from flask import redirect
+from flask import request
 from flask.helpers import url_for
 from config import app
 
@@ -24,9 +25,36 @@ def home_page():
     now = datetime.datetime.now()
     return render_template('home.html', current_time=now.ctime())
 
-@app.route('/leagues')
+@app.route('/leagues', methods=['GET', 'POST'])
 def leagues_page():
-    return render_template('leagues.html')
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT * FROM LEAGUES"
+        cursor.execute(query)
+        return render_template('leagues.html', leagues = cursor)
+    else:
+        name = request.form['name']
+        logo = request.form['logo']
+        year = request.form['year']
+        country = request.form['country']
+        query = """INSERT INTO LEAGUES (League_Name,League_Logo,League_Start_Date,Country_ID)
+        VALUES ('"""+name+"', '"+logo+"', '"+year+"' , '"+country+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('leagues_page'))
+
+@app.route('/leagues/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
+def leagues_page_delete(DELETEID):
+        connection = dbapi2.connect(app.config['dsn'])
+        cursor = connection.cursor()
+
+
+        cursor.execute("""DELETE FROM leagues WHERE ID = %s""", (int(DELETEID),))
+        connection.commit()
+        return redirect(url_for('leagues_page'))
+
 
 @app.route('/teams')
 def teams_page():
