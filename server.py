@@ -150,9 +150,9 @@ def arenas_page():
         name_in = request.form['name']
         builtDate_in = request.form['builtDate']
         city_in = request.form['city']
-        capasity_in = request.form['capasity']
-        query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapasity)
-        VALUES ('"""+name_in+"', '"+builtDate_in+"', '"+city_in+"', '"+capasity_in+"')"
+        capacity_in = request.form['capacity']
+        query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity)
+        VALUES ('"""+name_in+"', '"+builtDate_in+"', '"+city_in+"', '"+capacity_in+"')"
         cursor.execute(query)
         connection.commit()
         return redirect(url_for('arenas_page'))
@@ -219,11 +219,11 @@ def initialize_database():
 
     query = """DROP TABLE IF EXISTS ARENAS"""
     cursor.execute(query)
-    query = """CREATE TABLE ARENAS (ID SERIAL PRIMARY KEY, ArenaName VARCHAR NOT NULL, ArenaBuiltDate VARCHAR, ArenaCity VARCHAR NOT NULL, ArenaCapasity VARCHAR)"""
+    query = """CREATE TABLE ARENAS (ID SERIAL PRIMARY KEY, ArenaName VARCHAR NOT NULL, ArenaBuiltDate VARCHAR, ArenaCity VARCHAR NOT NULL, ArenaCapacity VARCHAR)"""
     cursor.execute(query)
-    query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapasity) VALUES ('Burhan Felek Spor Kompleksi', '2010', 'Istanbul', '7500')"""
+    query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity) VALUES ('Burhan Felek Spor Kompleksi', '2010', 'Istanbul', '7500')"""
     cursor.execute(query)
-    query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapasity) VALUES ('Memorial Coliseum', '1976', 'Kentucky', '23000')"""
+    query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity) VALUES ('Memorial Coliseum', '1976', 'Kentucky', '23000')"""
     cursor.execute(query)
 
     connection.commit()
