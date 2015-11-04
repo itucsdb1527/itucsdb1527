@@ -108,7 +108,7 @@ def players_page():
         connection.commit()
         return redirect(url_for('players_page'))
 
-@app.route('/referees')
+@app.route('/referees', methods=['GET', 'POST'])
 def referees_page():
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
@@ -137,7 +137,7 @@ def referees_page_delete(DELETEID):
         connection.commit()
         return redirect(url_for('referees_page'))
 
-@app.route('/arenas')
+@app.route('/arenas', methods=['GET', 'POST'])
 def arenas_page():
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
@@ -210,7 +210,7 @@ def initialize_database():
 
     query = """DROP TABLE IF EXISTS REFEREES"""
     cursor.execute(query)
-    query = """CREATE TABLE REFEREES (ID SERIAL PRIMARY KEY, RefereeName VARCHAR NOT NULL, RefereeAge VARCHAR, RefereeNationality VARCHAR)"""
+    query = """CREATE TABLE REFEREES (ID SERIAL PRIMARY KEY, RefereeName VARCHAR NOT NULL, RefereeAge VARCHAR NOT NULL, RefereeNationality VARCHAR NOT NULL)"""
     cursor.execute(query)
     query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir','39', 'Turkiye')"""
     cursor.execute(query)
@@ -219,9 +219,9 @@ def initialize_database():
 
     query = """DROP TABLE IF EXISTS ARENAS"""
     cursor.execute(query)
-    query = """CREATE TABLE ARENAS (ID SERIAL PRIMARY KEY, ArenaName VARCHAR NOT NULL, ArenaBuiltDate VARCHAR, ArenaCity VARCHAR NOT NULL, ArenaCapacity VARCHAR)"""
+    query = """CREATE TABLE ARENAS (ID SERIAL PRIMARY KEY, ArenaName VARCHAR NOT NULL, ArenaBuiltDate VARCHAR NOT NULL, ArenaCity VARCHAR NOT NULL, ArenaCapacity VARCHAR NOT NULL)"""
     cursor.execute(query)
-    query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity) VALUES ('Burhan Felek Spor Kompleksi', '2010', 'Istanbul', '7500')"""
+    query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity) VALUES ('Burhan Felek', '2010', 'Istanbul', '7500')"""
     cursor.execute(query)
     query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity) VALUES ('Memorial Coliseum', '1976', 'Kentucky', '23000')"""
     cursor.execute(query)
