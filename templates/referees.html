@@ -8,12 +8,6 @@
 	<form action="{{ url_for('referees_page') }}" method = "post">
 		<table id="refereesTable">
 
-		<tr>
-    		<th>Referee Name</th>
-    		<th>Referee Age</th>
-    		<th>Referee Nationality</th>
-  		</tr>
-
 		{% for ID, RefereeName, RefereeAge, RefereeNationality %}
 		<tr>
 			<td class="RefereesTableItem">{{ID}}</td>
@@ -22,13 +16,12 @@
 			<td class="RefereesTableItem">{{RefereeNationality}}</td>
 			<td class="RefereesTableItem"><a href="{{ url_for('referees_page_delete', DELETEID=ID) }}">Delete</a></td>
 		</tr>
-
 		{% endfor %}
 
 		<tr>
 			<td class="RefereesTableNewItem"> </td>
 			<td class="RefereesTableNewItem"><input type="text" name="name" required="required"></td>
-			<td class="RefereesTableNewItem"><input type="text" name="age" required="required"></td>
+			<td class="RefereesTableNewItem"><input type="text" name="age"></td>
 			<td class="RefereesTableNewItem"><input type="text" name="nationality" required="required"></td>
 			<td class="RefereesTableNewItem"> </td>
 		</tr>
@@ -37,4 +30,4 @@
 		</tr>
 		</table>
 	</form>
-	{% endblock %}
+{% endblock %}
