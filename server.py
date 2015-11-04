@@ -121,7 +121,7 @@ def referees_page():
         name_in = request.form['name']
         age_in = request.form['age']
         nationality_in = request.form['nationality']
-        query = """INSERT INTO REFEREES (RefereeName, RefereeAge, Nationality)
+        query = """INSERT INTO REFEREES (RefereeName, RefereeAge, RefereeNationality)
         VALUES ('"""+name_in+"', '"+age_in+"', '"+nationality_in+"')"
         cursor.execute(query)
         connection.commit()
@@ -148,7 +148,7 @@ def arenas_page():
         return render_template('arenas.html', arenas = cursor)
     else:
         name_in = request.form['name']
-        builtDate_in = request.form['builtDate']
+        builtDate_in = request.form['built-date']
         city_in = request.form['city']
         capacity_in = request.form['capacity']
         query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity)
