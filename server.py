@@ -149,10 +149,10 @@ def arenas_page():
     else:
         name_in = request.form['name']
         builtDate_in = request.form['builtDate']
-        country_in = request.form['country']
+        city_in = request.form['city']
         capasity_in = request.form['capasity']
-        query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCountry, ArenaCapasity)
-        VALUES ('"""+name_in+"', '"+builtDate_in+"', '"+country_in+"', '"+capasity_in+"')"
+        query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapasity)
+        VALUES ('"""+name_in+"', '"+builtDate_in+"', '"+city_in+"', '"+capasity_in+"')"
         cursor.execute(query)
         connection.commit()
         return redirect(url_for('arenas_page'))
@@ -207,6 +207,25 @@ def initialize_database():
     cursor.execute(query)
     query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('Cemal',16,17,1,24)"""
     cursor.execute(query)
+
+    query = """DROP TABLE IF EXISTS REFEREES"""
+    cursor.execute(query)
+    query = """CREATE TABLE REFEREES (ID SERIAL PRIMARY KEY, RefereeName VARCHAR NOT NULL, RefereeAge VARCHAR, RefereeNationality VARCHAR)"""
+    cursor.execute(query)
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeCountry) VALUES ('Cuneyt Cakir','39', 'Turkiye')"""
+    cursor.execute(query)
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeCountry) VALUES ('Felix Brych','40', 'Deutchland')"""
+    cursor.execute(query)
+
+    query = """DROP TABLE IF EXISTS ARENAS"""
+    cursor.execute(query)
+    query = """CREATE TABLE ARENAS (ID SERIAL PRIMARY KEY, ArenaName VARCHAR NOT NULL, ArenaBuiltDate VARCHAR, ArenaCity VARCHAR NOT NULL, ArenaCapasity VARCHAR)"""
+    cursor.execute(query)
+    query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapasity) VALUES ('Burhan Felek Spor Kompleksi', '2010', 'Istanbul', '7500')"""
+    cursor.execute(query)
+    query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapasity) VALUES ('Memorial Coliseum', '1976', 'Kentucky', '23000')"""
+    cursor.execute(query)
+
     connection.commit()
     return redirect(url_for('home_page'))
 
