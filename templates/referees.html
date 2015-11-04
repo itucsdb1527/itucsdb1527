@@ -14,12 +14,12 @@
     		<th>Referee Nationality</th>
   		</tr>
 
-		{% for ID, RefereeName, RefereeAge, Nationality}
+		{% for ID, RefereeName, RefereeAge, RefereeNationality}
 		<tr>
 			<td class="RefereesTableItem">{{ID}}</td>
 			<td class="RefereesTableItem">{{RefereeName}}</td>
 			<td class="RefereesTableItem">{{RefereeAge}}</td>
-			<td class="RefereesTableItem">{{Nationality}}</td>
+			<td class="RefereesTableItem">{{RefereeNationality}}</td>
 			<td class="RefereesTableItem"><a href="{{ url_for('referees_page_delete', DELETEID=ID) }}">Delete</a></td>
 		</tr>
 

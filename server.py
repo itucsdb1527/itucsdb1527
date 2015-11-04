@@ -212,9 +212,9 @@ def initialize_database():
     cursor.execute(query)
     query = """CREATE TABLE REFEREES (ID SERIAL PRIMARY KEY, RefereeName VARCHAR NOT NULL, RefereeAge VARCHAR, RefereeNationality VARCHAR)"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeCountry) VALUES ('Cuneyt Cakir','39', 'Turkiye')"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir','39', 'Turkiye')"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeCountry) VALUES ('Felix Brych','40', 'Deutchland')"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Felix Brych','40', 'Deutchland')"""
     cursor.execute(query)
 
     query = """DROP TABLE IF EXISTS ARENAS"""
