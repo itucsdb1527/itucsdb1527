@@ -110,11 +110,62 @@ def players_page():
 
 @app.route('/referees')
 def referees_page():
-    return render_template('referees.html')
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT * FROM REFEREES"
+        cursor.execute(query)
+        return render_template('referees.html', referees = cursor)
+    else:
+        name_in = request.form['name']
+        age_in = request.form['age']
+        nationality_in = request.form['nationality']
+        query = """INSERT INTO REFEREES (RefereeName, RefereeAge, Nationality)
+        VALUES ('"""+name_in+"', '"+age_in+"', '"+nationality_in+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('referees_page'))
+
+@app.route('/referees/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
+def referees_page_delete(DELETEID):
+        connection = dbapi2.connect(app.config['dsn'])
+        cursor = connection.cursor()
+
+
+        cursor.execute("""DELETE FROM REFEREES WHERE ID = %s""", (int(DELETEID),))
+        connection.commit()
+        return redirect(url_for('referees_page'))
 
 @app.route('/arenas')
 def arenas_page():
-    return render_template('arenas.html')
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT * FROM ARENAS"
+        cursor.execute(query)
+        return render_template('arenas.html', arenas = cursor)
+    else:
+        name_in = request.form['name']
+        builtDate_in = request.form['builtDate']
+        country_in = request.form['country']
+        capasity_in = request.form['capasity']
+        query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCountry, ArenaCapasity)
+        VALUES ('"""+name_in+"', '"+builtDate_in+"', '"+country_in+"', '"+capasity_in+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('arenas_page'))
+
+@app.route('/arenas/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
+def arenas_page_delete(DELETEID):
+        connection = dbapi2.connect(app.config['dsn'])
+        cursor = connection.cursor()
+
+
+        cursor.execute("""DELETE FROM ARENAS WHERE ID = %s""", (int(DELETEID),))
+        connection.commit()
+        return redirect(url_for('arenas_page'))
 
 @app.route('/initdb')
 def initialize_database():
