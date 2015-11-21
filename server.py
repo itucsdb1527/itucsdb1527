@@ -32,6 +32,7 @@ def home_page():
     return render_template('home.html', current_time=now.ctime())
 
 
+
 @app.route('/initdb')
 def initialize_database():
     connection = dbapi2.connect(app.config['dsn'])

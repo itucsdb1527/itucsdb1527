@@ -41,11 +41,11 @@ def initialize_database_leagues():
     connection = dbapi2.connect(app.config['dsn'])
     cursor =connection.cursor()
         
-    query = """DROP TABLE IF EXISTS LEAGUES"""
+    query = """DROP TABLE IF EXISTS LEAGUES CASCADE"""
     cursor.execute(query)
     query = """CREATE TABLE LEAGUES (ID SERIAL PRIMARY KEY, League_Name VARCHAR NOT NULL, League_Logo VARCHAR, League_Start_Date INTEGER, Country_ID INTEGER NOT NULL)"""
     cursor.execute(query)
-    query = """INSERT INTO LEAGUES (League_Name,League_Logo,Country_ID) VALUES ('Super Lig','http://dwmdwmdk.com/img/logo1.jpg',1)"""
+    query = """INSERT INTO LEAGUES (League_Name,League_Logo,Country_ID) VALUES ('Aroma Erkekler Voleybol Ligi','http://dwmdwmdk.com/img/logo1.jpg',1)"""
     cursor.execute(query)
     query = """INSERT INTO LEAGUES (League_Name,League_Logo,Country_ID) VALUES ('Premier Lig','http://dwmdwmdk.com/img/logo1.jpg',2)"""
     cursor.execute(query)
