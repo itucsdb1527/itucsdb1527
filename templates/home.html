@@ -4,7 +4,7 @@
 
 {% block content %}
     	<h1>Home Page</h1><hr>
-        <a href="{{ url_for('initialize_database') }}">Init DB</a><br>
+        <a href="{{ url_for('initialize_database') }}">Init DB for Counter</a><br>
         <a href="{{ url_for('counter_page') }}">Counter Page</a>
 
         <img style="float:right" src="{{ url_for('static', filename='img/logo.png') }}" title="Fastbook" alt="Fastbook">

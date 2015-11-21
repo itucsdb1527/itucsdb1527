@@ -4,6 +4,8 @@
 
 {% block content %}
     	<h1>About Us - Seyma</h1><hr>
+        <a href="{{ url_for('initialize_database_matches') }}">Init DB for Matches</a><br>    
+    	
         <p>Fastbook Company was founded in 2005. Our company offers system solutions to our esteemed customers with our powerful computers at your disposal. In november catalog; web offer our new products to you.<p>
         <img style="float:right" src="{{ url_for('static', filename='img/logo.png') }}" title="Fastbook" alt="Fastbook">
 {% endblock %}

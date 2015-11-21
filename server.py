@@ -3,6 +3,12 @@ import os
 import json
 import re
 import psycopg2 as dbapi2
+import teams
+import leagues
+import players
+import referees
+import arenas
+import matches
 
 from flask import render_template
 from flask import redirect
@@ -25,147 +31,6 @@ def home_page():
     now = datetime.datetime.now()
     return render_template('home.html', current_time=now.ctime())
 
-@app.route('/leagues', methods=['GET', 'POST'])
-def leagues_page():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    if request.method == 'GET':
-        query = "SELECT * FROM LEAGUES"
-        cursor.execute(query)
-        return render_template('leagues.html', leagues = cursor)
-    else:
-        name = request.form['name']
-        logo = request.form['logo']
-        year = request.form['year']
-        country = request.form['country']
-        query = """INSERT INTO LEAGUES (League_Name,League_Logo,League_Start_Date,Country_ID)
-        VALUES ('"""+name+"', '"+logo+"', '"+year+"' , '"+country+"')"
-        cursor.execute(query)
-        connection.commit()
-        return redirect(url_for('leagues_page'))
-
-@app.route('/leagues/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
-def leagues_page_delete(DELETEID):
-        connection = dbapi2.connect(app.config['dsn'])
-        cursor = connection.cursor()
-
-
-        cursor.execute("""DELETE FROM leagues WHERE ID = %s""", (int(DELETEID),))
-        connection.commit()
-        return redirect(url_for('leagues_page'))
-
-
-@app.route('/teams', methods=['GET', 'POST'])
-def teams_page():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    if request.method == 'GET':
-        query = "SELECT * FROM TEAMS"
-        cursor.execute(query)
-        return render_template('teams.html', teams = cursor)
-    else:
-        name = request.form['name']
-        query = """INSERT INTO TEAMS (Team_Name)
-        VALUES ('"""+name+"')"
-        cursor.execute(query)
-        connection.commit()
-        return redirect(url_for('teams_page'))
-
-@app.route('/teams/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
-def teams_page_delete(DELETEID):
-        connection = dbapi2.connect(app.config['dsn'])
-        cursor = connection.cursor()
-
-
-        cursor.execute("""DELETE FROM TEAMS WHERE ID = %s""", (int(DELETEID),))
-        connection.commit()
-        return redirect(url_for('teams_page'))
-
-
-@app.route('/matches')
-def matches_page():
-    return render_template('matches.html')
-
-@app.route('/players', methods=['GET', 'POST'])
-def players_page():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    if request.method == 'GET':
-        query = "SELECT * FROM PLAYERS"
-        cursor.execute(query)
-        return render_template('players.html', players = cursor)
-    else:
-        name_in = request.form['name']
-        number_in = request.form['number']
-        team_in = request.form['teamID']
-        country_in = request.form['countryID']
-        age_in = request.form['age']
-        query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('"""+name_in+"', '"+number_in+"', '"+team_in+"', '"+country_in+"' , '"+age_in+"')"
-        cursor.execute(query)
-        connection.commit()
-        return redirect(url_for('players_page'))
-
-@app.route('/referees', methods=['GET', 'POST'])
-def referees_page():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    if request.method == 'GET':
-        query = "SELECT * FROM REFEREES"
-        cursor.execute(query)
-        return render_template('referees.html', referees = cursor)
-    else:
-        name_in = request.form['name']
-        age_in = request.form['age']
-        nationality_in = request.form['nationality']
-        query = """INSERT INTO REFEREES (RefereeName, RefereeAge, RefereeNationality)
-        VALUES ('"""+name_in+"', '"+age_in+"', '"+nationality_in+"')"
-        cursor.execute(query)
-        connection.commit()
-        return redirect(url_for('referees_page'))
-
-@app.route('/referees/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
-def referees_page_delete(DELETEID):
-        connection = dbapi2.connect(app.config['dsn'])
-        cursor = connection.cursor()
-
-
-        cursor.execute("""DELETE FROM REFEREES WHERE ID = %s""", (int(DELETEID),))
-        connection.commit()
-        return redirect(url_for('referees_page'))
-
-@app.route('/arenas', methods=['GET', 'POST'])
-def arenas_page():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    if request.method == 'GET':
-        query = "SELECT * FROM ARENAS"
-        cursor.execute(query)
-        return render_template('arenas.html', arenas = cursor)
-    else:
-        name_in = request.form['name']
-        builtDate_in = request.form['built-date']
-        city_in = request.form['city']
-        capacity_in = request.form['capacity']
-        query = """INSERT INTO ARENAS (ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity)
-        VALUES ('"""+name_in+"', '"+builtDate_in+"', '"+city_in+"', '"+capacity_in+"')"
-        cursor.execute(query)
-        connection.commit()
-        return redirect(url_for('arenas_page'))
-
-@app.route('/arenas/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
-def arenas_page_delete(DELETEID):
-        connection = dbapi2.connect(app.config['dsn'])
-        cursor = connection.cursor()
-
-
-        cursor.execute("""DELETE FROM ARENAS WHERE ID = %s""", (int(DELETEID),))
-        connection.commit()
-        return redirect(url_for('arenas_page'))
 
 @app.route('/initdb')
 def initialize_database():
@@ -177,53 +42,6 @@ def initialize_database():
     query = """CREATE TABLE COUNTER (N INTEGER)"""
     cursor.execute(query)
     query = """INSERT INTO COUNTER(N) VALUES(0)"""
-    cursor.execute(query)
-
-    query = """DROP TABLE IF EXISTS LEAGUES"""
-    cursor.execute(query)
-    query = """CREATE TABLE LEAGUES (ID SERIAL PRIMARY KEY, League_Name VARCHAR NOT NULL, League_Logo VARCHAR, League_Start_Date INTEGER, Country_ID INTEGER NOT NULL)"""
-    cursor.execute(query)
-    query = """INSERT INTO LEAGUES (League_Name,League_Logo,Country_ID) VALUES ('Super Lig','http://dwmdwmdk.com/img/logo1.jpg',1)"""
-    cursor.execute(query)
-    query = """INSERT INTO LEAGUES (League_Name,League_Logo,Country_ID) VALUES ('Premier Lig','http://dwmdwmdk.com/img/logo1.jpg',2)"""
-    cursor.execute(query)
-
-    query = """DROP TABLE IF EXISTS TEAMS"""
-    cursor.execute(query)
-    query = """CREATE TABLE TEAMS (ID SERIAL PRIMARY KEY, Team_Name VARCHAR NOT NULL)"""
-    cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Galatasaray')"""
-    cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Besiktas')"""
-    cursor.execute(query)
-
-    query = """DROP TABLE IF EXISTS PLAYERS"""
-    cursor.execute(query)
-    query = """CREATE TABLE PLAYERS (ID SERIAL PRIMARY KEY, name VARCHAR NOT NULL, number INTEGER NOT NULL, team INTEGER, country INTEGER NOT NULL, age INTEGER NOT NULL)"""
-    cursor.execute(query)
-    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('BabeRuth',3,4,1,24)"""
-    cursor.execute(query)
-    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('MEral',1,17,2,20)"""
-    cursor.execute(query)
-    query = """INSERT INTO PLAYERS (name,number,team,country,age) VALUES ('Cemal',16,17,1,24)"""
-    cursor.execute(query)
-
-    query = """DROP TABLE IF EXISTS REFEREES"""
-    cursor.execute(query)
-    query = """CREATE TABLE REFEREES (ID SERIAL PRIMARY KEY, RefereeName VARCHAR NOT NULL, RefereeAge INTEGER, RefereeNationality VARCHAR NOT NULL)"""
-    cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir',39,'Turkiye')"""
-    cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Felix Brych',40,'Deutchland')"""
-    cursor.execute(query)
-
-    query = """DROP TABLE IF EXISTS ARENAS"""
-    cursor.execute(query)
-    query = """CREATE TABLE ARENAS (ID SERIAL PRIMARY KEY, ArenaName VARCHAR NOT NULL, ArenaBuiltDate INTEGER, ArenaCity VARCHAR NOT NULL, ArenaCapacity INTEGER)"""
-    cursor.execute(query)
-    query = """INSERT INTO ARENAS (ArenaName,ArenaBuiltDate,ArenaCity,ArenaCapacity) VALUES ('Burhan Felek',2010,'Istanbul',7500)"""
-    cursor.execute(query)
-    query = """INSERT INTO ARENAS (ArenaName,ArenaBuiltDate,ArenaCity,ArenaCapacity) VALUES ('Memorial Coliseum',1976,'Kentucky',23000)"""
     cursor.execute(query)
 
     connection.commit()

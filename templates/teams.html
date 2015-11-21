@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>About Us - Meric</h1><hr>
+        <a href="{{ url_for('initialize_database_teams') }}">Init DB for Teams</a><br>    
     <form action="{{ url_for('teams_page') }}" method = "post">
 		<table id="teamsTable">
 		
