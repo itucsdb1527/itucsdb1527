@@ -4,29 +4,31 @@
 
 {% block content %}
     <h1>About Us - Cemal</h1><hr>
-        <a href="{{ url_for('initialize_database_leagues') }}">Init DB for Leagues</a><br>
-    <form action="{{ url_for('leagues_page') }}" method = "post">
-		<table id="leaguesTable">
-
-		{% for ID, League_Name, Country_ID in leagues %}
+    <a href="{{ url_for('admin_leagues_page') }}">ADMIN Leagues Page</a><br><br>
+	<form action="{{ url_for('leagues_page') }}" method = "post">
+		<table >
 		<tr>
-			<td class="LeaguesTableItem">{{ID}}</td>
-			<td class="LeaguesTableItem">{{League_Name}}</td>
-			<td class="LeaguesTableItem">{{Country_ID}}</td>
-			<td class="LeaguesTableItem"><a href="{{ url_for('leagues_page_delete', DELETEID=ID) }}">Delete</a>
-			<td class="LeaguesTableItem"><a href="{{ url_for('leagues_page_update', UPDATEID=ID) }}">Update</a></td>
-		</tr>
-		{% endfor %}
-		<tr>
-			<td class="LeaguesTableNewItem"> </td>
-			<td class="LeaguesTableNewItem"><input type="text" name="name" required="required"></td>
-			<td class="LeaguesTableNewItem"><input type="number" name="country" required="required"></td>
-			<td class="LeaguesTableNewItem"> </td>
-			<td class="LeaguesTableNewItem"> </td>
+			<td >Search League Name:</td>
+			<td><input type="text" name="search" required="required" style="margin-left:3px;width:95%"></td>
 		</tr>
 		<tr>
-			<td colspan="5"><input value="Add New League" name="add" type="submit"></td>
+			<td colspan="2"><input value="Search" name="search" type="submit"></td>
 		</tr>
 		</table>
 	</form>
+	<br><br>
+	<table id="leaguesTable">
+	<tr>
+		<td class="LeaguesTableHeader">League Name</td>
+		<td class="LeaguesTableHeader">Country Information</td>
+	</tr>
+	{% for ID, League_Name, Country_ID in leagues %}
+	<tr>
+		<td class="LeaguesTableItem"><a href="{{ url_for('leagues_season_page', LEAGUEID=ID) }}">{{League_Name}}</a></td>
+		<td class="LeaguesTableItem">{{Country_ID}}</td>
+	</tr>
+	{% endfor %}
+
+	</table>
+
 {% endblock %}

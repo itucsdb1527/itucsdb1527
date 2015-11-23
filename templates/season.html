@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %} Season {% endblock %}
+
+{% block content %}
+    <h1>About Us - Cemal</h1><hr>
+    <a href="{{ url_for('leagues_page') }}">Leagues Page</a><br><br>
+    <a href="{{ url_for('admin_seasons_page') }}">Admin Seasons Page</a><br><br>
+	<form action="" method = "post">
+		<table >
+		<tr>
+			<td >Search Season Name:</td>
+			<td><input type="text" name="search" required="required" style="margin-left:3px;width:95%"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input value="Search" name="search" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+	<br><br>
+
+	<table id="leaguesTable">
+	<tr>
+		<td class="LeaguesTableHeader">Season Name</td>
+		<td class="LeaguesTableHeader">Leagues</td>
+	</tr>
+	{% for Season_Name, Leagues_Name in seasons %}
+	<tr>
+		<td class="LeaguesTableItem">{{ Season_Name }}</td>
+		<td class="LeaguesTableItem">{{ Leagues_Name }}</td>
+	</tr>
+	{% endfor %}
+
+	</table>
+
+{% endblock %}

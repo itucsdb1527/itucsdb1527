@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %} Season {% endblock %}
+
+{% block content %}
+    <h1>About Us - Cemal</h1><hr>
+    <a href="{{ url_for('leagues_page') }}">Leagues Page</a><br><br>
+	<form action="{{ url_for('admin_seasons_page') }}" method = "post">
+		<table id="leaguesTable">
+		<tr>
+			<td class="LeaguesTableHeader">Season Name</td>
+			<td class="LeaguesTableHeader">Leagues</td>
+			<td class="LeaguesTableItem"></a>
+			<td class="LeaguesTableItem"></a></td>
+		</tr>
+		{% for ID ,Season_Name, Leagues_Name in seasons %}
+		<tr>
+			<td class="LeaguesTableItem">{{ Season_Name }}</td>
+			<td class="LeaguesTableItem">{{ Leagues_Name }}</td>
+			<td class="LeaguesTableItem"><a href="{{ url_for('admin_seasons_page_delete', DELETEID=ID) }}">Delete</a>
+			<td class="LeaguesTableItem"><a href="{{ url_for('admin_seasons_page_update', UPDATEID=ID) }}">Update</a></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td class="LeaguesTableItem"><input type="text" name="name" required="required" style="margin-left:3px;width:95%"></td>
+			<td class="LeaguesTableItem"><select  name="League_ID">
+				{% for ID, League_Name in leagues %}
+					<option value="{{ ID }}">{{ League_Name }}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<td colspan="5" align="right" style="padding-right:5px"><input value="Add New Season" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}
