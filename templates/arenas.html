@@ -4,12 +4,13 @@
 
 {% block content %}
 	<h1>About Us - Tugba</h1><hr>
-    <a href="{{ url_for('initialize_database_arenas') }}">Init DB for Arenas</a><br>    
+    <a href="{{ url_for('initialize_database_arenas') }}">Init DB for Arenas</a><br>
 
 	<form action="{{ url_for('arenas_page') }}" method = "post">
 		<table id="arenasTable">
 
 		<tr>
+			<th>Arena ID</th>
     		<th>Arena Name</th>
     		<th>Arena BuiltDate</th>
     		<th>Arena City</th>

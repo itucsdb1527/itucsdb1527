@@ -34,21 +34,24 @@ def referees_page_delete(DELETEID):
         cursor.execute("""DELETE FROM REFEREES WHERE ID = %s""", (int(DELETEID),))
         connection.commit()
         return redirect(url_for('referees_page'))
-    
+
 @app.route('/referees/initdb')
 def initialize_database_referees():
     connection = dbapi2.connect(app.config['dsn'])
-    cursor =connection.cursor()
-        
+    cursor = connection.cursor()
+
     query = """DROP TABLE IF EXISTS REFEREES"""
     cursor.execute(query)
     query = """CREATE TABLE REFEREES (ID SERIAL PRIMARY KEY, RefereeName VARCHAR NOT NULL, RefereeAge INTEGER, RefereeNationality VARCHAR NOT NULL)"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir',39,'Turkiye')"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Brad Aaberg',39,'North Country')"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Felix Brych',40,'Deutchland')"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Keith Aidun',40,'Northern California')"""
     cursor.execute(query)
-    
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cedric All Runner',40,'Sun Country')"""
+    cursor.execute(query)
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir',39,'Turkey')"""
+    cursor.execute(query)
+
     connection.commit()
-    return redirect(url_for('referees_page'))      
-    
+    return redirect(url_for('referees_page'))

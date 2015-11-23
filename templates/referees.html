@@ -4,10 +4,17 @@
 
 {% block content %}
 	<h1>About Us - Tugba</h1><hr>
-    <a href="{{ url_for('initialize_database_referees') }}">Init DB for Referees</a><br>    
+    <a href="{{ url_for('initialize_database_referees') }}">Init DB for Referees</a><br>
 
 	<form action="{{ url_for('referees_page') }}" method = "post">
 		<table id="refereesTable">
+
+		<tr>
+			<th>Referee ID</th>
+    		<th>Referee Name</th>
+    		<th>Referee Age</th>
+    		<th>Referee Nationality</th>
+  		</tr>
 
 		{% for ID, RefereeName, RefereeAge, RefereeNationality in referees %}
 		<tr>

@@ -4,8 +4,35 @@
 
 {% block content %}
     	<h1>About Us - Seyma</h1><hr>
-        <a href="{{ url_for('initialize_database_matches') }}">Init DB for Matches</a><br>    
-    	
-        <p>Fastbook Company was founded in 2005. Our company offers system solutions to our esteemed customers with our powerful computers at your disposal. In november catalog; web offer our new products to you.<p>
-        <img style="float:right" src="{{ url_for('static', filename='img/logo.png') }}" title="Fastbook" alt="Fastbook">
+        <a href="{{ url_for('initialize_database_matches') }}">Init DB for Matches</a><br>
+
+		<form action="{{ url_for('matches_page') }}" method = "post">
+		<table id="MatchesTable">
+
+		{% for ID, Team1Name, Team2Name , ArenaName , RefereeName , Season in matches %}
+		<tr>
+			<td class="MatchesTableItem">{{ID}}</td>
+			<td class="MatchesTableItem">{{Team1Name}}</td>
+			<td class="MatchesTableItem">{{Team2Name}}</td>
+			<td class="MatchesTableItem">{{ArenaName}}</td>
+			<td class="MatchesTableItem">{{RefereeName}}</td>
+			<td class="MatchesTableItem">{{Season}}</td>
+			<td class="MatchesTableItem"><a href="{{ url_for('matches_page_delete', DELETEID=ID) }}">Delete</a></td>
+		</tr>
+		{% endfor %}
+
+		<tr>
+			<td class="MatchesTableNewItem"> </td>
+			<td class="MatchesTableNewItem"><input type="text" name="Team1name" required="required"></td>
+			<td class="MatchesTableNewItem"><input type="text" name="Team2name" required="required"></td>
+			<td class="MatchesTableNewItem"><input type="text" name="ArenaName"></td>
+			<td class="MatchesTableNewItem"><input type="text" name="RefereeName"></td>
+			<td class="MatchesTableNewItem"><input type="text" name="Season"></td>
+			<td class="MatchesTableNewItem"> </td>
+		</tr>
+		<tr>
+			<td colspan="5"><input value="Add New Match" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
 {% endblock %}

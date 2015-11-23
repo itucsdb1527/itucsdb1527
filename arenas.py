@@ -35,12 +35,12 @@ def arenas_page_delete(DELETEID):
         cursor.execute("""DELETE FROM ARENAS WHERE ID = %s""", (int(DELETEID),))
         connection.commit()
         return redirect(url_for('arenas_page'))
-    
+
 @app.route('/arenas/initdb')
 def initialize_database_arenas():
     connection = dbapi2.connect(app.config['dsn'])
     cursor =connection.cursor()
-        
+
     query = """DROP TABLE IF EXISTS ARENAS"""
     cursor.execute(query)
     query = """CREATE TABLE ARENAS (ID SERIAL PRIMARY KEY, ArenaName VARCHAR NOT NULL, ArenaBuiltDate INTEGER, ArenaCity VARCHAR NOT NULL, ArenaCapacity INTEGER)"""
@@ -49,6 +49,6 @@ def initialize_database_arenas():
     cursor.execute(query)
     query = """INSERT INTO ARENAS (ArenaName,ArenaBuiltDate,ArenaCity,ArenaCapacity) VALUES ('Memorial Coliseum',1976,'Kentucky',23000)"""
     cursor.execute(query)
-    
+
     connection.commit()
-    return redirect(url_for('arenas_page'))     
+    return redirect(url_for('arenas_page'))
