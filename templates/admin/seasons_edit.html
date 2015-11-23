@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %} Leagues {% endblock %}
+
+{% block content %}
+    <h1>About Us - Cemal</h1><hr>
+
+<form action="APPLY" method = "post">
+		<table id="leaguesTable">
+
+		{% for ID, Seasons_Name, League_ID in seasons %}
+		<tr>
+			<td class="LeaguesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
+			<td class="LeaguesTableItem"><input type="text" name="name" required="required" value="{{Seasons_Name}}" style="width:95%"></td>
+			<td class="LeaguesTableItem"><select  name="League_ID">
+				{% for ID, League_Name in leagues %}
+					<option value="{{ ID }}" {% print("selected") if League_ID == ID %}>{{ League_Name }}</option>
+				{% endfor %}
+			</select>
+			</td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3" align="center"><input value="Update Season" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}

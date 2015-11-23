@@ -224,3 +224,16 @@ h2{
 .logo {
 	float:left;
 }
+
+/* League Table */
+#leaguesTable {
+	width:600px;
+}
+.LeaguesTableHeader {
+	font-size:18px;
+	font-weight:bold;
+	text-align:center;
+}
+.LeaguesTableItem {
+	padding-left: 10px;
+}
