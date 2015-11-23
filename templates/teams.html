@@ -4,61 +4,32 @@
 
 {% block content %}
     <h1>About Us - Meric</h1><hr>
-        <a href="{{ url_for('initialize_database_teams') }}">Init DB for Teams</a><br>   
-        <p>Check <a href="{{ url_for('leagues_page') }}">Leagues</a> page for League IDs.<p>
-         
+        <a href="{{ url_for('initialize_database_teams') }}">Init DB for Teams</a><br>       
     <form action="{{ url_for('teams_page') }}" method = "post">
 		<table id="teamsTable">
 		
 		<tr>
-    		<th>Team ID</th>
-    		<th>Team Name</th> 
-    		<th>League Name</th>   
-    		<th>League ID</th>   		
+			<th>Team ID</th>
+    		<th>Team Name</th>
   		</tr>			
 		
-		{% for ID, Team_Name, League_Name, League_ID in teams %}
+		{% for ID, Team_Name in teams %}
 		<tr>
 			<td class="TeamsTableItem">{{ID}}</td>
-			<td class="TeamsTableItem">{{Team_Name}}</td>	
-			<td class="TeamsTableItem">{{League_Name}}</td>		
-			<td class="TeamsTableItem">{{League_ID}}</td>	
+			<td class="TeamsTableItem">{{Team_Name}}</td>
 			<td class="TeamsTableItem"><a href="{{ url_for('teams_page_delete', DELETEID=ID) }}">Delete</a></td>
-		</tr>
-		{% endfor %}
-		
-		</table>
-		
-				
-		<br><br>
-					
-					
-		<table>		
-		<tr>
-    		<th>Team ID</th>
-    		<th>Team Name</th> 	
-    		<th>League ID</th> 	
-  		</tr>			
-		
-		{% for ID, Team_Name, League_ID in teams %}
-		<tr>
-			<td>{{ID}}</td>
-			<td>{{Team_Name}}</td>	
-			<td>{{League_ID}}</td>	
+			<td class="TeamsTableItem"><a href="{{ url_for('teams_page_update', UPDATEID=ID) }}">Update</a></td>	
 		</tr>
 		{% endfor %}
 		<tr>
-			<td></td>
-			<td><input type="text" name="name" required="required"></td>	
-			<td><input type="number" name="league_id" required="required"></td>	
-			
+			<td class="TeamsTableNewItem"> </td>
+			<td class="TeamsTableNewItem"><input type="text" name="name" required="required"></td>
+			<td class="TeamsTableNewItem"> </td>
+			<td class="TeamsTableNewItem"> </td>			
 		</tr>
 		<tr>
 			<td colspan="5"><input value="Add New Team" name="add" type="submit"></td>
 		</tr>
-		</table>		
-		
-		
+		</table>
 	</form>
-
 {% endblock %}
