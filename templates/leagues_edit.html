@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %} Leagues {% endblock %}
+
+{% block content %}
+    <h1>About Us - Cemal</h1><hr>
+
+<form action="APPLY" method = "post">
+		<table id="leaguesTable">
+
+		{% for ID, League_Name, Country_ID in leagues %}
+		<tr>
+			<td class="LeaguesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
+			<td class="LeaguesTableItem"><input type="text" name="name" required="required" value="{{League_Name}}"></td>
+			<td class="LeaguesTableItem"><input type="number" name="country" required="required" value="{{Country_ID}}"></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3"><input value="Add New League" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}

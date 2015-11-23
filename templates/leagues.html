@@ -4,26 +4,24 @@
 
 {% block content %}
     <h1>About Us - Cemal</h1><hr>
-        <a href="{{ url_for('initialize_database_leagues') }}">Init DB for Leagues</a><br>     
+        <a href="{{ url_for('initialize_database_leagues') }}">Init DB for Leagues</a><br>
     <form action="{{ url_for('leagues_page') }}" method = "post">
 		<table id="leaguesTable">
 
-		{% for ID, League_Name, League_Logo, League_Start_Date, Country_ID in leagues %}
+		{% for ID, League_Name, Country_ID in leagues %}
 		<tr>
 			<td class="LeaguesTableItem">{{ID}}</td>
 			<td class="LeaguesTableItem">{{League_Name}}</td>
-			<td class="LeaguesTableItem"><img src="{{League_Logo}}" ></td>
-			<td class="LeaguesTableItem">{{League_Start_Date}}</td>
 			<td class="LeaguesTableItem">{{Country_ID}}</td>
-			<td class="LeaguesTableItem"><a href="{{ url_for('leagues_page_delete', DELETEID=ID) }}">Delete</a></td>
+			<td class="LeaguesTableItem"><a href="{{ url_for('leagues_page_delete', DELETEID=ID) }}">Delete</a>
+			<td class="LeaguesTableItem"><a href="{{ url_for('leagues_page_update', UPDATEID=ID) }}">Update</a></td>
 		</tr>
 		{% endfor %}
 		<tr>
 			<td class="LeaguesTableNewItem"> </td>
 			<td class="LeaguesTableNewItem"><input type="text" name="name" required="required"></td>
-			<td class="LeaguesTableNewItem"><input type="text" name="logo"></td>
-			<td class="LeaguesTableNewItem"><input type="number" min="1000" max="2016" name="year"></td>
 			<td class="LeaguesTableNewItem"><input type="number" name="country" required="required"></td>
+			<td class="LeaguesTableNewItem"> </td>
 			<td class="LeaguesTableNewItem"> </td>
 		</tr>
 		<tr>
