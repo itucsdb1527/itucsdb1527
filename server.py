@@ -10,6 +10,7 @@ import players
 import referees
 import arenas
 import matches
+import maillist
 
 from flask import render_template
 from flask import redirect
