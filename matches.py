@@ -16,14 +16,14 @@ def matches_page():
         cursor.execute(query)
         return render_template('matches.html', matches = cursor)
     else:
-        Team1name_in = request.form['Team1name']
-        Team2name_in = request.form['Team2name']
+        Team1Name_in = request.form['Team1Name']
+        Team2Name_in = request.form['Team2Name']
         ArenaName_in = request.form['ArenaName']
         RefereeName_in = request.form['RefereeName']
         Season_in = request.form['Season']
 
-        query = """INSERT INTO MATCHES (Team1name, Team2name, ArenaName, RefereeName, Season)
-        VALUES ('"""+Team1name_in+"', '"+Team2name_in+"', '"+ArenaName_in+"', '"+RefereeName_in+"', '"+Season_in+"')"
+        query = """INSERT INTO MATCHES (Team1Name, Team2Name, ArenaName, RefereeName, Season)
+        VALUES ('"""+Team1Name_in+"', '"+Team2Name_in+"', '"+ArenaName_in+"', '"+RefereeName_in+"', '"+Season_in+"')"
         cursor.execute(query)
 
         connection.commit()
@@ -40,6 +40,32 @@ def matches_page_delete(DELETEID):
         connection.commit()
         return redirect(url_for('matches_page'))
 
+
+@app.route('/matches/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def matches_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("""SELECT ID, Team1Name, Team2Name, ArenaName, RefereeName, Season FROM LEAGUES WHERE ID = %s""", (int(UPDATEID),))
+    connection.commit()
+    return render_template('matches_edit.html', leagues = cursor)
+
+@app.route('/matches/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
+def matches_page_apply(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    new_name1 = request.form['name1']
+    new_name2 = request.form['name2']
+    new_arena = request.form['arena']
+    new_referee = request.form['referee']
+    new_season = request.form['season']
+    query = """UPDATE MATCHES SET Team1Name = '%s', Team2Name = '%s', ArenaName = '%s', RefereeName = '%s', Season = %d WHERE ID = %d""" % (new_name1, new_name2, new_arena, new_referee ,int(season), int(UPDATEID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('matches_page'))
+
+
 @app.route('/matches/initdb')
 def initialize_database_matches():
     connection = dbapi2.connect(app.config['dsn'])
@@ -47,11 +73,11 @@ def initialize_database_matches():
 
     query = """DROP TABLE IF EXISTS MATCHES"""
     cursor.execute(query)
-    query = """CREATE TABLE MATCHES (ID SERIAL PRIMARY KEY, Team1name VARCHAR NOT NULL, Team2name VARCHAR NOT NULL, ArenaName VARCHAR, RefereeName VARCHAR, Season INTEGER)"""
+    query = """CREATE TABLE MATCHES (ID SERIAL PRIMARY KEY, Team1Name VARCHAR NOT NULL, Team2Name VARCHAR NOT NULL, ArenaName VARCHAR, RefereeName VARCHAR, Season INTEGER)"""
     cursor.execute(query)
-    query = """INSERT INTO MATCHES (Team1name,Team2name,ArenaName, RefereeName, Season) VALUES ('Besiktas', 'Galatasaray', 'Brad Aaberg','Akatlar', 2014)"""
+    query = """INSERT INTO MATCHES (Team1Name, Team2Name, ArenaName, RefereeName, Season) VALUES ('Besiktas', 'Galatasaray', 'Brad Aaberg','Akatlar', 2014)"""
     cursor.execute(query)
-    query = """INSERT INTO MATCHES (Team1name,Team2name,ArenaName, RefereeName, Season) VALUES ('Barcelona', 'Real Madrid', 'Cuneyt Cakir','Inonu', 2015)"""
+    query = """INSERT INTO MATCHES (Team1Name, Team2Name, ArenaName, RefereeName, Season) VALUES ('Barcelona', 'Real Madrid', 'Cuneyt Cakir','Inonu', 2015)"""
     cursor.execute(query)
 
     connection.commit()

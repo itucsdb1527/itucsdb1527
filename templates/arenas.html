@@ -25,6 +25,7 @@
 			<td class="ArenasTableItem">{{ArenaCity}}</td>
 			<td class="ArenasTableItem">{{ArenaCapacity}}</td>
 			<td class="ArenasTableItem"><a href="{{ url_for('arenas_page_delete', DELETEID=ID) }}">Delete</a></td>
+			<td class="ArenasTableItem"><a href="{{ url_for('arenas_page_update', UPDATEID=ID) }}">Update</a></td>
 		</tr>
 
 		{% endfor %}
@@ -32,9 +33,9 @@
 		<tr>
 			<td class="ArenasTableNewItem"> </td>
 			<td class="ArenasTableNewItem"><input type="text" name="name" required="required"></td>
-			<td class="ArenasTableNewItem"><input type="text" name="built-date"></td>
+			<td class="ArenasTableNewItem"><input type="number" name="built-date"></td>
 			<td class="ArenasTableNewItem"><input type="text" name="city" required="required"></td>
-			<td class="ArenasTableNewItem"><input type="text" name="capacity"></td>
+			<td class="ArenasTableNewItem"><input type="number" name="capacity"></td>
 			<td class="ArenasTableNewItem"> </td>
 		</tr>
 		<tr>

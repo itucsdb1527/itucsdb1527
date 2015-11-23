@@ -55,3 +55,26 @@ def initialize_database_referees():
 
     connection.commit()
     return redirect(url_for('referees_page'))
+
+
+@app.route('/referees/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def referees_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("""SELECT ID, RefereeName, RefereeAge, RefereeNationality FROM REFEREES WHERE ID = %s""", (int(UPDATEID),))
+    connection.commit()
+    return render_template('referees_edit.html', referees = cursor)
+
+@app.route('/referees/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
+def referees_page_apply(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    new_name = request.form['name']
+    new_age = request.form['age']
+    new_nationality = request.form['nationality']
+    query = """UPDATE REFEREES SET RefereeName = '%s', RefereeAge = %d, RefereeNationality = '%s' WHERE ID = %d""" % (new_name, int(new_age), new_nationality, int(UPDATEID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('referees_page'))

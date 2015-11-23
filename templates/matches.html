@@ -7,7 +7,7 @@
         <a href="{{ url_for('initialize_database_matches') }}">Init DB for Matches</a><br>
 
 		<form action="{{ url_for('matches_page') }}" method = "post">
-		<table id="MatchesTable">
+		<table id="matchesTable">
 
 		{% for ID, Team1Name, Team2Name , ArenaName , RefereeName , Season in matches %}
 		<tr>
@@ -18,13 +18,14 @@
 			<td class="MatchesTableItem">{{RefereeName}}</td>
 			<td class="MatchesTableItem">{{Season}}</td>
 			<td class="MatchesTableItem"><a href="{{ url_for('matches_page_delete', DELETEID=ID) }}">Delete</a></td>
+			<td class="MatchesTableItem"><a href="{{ url_for('matches_page_update', UPDATEID=ID) }}">Update</a></td>
 		</tr>
 		{% endfor %}
 
 		<tr>
 			<td class="MatchesTableNewItem"> </td>
-			<td class="MatchesTableNewItem"><input type="text" name="Team1name" required="required"></td>
-			<td class="MatchesTableNewItem"><input type="text" name="Team2name" required="required"></td>
+			<td class="MatchesTableNewItem"><input type="text" name="Team1Name" required="required"></td>
+			<td class="MatchesTableNewItem"><input type="text" name="Team2Name" required="required"></td>
 			<td class="MatchesTableNewItem"><input type="text" name="ArenaName"></td>
 			<td class="MatchesTableNewItem"><input type="text" name="RefereeName"></td>
 			<td class="MatchesTableNewItem"><input type="text" name="Season"></td>

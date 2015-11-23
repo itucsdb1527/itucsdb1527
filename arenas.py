@@ -36,10 +36,34 @@ def arenas_page_delete(DELETEID):
         connection.commit()
         return redirect(url_for('arenas_page'))
 
+
+@app.route('/arenas/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def arenas_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("""SELECT ID, ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity FROM ARENAS WHERE ID = %s""", (int(UPDATEID),))
+    connection.commit()
+    return render_template('arenas_edit.html', arenas = cursor)
+
+@app.route('/arenas/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
+def arenas_page_apply(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    new_name = request.form['name']
+    new_date = request.form['built-date']
+    new_city = request.form['city']
+    new_capacity = request.form['capacity']
+    query = """UPDATE ARENAS SET ArenaName = '%s', ArenaBuiltDate = %d, ArenaCity = '%s', ArenaCapacity = %d WHERE ID = %d""" % (new_name, int(new_date), new_city, int(new_capacity), int(UPDATEID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('arenas_page'))
+
 @app.route('/arenas/initdb')
 def initialize_database_arenas():
     connection = dbapi2.connect(app.config['dsn'])
-    cursor =connection.cursor()
+    cursor = connection.cursor()
 
     query = """DROP TABLE IF EXISTS ARENAS"""
     cursor.execute(query)
