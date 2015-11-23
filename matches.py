@@ -46,7 +46,7 @@ def matches_page_update(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
 
-    cursor.execute("""SELECT ID, Team1Name, Team2Name, ArenaName, RefereeName, Season FROM LEAGUES WHERE ID = %s""", (int(UPDATEID),))
+    cursor.execute("""SELECT ID, Team1Name, Team2Name, ArenaName, RefereeName, Season FROM MATCHES WHERE ID = %s""", (int(UPDATEID),))
     connection.commit()
     return render_template('matches_edit.html', leagues = cursor)
 
@@ -55,12 +55,12 @@ def matches_page_apply(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
 
-    new_name1 = request.form['name1']
-    new_name2 = request.form['name2']
-    new_arena = request.form['arena']
-    new_referee = request.form['referee']
-    new_season = request.form['season']
-    query = """UPDATE MATCHES SET Team1Name = '%s', Team2Name = '%s', ArenaName = '%s', RefereeName = '%s', Season = %d WHERE ID = %d""" % (new_name1, new_name2, new_arena, new_referee ,int(season), int(UPDATEID))
+    new_name1 = request.form['Team1Name']
+    new_name2 = request.form['Team2Name']
+    new_arena = request.form['ArenaName']
+    new_referee = request.form['RefereeName']
+    new_season = request.form['Season']
+    query = """UPDATE MATCHES SET Team1Name = '%s', Team2Name = '%s', ArenaName = '%s', RefereeName = '%s', Season = %d WHERE ID = %d""" % (new_name1, new_name2, new_arena, new_referee ,int(new_season), int(UPDATEID))
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('matches_page'))
