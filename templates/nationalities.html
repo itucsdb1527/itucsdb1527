@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %} Nationalities {% endblock %}
+
+{% block content %}
+	<h1>About Us - Tugba</h1><hr>
+    <a href="{{ url_for('initialize_database_nationalities') }}">Init DB for Nationalities</a><br>
+
+	<form action="{{ url_for('nationalities_page') }}" method = "post">
+		<table id="nationalitiesTable">
+
+		<tr>
+			<th>NationalityID</th>
+    		<th>Nationality</th>
+  		</tr>
+
+		{% for ID, Nationality in nationalities %}
+		<tr>
+			<td class="NationalitiesTableItem">{{ID}}</td>
+			<td class="NationalitiesTableItem">{{Nationality}}</td>
+			<td class="NationalitiesTableItem"><a href="{{ url_for('nationalities_page_delete', DELETEID=ID) }}">Delete</a></td>
+			<td class="NationalitiesTableItem"><a href="{{ url_for('nationalities_page_update', UPDATEID=ID) }}">Update</a></td>
+		</tr>
+		{% endfor %}
+
+		<tr>
+			<td class="NationalitiesTableNewItem"> </td>
+			<td class="NationalitiesTableNewItem"><input type="text" name="nationality" required="required"></td>
+			<td class="NationalitiesTableNewItem"> </td>
+			<td class="NationalitiesTableNewItem"> </td>
+		</tr>
+		<tr>
+			<td colspan="5"><input value="Add New Nationality" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}

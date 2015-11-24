@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %} Nationalities {% endblock %}
+
+{% block content %}
+    <h1>About Us - Tugba</h1><hr>
+
+<form action="APPLY" method = "post">
+		<table id="nationalitiesTable">
+
+		{% for ID, Nationality in nationalities %}
+		<tr>
+			<td class="NationalitiesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
+			<td class="NationalitiesTableItem"><input type="text" name="nationality" required="required" value="{{Nationality}}"></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3"><input value="Update Nationality" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}
