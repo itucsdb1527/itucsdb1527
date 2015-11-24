@@ -6,6 +6,31 @@ from flask import request
 from flask.helpers import url_for
 from config import app
 
+@app.route('/nationalities/initdb')
+def initialize_database_nationalities():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    query = """DROP TABLE IF EXISTS NATIONALITIES"""
+    cursor.execute(query)
+    query = """CREATE TABLE NATIONALITIES (ID SERIAL PRIMARY KEY, Nationality VARCHAR NOT NULL)"""
+    cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('North Country')"""
+    cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('Northern California')"""
+    cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('Sun Country')"""
+    cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('Turkey')"""
+    cursor.execute(query)
+
+    connection.commit()
+    return redirect(url_for('nationalities_page'))
+
 @app.route('/nationalities', methods=['GET', 'POST'])
 def nationalities_page():
     connection = dbapi2.connect(app.config['dsn'])
@@ -32,31 +57,6 @@ def nationalities_page_delete(DELETEID):
         cursor.execute("""DELETE FROM NATIONALITIES WHERE ID = %s""", (int(DELETEID),))
         connection.commit()
         return redirect(url_for('nationalities_page'))
-
-@app.route('/nationalities/initdb')
-def initialize_database_nationalities():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    query = """DROP TABLE IF EXISTS NATIONALITIES"""
-    cursor.execute(query)
-    query = """CREATE TABLE NATIONALITIES (ID SERIAL PRIMARY KEY, Nationality VARCHAR NOT NULL)"""
-    cursor.execute(query)
-    query = """INSERT INTO NATIONALITIES (Nationality)
-    VALUES ('North Country')"""
-    cursor.execute(query)
-    query = """INSERT INTO NATIONALITIES (Nationality)
-    VALUES ('Northern California')"""
-    cursor.execute(query)
-    query = """INSERT INTO NATIONALITIES (Nationality)
-    VALUES ('Sun Country')"""
-    cursor.execute(query)
-    query = """INSERT INTO NATIONALITIES (Nationality)
-    VALUES ('Turkey')"""
-    cursor.execute(query)
-
-    connection.commit()
-    return redirect(url_for('nationalities_page'))
 
 
 @app.route('/s/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
