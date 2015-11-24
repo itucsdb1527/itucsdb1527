@@ -64,7 +64,26 @@ def admin_initialize_database_teams():
     cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 2)"""
     cursor.execute(query)
-
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 3)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 4)"""
+    cursor.execute(query)    
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 5)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 6)"""
+    cursor.execute(query)    
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 7)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 8)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 9)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 10)"""
+    cursor.execute(query)    
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 11)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 12)"""
+    cursor.execute(query)   
 
     #Admin Table
     query = """DROP TABLE IF EXISTS SITE CASCADE"""
