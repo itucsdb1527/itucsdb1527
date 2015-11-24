@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %} Maillist {% endblock %}
+
+{% block content %}
+    <h1>About Us - Seyma</h1><hr>
+
+<form action="APPLY" method = "post">
+		<table id="maillistTable">
+
+		{% for ID, Mail, TeamID in maillist %}
+		<tr>
+			<td class="MaillistTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
+			<td class="MaillistTableItem"><input type="text" name="Mail" required="required" value="{{Mail}}"></td>
+			<td class="MaillistTableItem"><input type="text" name="TeamID" required="required" value="{{TeamID}}"></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3"><input value="Add New Mail" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}
