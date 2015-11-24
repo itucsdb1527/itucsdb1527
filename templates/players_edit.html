@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %} Players {% endblock %}
+
+{% block content %}
+    	<h1>About Us - Meral</h1><hr>
+
+   <form action="APPLY" method = "post">
+		<table id="playerpool">
+			<tr>
+				<td> </td>
+				<td>NAME</td>
+				<td>NATIONALITY</td>
+			</tr>
+		{% for ID, name, nationality_ID in players %}
+		<tr>
+			<td class="playerItem"><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
+			<td class="playerItem"><input type="text" name="name" required="required" value="{{name}}" style="width:95%"></td>
+			<td class="playerItem"><select  name="nationalityID">
+				{% for ID, nationality in nationalities %}
+					<option value="{{ ID }}" {% print("selected") if nationality_ID == ID %}>{{ nationality }}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3"><input value="Update Person" name="update" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}
