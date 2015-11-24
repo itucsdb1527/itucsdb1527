@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %} Leagues {% endblock %}
+
+{% block content %}
+    <h1>Admin Teams/Update Page - Meric</h1><hr>
+
+<form action="APPLY" method = "post">
+		<table id="teamsTable">
+
+		{% for ID, Team_Name in teams %}
+		<tr>
+			<td class="teamsTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
+			<td class="teamsTableItem"><input type="text" name="name" required="required" value="{{Team_Name}}" style="width:95%"></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3" align="center"><input value="Update Team" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}

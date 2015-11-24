@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %} Season Team {% endblock %}
+
+{% block content %}
+    <h1>Season Team - Meric</h1><hr>
+    <a href="{{ url_for('teams_page') }}">Teams Page</a><br><br>
+    <a href="{{ url_for('admin_season_team_page') }}">Admin Season Team Page</a><br><br>
+	<form action="" method = "post">
+		<table >
+		<tr>
+			<td >Search Team Name:</td>
+			<td><input type="text" name="search" required="required" style="margin-left:3px;width:95%"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input value="Search" name="search" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+	<br><br>
+	
+    <p>Search for the teams that you want to see in which season they played.<p>
+
+	<table id="teamsTable">
+	<tr>
+		<td class="teamsTableHeader"><b><center>Season Name</b></center></td>
+		<td class="teamsTableHeader"><b><center>Teams</b></center></td>
+	</tr>
+	{% for Season_Name, Team_Name in season_team %}
+	<tr>	
+		<td class="teamsTableItem">{{ Season_Name }}</td>	
+		<td class="teamsTableItem">{{ Team_Name }}</td>
+	</tr>
+	{% endfor %}
+
+	</table>
+
+{% endblock %}
