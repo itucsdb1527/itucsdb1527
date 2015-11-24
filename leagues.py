@@ -13,7 +13,7 @@ def leagues_page():
     cursor = connection.cursor()
 
     if request.method == 'GET':
-        query = "SELECT ID, League_Name, Country_ID FROM LEAGUES ORDER BY Country_ID, League_Name"
+        query = "SELECT COUNTRIES.ID, League_Name, COUNTRIES.Name FROM LEAGUES, COUNTRIES WHERE Country_ID = COUNTRIES.ID ORDER BY Country_ID, League_Name"
         cursor.execute(query)
         return render_template('leagues.html', leagues = cursor)
     else:
@@ -50,7 +50,8 @@ def admin_initialize_database_leagues():
     query = """CREATE TABLE LEAGUES (
                     ID SERIAL PRIMARY KEY,
                     League_Name VARCHAR NOT NULL,
-                    Country_ID INTEGER NOT NULL
+                    Country_ID INTEGER NOT NULL,
+                    FOREIGN KEY Country_ID REFERENCES COUNTRIES(ID) ON DELETE CASCADE ON UPDATE CASCADE
                     )"""
     cursor.execute(query)
 #/*FOREIGN KEY Country_ID INTEGER NOT NULL REFERENCES COUNTRIES(ID) ON DELETE CASCADE ON UPDATE CASCADE*/

@@ -22,10 +22,10 @@
 		<td class="LeaguesTableHeader">League Name</td>
 		<td class="LeaguesTableHeader">Country Information</td>
 	</tr>
-	{% for ID, League_Name, Country_ID in leagues %}
+	{% for ID, League_Name, Name in leagues %}
 	<tr>
 		<td class="LeaguesTableItem"><a href="{{ url_for('leagues_season_page', LEAGUEID=ID) }}">{{League_Name}}</a></td>
-		<td class="LeaguesTableItem">{{Country_ID}}</td>
+		<td class="LeaguesTableItem">{{Name}}</td>
 	</tr>
 	{% endfor %}
 
