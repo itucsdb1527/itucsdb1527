@@ -9,6 +9,8 @@
 		<form action="{{ url_for('matches_page') }}" method = "post">
 		<table id="matchesTable">
 
+		<div><a href="{{ url_for('maillist_page') }}">Maillist</a></div>
+
 		{% for ID, Team1Name, Team2Name , ArenaName , RefereeName , Season in matches %}
 		<tr>
 			<td class="MatchesTableItem">{{ID}}</td>
