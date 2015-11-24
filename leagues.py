@@ -51,7 +51,7 @@ def admin_initialize_database_leagues():
                     ID SERIAL PRIMARY KEY,
                     League_Name VARCHAR NOT NULL,
                     Country_ID INTEGER NOT NULL,
-                    FOREIGN KEY Country_ID REFERENCES COUNTRIES(ID) ON DELETE CASCADE ON UPDATE CASCADE
+                    FOREIGN KEY (Country_ID) REFERENCES COUNTRIES(ID) ON DELETE CASCADE ON UPDATE CASCADE
                     )"""
     cursor.execute(query)
 #/*FOREIGN KEY Country_ID INTEGER NOT NULL REFERENCES COUNTRIES(ID) ON DELETE CASCADE ON UPDATE CASCADE*/
