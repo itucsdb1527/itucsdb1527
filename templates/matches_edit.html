@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %} Matches {% endblock %}
+
+{% block content %}
+    <h1>About Us - Seyma</h1><hr>
+
+<form action="APPLY" method = "post">
+		<table id="matchesTable">
+
+		{% for ID, Team1Name, Team2Name, ArenaName, RefereeName , Season in leagues %}
+		<tr>
+			<td class="MatchesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
+			<td class="MatchesTableItem"><input type="text" name="Team1Name" required="required" value="{{Team1Name}}"></td>
+			<td class="MatchesTableItem"><input type="text" name="Team2Name" required="required" value="{{Team2Name}}"></td>
+			<td class="MatchesTableItem"><input type="text" name="ArenaName" value="{{ArenaName}}"></td>
+			<td class="MatchesTableItem"><input type="text" name="RefereeName" value="{{RefereeName}}"></td>
+			<td class="MatchesTableItem"><input type="number" name="Season" value="{{Season}}"></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3"><input value="Add New Match" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}

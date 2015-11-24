@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %} Arenas {% endblock %}
+
+{% block content %}
+    <h1>About Us - Tugba</h1><hr>
+
+<form action="APPLY" method = "post">
+		<table id="teamsTable">
+
+		{% for ID, ArenaName, ArenaBuiltDate, ArenaCity, ArenaCapacity in arenas %}
+		<tr>
+			<td class="ArenasTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
+			<td class="ArenasTableItem"><input type="text" name="name" required="required" value="{{ArenaName}}"></td>
+			<td class="ArenasTableItem"><input type="number" name="built-date" value="{{ArenaBuiltDate}}"></td>
+			<td class="ArenasTableItem"><input type="text" name="city" required="required" value="{{ArenaCity}}"></td>
+			<td class="ArenasTableItem"><input type="number" name="capacity" value="{{ArenaCapacity}}"></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3"><input value="Update Arena" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}
