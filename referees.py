@@ -11,7 +11,7 @@ def referees_page():
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
 
-    if request.method == 'GET':
+    if  request.method == 'GET':
         query = "SELECT * FROM REFEREES"
         cursor.execute(query)
         return render_template('referees.html', referees = cursor)
@@ -78,3 +78,31 @@ def referees_page_apply(UPDATEID):
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('referees_page'))
+
+@app.route('/referees/SEARCH/', methods=['GET', 'POST'])
+def referees_page_search():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    connection.commit()
+    return render_template('referees_search.html', referees = cursor)
+
+@app.route('/referees/SEARCH/SEARCHAPPLY', methods=['GET', 'POST'])
+def referees_page_searchapply():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    in_name = request.form['name']
+    query = """SELECT * FROM REFEREES WHERE RefereeName = '%s'""" % (in_name)
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('referees_foundpage'))
+
+@app.route('/referees/SEARCH/<RNAME>/FOUND', methods=['POST'])
+def referees_found_page(RNAME):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    query = """SELECT RNAME FROM REFEREES WHERE RefereeName = '%s'"""
+    cursor.execute(query)
+    return render_template('referee_foundsearch.html', referees = cursor)

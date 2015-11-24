@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %} Referees {% endblock %}
+
+{% block content %}
+    <h1>About Us - Tugba</h1><hr>
+
+<form action="SEARCHAPPLY" method = "post">
+
+		<table>
+		<tr>
+			<td class="RefereesSearchTableItem"></td>
+			<td class="RefereesSearchTableItem"> <input type="text" name="name" required="required"></td>
+			<td class="RefereesSearchTableItem"> </td>
+		</tr>
+
+		<tr>
+			<td colspan="5"><input value="Search Referee" name="search" type="submit"></td>
+			<td class="RefereesSearchTableItem"><a href="{{ url_for('referees_page_searchapply', RNAME=RefereeName) }}">Search</a></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}
