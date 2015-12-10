@@ -17,33 +17,35 @@ def admin_initialize_database_teams():
 
     query = """CREATE TABLE TEAMS(
     ID SERIAL PRIMARY KEY,
-    Team_Name VARCHAR NOT NULL
+    Team_Name VARCHAR NOT NULL,
+    Leagues_ID INTEGER,
+    FOREIGN KEY (Leagues_ID) REFERENCES LEAGUES(ID) ON DELETE CASCADE ON UPDATE CASCADE
     )"""
     cursor.execute(query)
 
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Galatasaray')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Galatasaray',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Besiktas')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Besiktas',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Fenerbahce')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Fenerbahce',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Ziraat Bankasi')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Ziraat Bankasi',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Halkbank')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Halkbank',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Istanbul B.S.B.')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Istanbul B.S.B.',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Sahinbey Bld.')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Sahinbey Bld.',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Maliye Milli Piyango')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Maliye Milli Piyango',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Tokat Bld. Plevne')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Tokat Bld. Plevne',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Inegol Bld.')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Inegol Bld.',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Arkas Spor')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Arkas Spor',1)"""
     cursor.execute(query)
-    query = """INSERT INTO TEAMS (Team_Name) VALUES ('Bornova Anadolu Lisesi')"""
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Bornova Anadolu Lisesi',1)"""
     cursor.execute(query)
 
 
@@ -67,11 +69,11 @@ def admin_initialize_database_teams():
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 3)"""
     cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 4)"""
-    cursor.execute(query)    
+    cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 5)"""
     cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 6)"""
-    cursor.execute(query)    
+    cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 7)"""
     cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 8)"""
@@ -79,11 +81,11 @@ def admin_initialize_database_teams():
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 9)"""
     cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 10)"""
-    cursor.execute(query)    
+    cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 11)"""
     cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 12)"""
-    cursor.execute(query)   
+    cursor.execute(query)
 
     #Admin Table
     query = """DROP TABLE IF EXISTS SITE CASCADE"""
@@ -110,7 +112,7 @@ def teams_page():
     cursor = connection.cursor()
 
     if request.method == 'GET':
-        query = "SELECT ID, Team_Name FROM TEAMS ORDER BY ID"
+        query = "SELECT TEAMS.ID, TEAMS.Team_Name, LEAGUES.League_Name FROM TEAMS INNER JOIN LEAGUES ON TEAMS.Leagues_ID = LEAGUES.ID ORDER BY ID"
         cursor.execute(query)
         return render_template('teams.html', teams = cursor)
     else:
@@ -147,7 +149,7 @@ def admin_teams_page():
     cursor = connection.cursor()
 
     if request.method == 'GET':
-        query = "SELECT ID, Team_Name FROM TEAMS ORDER BY ID"
+        query = "SELECT TEAMS.ID, TEAMS.Team_Name, LEAGUES.League_Name FROM TEAMS INNER JOIN LEAGUES ON TEAMS.Leagues_ID = LEAGUES.ID ORDER BY ID"
         cursor.execute(query)
         return render_template('admin/teams.html', teams = cursor)
     else:

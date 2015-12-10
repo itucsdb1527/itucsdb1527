@@ -17,16 +17,18 @@
 		</table>
 	</form>
 	<br><br>
-	
+
     <p>Click any teams below to access Season_Team pages of clicked team.<p>
-	
+
 	<table id="teamsTable">
 	<tr>
+		<td class="teamsTableHeader"><b><center>Team Name</b></center></td>
 		<td class="teamsTableHeader"><b><center>League Name</b></center></td>
 	</tr>
-	{% for ID, Team_Name in teams %}
+	{% for ID, Team_Name, Leagues_Name in teams %}
 	<tr>
 		<td class="teamsTableItem"><a href="{{ url_for('teams_season_team_page', TEAMID=ID) }}">{{Team_Name}}</a></td>
+		<td class="LeaguesTableItem">{{ Leagues_Name }}</td>
 	</tr>
 	{% endfor %}
 
