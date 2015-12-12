@@ -47,6 +47,22 @@ def admin_initialize_database_teams():
     cursor.execute(query)
     query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Bornova Anadolu Lisesi',1)"""
     cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('IBB Polonia London',2)"""
+    cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Team Northumbria',2)"""
+    cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('London Docklands',2)"""
+    cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Wessex M1',2)"""
+    cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Sheffield Hallam',2)"""
+    cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('London Lynx 1',2)"""
+    cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Leeds VC',2)"""
+    cursor.execute(query)
+    query = """INSERT INTO TEAMS (Team_Name, Leagues_ID) VALUES ('Malory Eagles (London)',2)"""
+    cursor.execute(query)
 
 
     #Season Team Table
@@ -85,6 +101,22 @@ def admin_initialize_database_teams():
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 11)"""
     cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 12)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 13)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 14)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 15)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 16)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 17)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 18)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 19)"""
+    cursor.execute(query)
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 20)"""
     cursor.execute(query)
 
     #Admin Table
