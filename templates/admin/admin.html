@@ -1,10 +1,9 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Admin {% endblock %}
 
 {% block content %}
-    <h1>Admin Page - Meric</h1><hr>
-    <a href="{{ url_for('admin_initialize_database_teams') }}">Init DB for Admins</a><br>
+
     <form action="{{ url_for('admin_admin_page') }}" method = "post">
 		<table id="adminTable">
 
