@@ -1,44 +1,41 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Teams {% endblock %}
 
 {% block content %}
-    <h1>Admin Teams Page - Meric</h1><hr>
-    <a href="{{ url_for('admin_initialize_database_teams') }}">Init DB for Teams</a><br>
-    <a href="{{ url_for('teams_page') }}">Return Teams Page</a><br><br>
     <form action="{{ url_for('admin_teams_page') }}" method = "post">
 		<table id="teamsTable">
-		
+
 		<tr>
 			<td class="teamsTableHeader"><b><center>Team Name</b></center></td>
-			<td class="teamsTableHeader"><b><center>League Name</b></center></td>			
+			<td class="teamsTableHeader"><b><center>League Name</b></center></td>
 			<td class="teamsTableItem"></a>
 			<td class="teamsTableItem"></a></td>
-		</tr>		
+		</tr>
 
 		{% for ID, Team_Name, Leagues_Name in teams %}
 		<tr>
 			<td class="TeamsTableItem">{{Team_Name}}</td>
-			<td class="TeamsTableItem">{{Leagues_Name}}</td>			
+			<td class="TeamsTableItem">{{Leagues_Name}}</td>
 			<td class="TeamsTableItem"><a href="{{ url_for('admin_teams_page_delete', DELETEID=ID) }}">Delete</a>
 			<td class="TeamsTableItem"><a href="{{ url_for('admin_teams_page_update', UPDATEID=ID) }}">Update</a></td>
 		</tr>
 		{% endfor %}
-		
+
 		<tr>
 
 			<td class="TeamsTableNewItem"><input type="text" name="name" required="required" style="margin-left:3px;width:95%"></td>
-			
+
 			<td class="teamsTableItem"><select  name="leagues_id">
 				{% for ID, League_Name in leagues %}
 					<option value="{{ ID }}">{{ League_Name }}</option>
 				{% endfor %}
-			</select></td>			
-			
+			</select></td>
+
 			<td class="TeamsTableNewItem"> </td>
 			<td class="TeamsTableNewItem"> </td>
 		</tr>
-	
+
 		<tr>
 			<td colspan="5" align="right" style="padding-right:5px"><input value="Add New Team" name="add" type="submit"></td>
 		</tr>

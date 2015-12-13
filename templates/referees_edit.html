@@ -8,12 +8,17 @@
 <form action="APPLY" method = "post">
 		<table id="refereesTable">
 
-		{% for ID, RefereeName, RefereeAge, RefereeNationality in referees %}
+		{% for ID, RefereeName, RefereeAge, Nationality in referees %}
 		<tr>
 			<td class="RefereesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
 			<td class="RefereesTableItem"><input type="text" name="name" required="required" value="{{RefereeName}}"></td>
 			<td class="RefereesTableItem"><input type="number" name="age" value="{{RefereeAge}}"></td>
-			<td class="RefereesTableItem"><input type="text" name="nationality" required="required" value="{{RefereeNationality}}"></td>
+			<td class="RefereesTableItem"><select name="nationality">
+				{% for ID, Nationality in nationalities %}
+				<option value="{{ID}}"{% print("selected") if RefereeNationality == ID %}>{{ Nationality }}</option>
+				{ % endfor %}
+				</select>
+			</td>
 		</tr>
 		{% endfor %}
 		<tr>
