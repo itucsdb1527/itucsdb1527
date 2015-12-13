@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %} Admin {% endblock %}
+
+{% block content %}
+    <h1>Admin/Update Page - Meric</h1><hr>
+
+<form action="APPLY" method = "post">
+		<table id="teamsTable">
+
+		{% for ID, Admin_Name, Admin_Password, Site_Name, Slogan in site %}
+		<tr>
+			<td class="teamsTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
+			<td class="teamsTableItem"><input type="text" name="name" required="required" value="{{Admin_Name}}" style="width:95%"></td>
+			<td class="teamsTableItem"><input type="text" name="password" required="required" value="{{Admin_Password}}" style="width:95%"></td>
+			<td class="teamsTableItem"><input type="text" name="site_name" required="required" value="{{Site_Name}}" style="width:95%"></td>
+			<td class="teamsTableItem"><input type="text" name="slogan" required="required" value="{{Slogan}}" style="width:95%"></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3" align="center"><input value="Update Admin" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}

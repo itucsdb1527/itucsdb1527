@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %} Admin {% endblock %}
+
+{% block content %}
+    <h1>Admin Page - Meric</h1><hr>
+    <a href="{{ url_for('admin_initialize_database_teams') }}">Init DB for Admins</a><br>
+    <form action="{{ url_for('admin_admin_page') }}" method = "post">
+		<table id="adminTable">
+
+		<tr>
+			<td class="teamsTableHeader"><b><center>Admin Name</b></center></td>
+			<td class="teamsTableHeader"><b><center>Admin Password</b></center></td>
+			<td class="teamsTableHeader"><b><center>Site Name</b></center></td>
+			<td class="teamsTableHeader"><b><center>Slogan</b></center></td>
+			<td class="teamsTableItem"></a>
+			<td class="teamsTableItem"></a></td>
+		</tr>
+
+		{% for ID, Admin_Name, Admin_Password, Site_Name, Slogan in site %}
+		<tr>
+			<td class="TeamsTableItem">{{Admin_Name}}</td>
+			<td class="TeamsTableItem">{{Admin_Password}}</td>
+			<td class="TeamsTableItem">{{Site_Name}}</td>
+			<td class="TeamsTableItem">{{Slogan}}</td>
+			<td class="TeamsTableItem"><a href="{{ url_for('admin_admin_page_delete', DELETEID=ID) }}">Delete</a>
+			<td class="TeamsTableItem"><a href="{{ url_for('admin_admin_page_update', UPDATEID=ID) }}">Update</a></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td class="TeamsTableNewItem"><input type="text" name="name" required="required" style="margin-left:3px;width:95%"></td>
+			<td class="TeamsTableNewItem"><input type="text" name="password" required="required" style="margin-left:3px;width:95%"></td>
+			<td class="TeamsTableNewItem"><input type="text" name="site_name" required="required" style="margin-left:3px;width:95%"></td>
+			<td class="TeamsTableNewItem"><input type="text" name="slogan" required="required" style="margin-left:3px;width:95%"></td>
+			<td class="TeamsTableNewItem"> </td>
+			<td class="TeamsTableNewItem"> </td>
+		</tr>
+		<tr>
+			<td colspan="5" align="right" style="padding-right:5px"><input value="Add New Admin" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}

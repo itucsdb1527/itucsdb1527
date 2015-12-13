@@ -124,14 +124,18 @@ def admin_initialize_database_teams():
     cursor.execute(query)
 
     query = """CREATE TABLE SITE(
+    ID SERIAL,
     Admin_Name VARCHAR NOT NULL,
     Admin_Password VARCHAR NOT NULL,
     Site_Name VARCHAR NOT NULL,
-    Slogan VARCHAR NOT NULL
+    Slogan VARCHAR NOT NULL,
+    PRIMARY KEY(ID)
     )"""
     cursor.execute(query)
 
     query = """INSERT INTO SITE (Admin_Name, Admin_Password, Site_Name, Slogan) VALUES ('Meric','lolololo','itucsdb1527','Cimbombom')"""
+    cursor.execute(query)
+    query = """INSERT INTO SITE (Admin_Name, Admin_Password, Site_Name, Slogan) VALUES ('Volleybase','uyar','itucsdb1527','Cimbombom')"""
     cursor.execute(query)
 
     connection.commit()
@@ -290,3 +294,63 @@ def admin_season_team_page_apply(UPDATEID):
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_season_team_page'))
+
+
+@app.route('/ADMIN/admin', methods=['GET', 'POST'])
+def admin_admin_page():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT * FROM SITE ORDER BY ID"
+        cursor.execute(query)
+        return render_template('admin/admin.html', site = cursor)
+    else:
+
+        name = request.form['name']
+        password = request.form['password']
+        site_name = request.form['site_name']
+        slogan = request.form['slogan']
+        query = """INSERT INTO SITE (Admin_Name, Admin_Password, Site_Name, Slogan)
+        VALUES ('"""+name+"','"+password+"','"+site_name+"','"+slogan+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('admin_admin_page'))
+
+
+
+
+@app.route('/ADMIN/admin/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
+def admin_admin_page_delete(DELETEID):
+        connection = dbapi2.connect(app.config['dsn'])
+        cursor = connection.cursor()
+
+
+        cursor.execute("""DELETE FROM SITE WHERE ID = %s""", (int(DELETEID),))
+        connection.commit()
+        return redirect(url_for('admin_admin_page'))
+
+
+@app.route('/ADMIN/admin/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def admin_admin_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("""SELECT ID, Admin_Name, Admin_Password, Site_Name, Slogan FROM SITE WHERE ID = %s""", (int(UPDATEID),))
+    connection.commit()
+    return render_template('admin/admin_edit.html', site = cursor)
+
+@app.route('/ADMIN/admin/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
+def admin_admin_page_apply(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    new_name = request.form['name']
+    new_password = request.form['password']
+    new_site_name = request.form['site_name']
+    new_slogan = request.form['slogan']
+
+    query = """UPDATE SITE SET Admin_Name = '%s', Admin_Password = '%s', Site_Name = '%s', Slogan = '%s' WHERE ID = %d""" % (new_name, new_password, new_site_name, new_slogan, int(UPDATEID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('admin_admin_page'))
