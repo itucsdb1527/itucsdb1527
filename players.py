@@ -163,7 +163,7 @@ def admin_countries_page_apply(UPDATEID):
     cursor = connection.cursor()
 
     new_name = request.form['name']
-    query = "UPDATE COUNTRIES SET NAME = '%s' WHERE ID = %d" % (new_name, int(UPDATEID))
+    query = """UPDATE COUNTRIES SET NAME = '%s' WHERE ID = %d""" % (new_name, int(UPDATEID))
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_countries_page'))

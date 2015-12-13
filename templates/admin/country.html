@@ -8,7 +8,6 @@
    <form action="{{ url_for('admin_countries_page') }}" method = "post">
 		<table id="countries">
 			<tr>
-				<td> </td>
 				<td>NAME</td>
 			</tr>
 		{% for ID, name in countries %}
@@ -18,7 +17,7 @@
 			<td class="countryItem"><a href="{{ url_for('admin_countries_page_update', UPDATEID=ID) }}">Update</a></td>
 		</tr>
 		{% endfor %}
-			<tr>
+		<tr>
 			<td class="newCountry"><input type="text" name="name" required="required"></td>
 			<td> </td>
 			<td> </td>
@@ -28,3 +27,5 @@
 		</tr>
 		</table>
 	</form>
+
+{% endblock %}
