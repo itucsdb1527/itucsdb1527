@@ -67,6 +67,7 @@ def counter_page():
     return "This page was accessed %d times." % count
 
 
+
 if __name__ == '__main__':
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
     if VCAP_APP_PORT is not None:
