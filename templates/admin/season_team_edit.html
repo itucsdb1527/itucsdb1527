@@ -7,7 +7,13 @@
 
 <form action="APPLY" method = "post">
 		<table id="teamsTable">
-
+		
+		<tr>
+			<td class="teamsTableItem"></a>
+			<td class="teamsTableHeader"><b><center>Season Name</b></center></td>
+			<td class="teamsTableHeader"><b><center>Team Name</b></center></td>			
+		</tr>	
+		
 		{% for ID, Seasons_ID, Team_ID in season_team %}
 		<tr>
 			<td class="teamsTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
