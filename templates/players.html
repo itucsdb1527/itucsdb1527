@@ -21,11 +21,18 @@
 			<tr>
 				<td>NAME</td>
 				<td>NATIONALITY</td>
+				<td>AGE</td>
+				<td>NUMBER</td>
+				<td>POSITION</td>
 			</tr>
-		{% for ID, name, nationality in players %}
+		{% for ID, name, nationality, age, number, position in players %}
 		<tr>
 			<td class="playerItem">{{name}}</td>
 			<td class="playerItem">{{nationality}}</td>
+			<td class="playerItem">{{age}}</td>
+			<td class="playerItem">{{number}}</td>
+			<td class="playerItem">{{position}}</td>
+
 		</tr>
 		{% endfor %}
 

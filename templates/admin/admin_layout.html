@@ -40,53 +40,59 @@
 
 <body>
 
-	<table align="center" width="100%" id="admin_menu">
+	<table align="center" width="100%"  id="admin_menu">
 		<tr>
-			<td width="200px" style="color:orange;"><b>ADMIN MENU<b></b></td>
-			<td rowspan="15" valign="top" style="padding-top: 20px;">{% block content %}{% endblock %}</td>
+			<td width="200px" ><a href="{{ url_for('admin_home_page') }}" title="Cemal" style="color:orange;"><b>ADMIN MENU</b></a></td>
+			<td rowspan="17" valign="top" style="padding-top: 20px;">{% block content %}{% endblock %}</td>
 		</tr>
 		<tr>
-			<td><a href="{{ url_for('admin_leagues_page') }}">Edit Leagues</a></td>
+			<td><a href="{{ url_for('admin_seasons_page') }}" title="Cemal">Edit News</a></td>
 		</tr>
 		<tr>
-			<td><a href="{{ url_for('admin_seasons_page') }}">Edit Seasons</a></td>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Cemal">Edit Leagues</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_seasons_page') }}" title="Cemal">Edit Seasons</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Meral">Edit Players</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Meral">Edit Team Players</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Meral">Edit Countries</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Tuğba">Edit Nationalities</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Tuğba">Edit Referees</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Tuğba">Edit Arenas</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Meriç">Edit Teams</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Meriç">Edit Season Teams</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Şeyma">Edit Matches</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Şeyma">Edit Scores</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Şeyma">Edit Mail List</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }} " title="Meriç">Edit Website Informations</a></td>
 		</tr>
 
 		<tr>
-			<td>Edit Countries</td>
-		</tr>
-		<tr>
-			<td>Edit Nationalities</td>
-		</tr>
-		<tr>
-			<td>Edit Teams</td>
-		</tr>
-		<tr>
-			<td>Edit Season Teams</td>
-		</tr>
-		<tr>
-			<td>Edit Mail List</td>
-		</tr>
-		<tr>
-			<td>Edit Matches</td>
-		</tr>
-		<tr>
-			<td>Edit Referees</td>
-		</tr>
-		<tr>
-			<td>Edit Arenas</td>
-		</tr>
-		<tr>
-			<td>Edit Website Informations</td>
-		</tr>
-		<tr>
-			<td>Edit Players</td>
-		</tr>
-		<tr>
-			<td>Edit Team Players</td>
-		</tr>
-		<tr>
-			<td>&nbsp</td>
+			<td> * <i>If want see which student did which part, you can hover on menu links</i></td>
 		</tr>
 		<tr>
 			<td><a href="{{ url_for('home_page') }}"><b>Return Web Site</b></a></td>

@@ -12,7 +12,7 @@ def players_page():
     cursor = connection.cursor()
 
     if request.method == 'GET':
-        query = "SELECT PLAYERS.ID, NAME,NATIONALITY FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID"
+        query = "SELECT PLAYERS.ID, NAME,NATIONALITY, AGE, NUMBER, POSITION FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID"
         cursor.execute(query)
         cursor2 = connection.cursor()
         query = "SELECT * FROM NATIONALITIES"
@@ -31,7 +31,7 @@ def admin_players_page():
     cursor = connection.cursor()
 
     if request.method == 'GET':
-        query = "SELECT PLAYERS.ID, NAME,NATIONALITY FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID"
+        query = "SELECT PLAYERS.ID, NAME, NATIONALITY, AGE, NUMBER, POSITION FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID"
         cursor.execute(query)
         cursor2 = connection.cursor()
         query = "SELECT * FROM NATIONALITIES"
@@ -40,7 +40,10 @@ def admin_players_page():
     else:
         name_in = request.form['name']
         nationality_in = request.form['nationalityID']
-        query = """INSERT INTO PLAYERS (name,NATIONALITY_ID) VALUES ('"""+name_in+"', '"+nationality_in+"')"
+        age_in = request.form['age']
+        number_in = request.form['number']
+        position_in = request.form['position']
+        query = """INSERT INTO PLAYERS (NAME, NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('"""+name_in+"', '"+nationality_in+"', '"+age_in+"', '"+number_in+"', '"+position_in+"')"
         cursor.execute(query)
         connection.commit()
         return redirect(url_for('admin_players_page'))
@@ -56,14 +59,17 @@ def admin_initialize_database_players():
                     ID SERIAL PRIMARY KEY,
                     NAME VARCHAR NOT NULL,
                     NATIONALITY_ID INTEGER NOT NULL,
+                    AGE INTEGER NOT NULL,
+                    NUMBER INTEGER NOT NULL,
+                    POSITION VARCHAR NOT NULL,
                     FOREIGN KEY (NATIONALITY_ID) REFERENCES NATIONALITIES(ID) ON DELETE CASCADE ON UPDATE CASCADE
                     )"""
     cursor.execute(query)
-    query = """INSERT INTO PLAYERS (NAME,NATIONALITY_ID) VALUES ('BabeRuth',1)"""
+    query = """INSERT INTO PLAYERS (NAME,NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('MERAL',1, 20, 8,'SETTER')"""
     cursor.execute(query)
-    query = """INSERT INTO PLAYERS (NAME,NATIONALITY_ID) VALUES ('MEral',2)"""
+    query = """INSERT INTO PLAYERS (NAME,NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('CEMAL',1, 24, 15,'LIBERO')"""
     cursor.execute(query)
-    query = """INSERT INTO PLAYERS (NAME,NATIONALITY_ID) VALUES ('Cemal',1)"""
+    query = """INSERT INTO PLAYERS (NAME,NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('SEYMA',1, 21, 9,'OPPOSITE')"""
     cursor.execute(query)
 
 
@@ -118,7 +124,10 @@ def admin_players_page_apply(UPDATEID):
 
     new_name = request.form['name']
     new_nationality = request.form['nationalityID']
-    query = "UPDATE PLAYERS SET NAME = '%s', NATIONALITY_ID = %d WHERE ID = %d" % (new_name,int(new_nationality), int(UPDATEID))
+    new_age = request.form['age']
+    new_number = request.form['number']
+    new_position = request.form['position']
+    query = "UPDATE PLAYERS SET NAME = '%s', NATIONALITY_ID = %d, AGE = %d, NUMBER = %d, POSITION = '%s'  WHERE ID = %d" % (new_name,int(new_nationality),int(new_age), int(new_number), new_position, int(UPDATEID))
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_players_page'))

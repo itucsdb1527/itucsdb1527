@@ -11,12 +11,19 @@
 				<tr>
 					<td>NAME</td>
 					<td>NATIONALITY</td>
+					<td>AGE</td>
+					<td>NUMBER</td>
+					<td>POSITION</td>
+
 				</tr>
-		{% for ID, name, nationality in players %}
+		{% for ID, name, nationality, age, number, position in players %}
 		<tr>
 			<td class="playerItem">{{ID}}</td>
 			<td class="playerItem">{{name}}</td>
 			<td class="playerItem">{{nationality}}</td>
+			<td class="playerItem">{{age}}</td>
+			<td class="playerItem">{{number}}</td>
+			<td class="playerItem">{{position}}</td>
 			<td class="playerItem"><a href="{{ url_for('admin_players_page_delete', DELETEID=ID) }}">Delete</a></td>
 			<td class="playerItem"><a href="{{ url_for('admin_players_page_update', UPDATEID=ID) }}">Update</a></td>
 
@@ -29,6 +36,16 @@
 				{% for ID, nationality in nationalities %}
 					<option value="{{ ID }}" >{{ nationality }}</option>
 				{% endfor %}
+			</select></td>
+			<td class="newPlayer"><input type="text" name="age" required="required"></td>
+			<td class="newPlayer"><input type="text" name="number" required="required"></td>
+			<td class=newPlayer><select  name="position">
+				  <option value="Right Side Hitter">Right Side Hitter</option>
+				  <option value="Middle Blocker">Middle Blocker</option>
+				  <option value="Opposite">Opposite</option>
+				  <option value="Setter">Setter</option>
+				  <option value="Middle Blocker">Middle Blocker</option>
+				  <option value="Outside Hitter">Outside Hitter</option>
 			</select></td>
 			<td> </td>
 			<td> </td>

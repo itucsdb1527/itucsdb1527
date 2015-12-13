@@ -12,6 +12,11 @@
 		<tr>
 			<td class="teamsTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
 			<td class="teamsTableItem"><input type="text" name="name" required="required" value="{{Team_Name}}" style="width:95%"></td>
+			<td class="teamsTableItem"><select  name="leagues_id">
+				{% for ID, League_Name in leagues %}
+					<option value="{{ ID }}"{% print("selected") if Leagues_ID == ID %}>{{ League_Name }}</option>
+				{% endfor %}
+			</select></td>				
 		</tr>
 		{% endfor %}
 		<tr>
