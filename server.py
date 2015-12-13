@@ -6,6 +6,7 @@ import psycopg2 as dbapi2
 
 import teams
 import leagues
+import news
 import players
 import referees
 import arenas
@@ -34,8 +35,11 @@ def get_elephantsql_dsn(vcap_services):
 
 @app.route('/')
 def home_page():
-    now = datetime.datetime.now()
-    return render_template('home.html', current_time=now.ctime())
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+    query = "SELECT ID, News_Title FROM NEWS ORDER BY ID DESC LIMIT 10"
+    cursor.execute(query)
+    return render_template('home.html', news=cursor)
 
 @app.route('/ADMIN')
 def admin_home_page():

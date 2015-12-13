@@ -3,9 +3,26 @@
 {% block title %} Home Page {% endblock %}
 
 {% block content %}
-    	<h1>Home Page</h1><hr>
-        <a href="{{ url_for('initialize_database') }}">Init DB for Counter</a><br>
-        <a href="{{ url_for('admin_home_page') }}">ADMIN Page</a>
+   	<h1>VolleyBASE News</h1><hr>
 
-        <img style="float:right" src="{{ url_for('static', filename='img/logo.png') }}" title="Fastbook" alt="Fastbook">
+	<script type="text/javascript">
+		function Stop() {
+			document.getElementById("home_news").stop();
+		}
+		function Continue() {
+			document.getElementById("home_news").start();
+		}
+	</script>
+	<div style="width: 1000px">
+
+		<marquee id="home_news" direction="up" width="500px" height="150px" scrolldelay="200" onmouseover="Stop()" onmouseleave="Continue()" style="border:#000 1px solid; padding: 10px;">
+			{% for ID, News_Title in news %}
+				<b>-</b> <a href="{{ url_for('news_details_page', NEWSID=ID) }}" title="Click for details">{{ News_Title }}</a><br><br>
+			{% endfor %}
+		</marquee>
+		<br>
+		<a href="{{ url_for('news_page') }}" title="Click for all news" style="margin-left: 420px"><b>ALL News >></b></a><br><br>
+	</div>
+
+    <img style="float:right" src="{{ url_for('static', filename='img/logo.png') }}" title="Fastbook" alt="Fastbook">
 {% endblock %}
