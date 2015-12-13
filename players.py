@@ -6,6 +6,25 @@ from flask import request
 from flask.helpers import url_for
 from config import app
 
+@app.route('/players', methods=['GET', 'POST'])
+def players_page():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT PLAYERS.ID, NAME,NATIONALITY FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID"
+        cursor.execute(query)
+        cursor2 = connection.cursor()
+        query = "SELECT * FROM NATIONALITIES"
+        cursor2.execute(query)
+        return render_template('players.html', players = cursor, nationalities = cursor2)
+    else:
+        search = request.form['search']
+        query = "SELECT * FROM PLAYERS WHERE Name LIKE '%" + search +"%'"
+        cursor.execute(query)
+        connection.commit()
+        return render_template('players.html', players = cursor)
+
 @app.route('/ADMIN/players', methods=['GET', 'POST'])
 def admin_players_page():
     connection = dbapi2.connect(app.config['dsn'])
@@ -25,42 +44,6 @@ def admin_players_page():
         cursor.execute(query)
         connection.commit()
         return redirect(url_for('admin_players_page'))
-
-@app.route('/ADMIN/countries', methods=['GET', 'POST'])
-def admin_countries_page():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    if request.method == 'GET':
-        query = "SELECT * FROM COUNTRIES"
-        cursor.execute(query)
-        return render_template('admin/countries.html', countries = cursor)
-    else:
-        name_in = request.form['name']
-        query = """INSERT INTO COUNTRIES (name) VALUES ('"""+name_in+"')"
-        cursor.execute(query)
-        connection.commit()
-        return redirect(url_for('admin_countries_page'))
-
-
-@app.route('/players', methods=['GET', 'POST'])
-def players_page():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    if request.method == 'GET':
-        query = "SELECT PLAYERS.ID, NAME,NATIONALITY FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID"
-        cursor.execute(query)
-        cursor2 = connection.cursor()
-        query = "SELECT * FROM NATIONALITIES"
-        cursor2.execute(query)
-        return render_template('players.html', players = cursor, nationalities = cursor2)
-    else:
-        search = request.form['search']
-        query = "SELECT * FROM PLAYERS WHERE Name LIKE '%" + search +"%'"
-        cursor.execute(query)
-        connection.commit()
-        return render_template('players.html', players = cursor)
 
 @app.route('/ADMIN/players/initdb')
 def admin_initialize_database_players():
@@ -116,15 +99,6 @@ def admin_players_page_delete(DELETEID):
     connection.commit()
     return redirect(url_for('admin_players_page'))
 
-@app.route('/ADMIN/countries/DELETE/<int:DELETEID>', methods=['GET','POST'])
-def admin_countries_page_delete(DELETEID):
-    connection=dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    cursor.execute("DELETE FROM COUNTRIES WHERE ID = %s", (int(DELETEID),))
-    connection.commit()
-    return redirect(url_for('admin_countries_page'))
-
 @app.route('/ADMIN/players/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
 def admin_players_page_update(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
@@ -136,15 +110,6 @@ def admin_players_page_update(UPDATEID):
     cursor2.execute(query)
     connection.commit()
     return render_template('admin/players_edit.html', players = cursor, nationalities = cursor2)
-
-@app.route('/ADMIN/countries/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
-def admin_countries_page_update(UPDATEID):
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    cursor.execute("SELECT * FROM COUNTRIES WHERE ID = %s", (int(UPDATEID),))
-    connection.commit()
-    return render_template('admin/countries_edit.html', countries = cursor)
 
 @app.route('/ADMIN/players/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
 def admin_players_page_apply(UPDATEID):
@@ -158,13 +123,47 @@ def admin_players_page_apply(UPDATEID):
     connection.commit()
     return redirect(url_for('admin_players_page'))
 
+@app.route('/ADMIN/countries', methods=['GET', 'POST'])
+def admin_countries_page():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT * FROM COUNTRIES"
+        cursor.execute(query)
+        return render_template('admin/countries.html', countries = cursor)
+    else:
+        name_in = request.form['name']
+        query = """INSERT INTO COUNTRIES (name) VALUES ('"""+name_in+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('admin_countries_page'))
+
+@app.route('/ADMIN/countries/DELETE/<int:DELETEID>', methods=['GET','POST'])
+def admin_countries_page_delete(DELETEID):
+    connection=dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM COUNTRIES WHERE ID = %s", (int(DELETEID),))
+    connection.commit()
+    return redirect(url_for('admin_countries_page'))
+
+@app.route('/ADMIN/countries/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def admin_countries_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM COUNTRIES WHERE ID = %s", (int(UPDATEID),))
+    connection.commit()
+    return render_template('admin/countries_edit.html', countries = cursor)
+
 @app.route('/ADMIN/countries/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
 def admin_countries_page_apply(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
 
     new_name = request.form['name']
-    query = "UPDATE COUNTRIES SET NAME = '%s' WHERE ID = %d" % (new_name, int(UPDATEID))
+    query = """UPDATE COUNTRIES SET NAME = '%s' WHERE ID = %d""" % (new_name, int(UPDATEID))
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_countries_page'))
