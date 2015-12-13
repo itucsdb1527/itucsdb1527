@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+   	<h1>VolleyBASE ALL News</h1><hr>
+
+	<div style="width: 1000px">
+		{% for ID, News_Title in news %}
+			<b>-</b> <a href="{{ url_for('news_details_page', NEWSID=ID) }}" title="Click for details">{{ News_Title }}</a><br>
+		{% endfor %}
+	</div>
+
+{% endblock %}

@@ -13,7 +13,7 @@ def leagues_page():
     cursor = connection.cursor()
 
     if request.method == 'GET':
-        query = "SELECT COUNTRIES.ID, League_Name, COUNTRIES.Name FROM LEAGUES, COUNTRIES WHERE Country_ID = COUNTRIES.ID ORDER BY Country_ID, League_Name"
+        query = "SELECT COUNTRIES.ID, League_Name, COUNTRIES.Name FROM LEAGUES, COUNTRIES WHERE Country_ID = COUNTRIES.ID ORDER BY Countries.Name, League_Name"
         cursor.execute(query)
         return render_template('leagues.html', leagues = cursor)
     else:

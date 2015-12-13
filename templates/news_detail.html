@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+     <h1>VolleyBASE ALL News</h1><hr>
+
+  {% for News_Title, News_Details, News_Picture in news %}
+    <table width="750px" border="1">
+      <tr>
+        <td rowspan="3" valign="top" width="100px"> <img src="{{ url_for('static', filename='news_img/'+News_Picture) }}" width="100px" height="100px" alt="Erro"></td>
+        <td height="40px" valign="middle" style="padding-left: 10px"><b></b> {{ News_Title }} </</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px;" valign="top" >a</td>
+      </tr>
+      <tr>
+        <td colspan="3" height="40px">&nbsp</td>
+      </tr>
+    </table>
+
+
+  {% endfor %}
+
+
+{% endblock %}
