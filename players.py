@@ -26,6 +26,23 @@ def admin_players_page():
         connection.commit()
         return redirect(url_for('admin_players_page'))
 
+@app.route('/ADMIN/countries', methods=['GET', 'POST'])
+def admin_countries_page():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT * FROM COUNTRIES"
+        cursor.execute(query)
+        return render_template('admin/countries.html', countries = cursor)
+    else:
+        name_in = request.form['name']
+        query = """INSERT INTO COUNTRIES (name) VALUES ('"""+name_in+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('admin_countries_page'))
+
+
 @app.route('/players', methods=['GET', 'POST'])
 def players_page():
     connection = dbapi2.connect(app.config['dsn'])
