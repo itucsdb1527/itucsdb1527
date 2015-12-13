@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Adress of Volleyball - VolleyBASE">
+<meta name="keywords" content="Volleyball, Database">
+
+<title>Admin Page VolleyBASE - {% block title %}{% endblock %}</title>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_style.css') }}">
+	<style type="text/css">
+		body{
+			background-color: white;
+			margin-left:10px;
+			margin-right:10px;
+			margin-bottom:10px;
+			margin-top:10px;
+		}
+		a{
+			color: #000;
+			text-decoration: none;
+		}
+		a:hover{
+			color: red;
+			text-decoration: underline;
+		}
+		#admin_menu{
+
+		}
+
+		#admin_menu table,th,td{
+			padding-left: 5px;
+			padding-right: 5px;
+			border:1px #000000 solid;
+			border-collapse:collapse;
+		}
+
+	</style>
+</head>
+
+<body>
+
+	<table align="center" width="100%" id="admin_menu">
+		<tr>
+			<td width="200px" style="color:orange;"><b>ADMIN MENU<b></b></td>
+			<td rowspan="15" valign="top" style="padding-top: 20px;">{% block content %}{% endblock %}</td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_leagues_page') }}">Edit Leagues</a></td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('admin_seasons_page') }}">Edit Seasons</a></td>
+		</tr>
+
+		<tr>
+			<td>Edit Countries</td>
+		</tr>
+		<tr>
+			<td>Edit Nationalities</td>
+		</tr>
+		<tr>
+			<td>Edit Teams</td>
+		</tr>
+		<tr>
+			<td>Edit Season Teams</td>
+		</tr>
+		<tr>
+			<td>Edit Mail List</td>
+		</tr>
+		<tr>
+			<td>Edit Matches</td>
+		</tr>
+		<tr>
+			<td>Edit Referees</td>
+		</tr>
+		<tr>
+			<td>Edit Arenas</td>
+		</tr>
+		<tr>
+			<td>Edit Website Informations</td>
+		</tr>
+		<tr>
+			<td>Edit Players</td>
+		</tr>
+		<tr>
+			<td>Edit Team Players</td>
+		</tr>
+		<tr>
+			<td>&nbsp</td>
+		</tr>
+		<tr>
+			<td><a href="{{ url_for('home_page') }}"><b>Return Web Site</b></a></td>
+		</tr>
+	</table>
+
+</body>
+</html>

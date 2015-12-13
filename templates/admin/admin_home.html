@@ -1,0 +1,7 @@
+{% extends "/admin/admin_layout.html" %}
+
+{% block title %} ADMIN Page {% endblock %}
+
+{% block content %}
+        <a href="{{ url_for('initialize_database') }}">Init DB</a><br>
+{% endblock %}
