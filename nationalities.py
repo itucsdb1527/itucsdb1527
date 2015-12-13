@@ -11,7 +11,7 @@ def initialize_database_nationalities():
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
 
-    query = """DROP TABLE IF EXISTS NATIONALITIES"""
+    query = """DROP TABLE IF EXISTS NATIONALITIES CASCADE"""
     cursor.execute(query)
     query = """CREATE TABLE NATIONALITIES (ID SERIAL PRIMARY KEY, Nationality VARCHAR NOT NULL)"""
     cursor.execute(query)
