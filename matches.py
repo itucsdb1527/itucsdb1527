@@ -6,6 +6,8 @@ from flask import request
 from flask.helpers import url_for
 from config import app
 
+
+
 @app.route('/matches', methods=['GET', 'POST'])
 def matches_page():
     connection = dbapi2.connect(app.config['dsn'])
