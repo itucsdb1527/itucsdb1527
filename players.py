@@ -121,4 +121,4 @@ def admin_players_page_apply(UPDATEID):
     query = "UPDATE PLAYERS SET NAME = '%s', NATIONALITY_ID = %d WHERE ID = %d" % (new_name,int(new_nationality), int(UPDATEID))
     cursor.execute(query)
     connection.commit()
-    return redirect(url_for('players_page'))
+    return redirect(url_for('admin_players_page'))
