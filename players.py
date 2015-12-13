@@ -99,6 +99,15 @@ def admin_players_page_delete(DELETEID):
     connection.commit()
     return redirect(url_for('admin_players_page'))
 
+@app.route('/ADMIN/countries/DELETE/<int:DELETEID>', methods=['GET','POST'])
+def admin_countries_page_delete(DELETEID):
+    connection=dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM COUNTRIES WHERE ID = %s", (int(DELETEID),))
+    connection.commit()
+    return redirect(url_for('admin_countries_page'))
+
 @app.route('/ADMIN/players/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
 def admin_players_page_update(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
@@ -111,6 +120,15 @@ def admin_players_page_update(UPDATEID):
     connection.commit()
     return render_template('admin/players_edit.html', players = cursor, nationalities = cursor2)
 
+@app.route('/ADMIN/countries/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def admin_countries_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM COUNTRIES WHERE ID = %s", (int(UPDATEID),))
+    connection.commit()
+    return render_template('admin/countries_edit.html', countries = cursor)
+
 @app.route('/ADMIN/players/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
 def admin_players_page_apply(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
@@ -122,3 +140,14 @@ def admin_players_page_apply(UPDATEID):
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_players_page'))
+
+@app.route('/ADMIN/countries/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
+def admin_countries_page_apply(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    new_name = request.form['name']
+    query = "UPDATE COUNTRIES SET NAME = '%s' WHERE ID = %d" % (new_name, int(UPDATEID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('admin_countries_page'))

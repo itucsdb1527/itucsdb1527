@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %} Players {% endblock %}
+
+{% block content %}
+    	<h1>About Us - Meral</h1><hr>
+
+   <form action="APPLY" method = "post">
+		<table id="countries">
+			<tr>
+				<td> </td>
+				<td>NAME</td>
+			</tr>
+		{% for ID, name in countries %}
+		<tr>
+			<td class="countryItem"><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
+			<td class="countryItem"><input type="text" name="name" required="required" value="{{name}}" style="width:95%"></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3"><input value="Update Person" name="update" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}
