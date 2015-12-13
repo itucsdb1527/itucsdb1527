@@ -12,7 +12,7 @@ def referees_page():
     cursor = connection.cursor()
 
     if  request.method == 'GET':
-        query = "SELECT * FROM REFEREES"
+        query = "SELECT REFEREES.ID, REFEREES.RefereeName, REFEREES.RefereeAge, NATIONALITIES.Nationality FROM REFEREES INNER JOIN NATIONALITIES ON REFEREES.RefereeNationality = NATIONALITIES.ID"
         cursor.execute(query)
         return render_template('referees.html', referees = cursor)
     else:
@@ -40,17 +40,20 @@ def initialize_database_referees():
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
 
-    query = """DROP TABLE IF EXISTS REFEREES"""
+    query = """DROP TABLE IF EXISTS REFEREES CASCADE"""
     cursor.execute(query)
-    query = """CREATE TABLE REFEREES (ID SERIAL PRIMARY KEY, RefereeName VARCHAR NOT NULL, RefereeAge INTEGER, RefereeNationality VARCHAR NOT NULL)"""
+    query = """CREATE TABLE REFEREES (ID SERIAL PRIMARY KEY, RefereeName VARCHAR NOT NULL, RefereeAge INTEGER, RefereeNationality INTEGER NOT NULL,
+    FOREIGN KEY (RefereeNationality) REFERENCES NATIONALITIES(ID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE)"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Brad Aaberg',39,'North Country')"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Brad Aaberg',39,1)"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Keith Aidun',40,'Northern California')"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Keith Aidun',40,2)"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cedric All Runner',40,'Sun Country')"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cedric All Runner',40,2)"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir',39,'Turkey')"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir',39,3)"""
     cursor.execute(query)
 
     connection.commit()
@@ -61,10 +64,12 @@ def initialize_database_referees():
 def referees_page_update(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
-
-    cursor.execute("""SELECT ID, RefereeName, RefereeAge, RefereeNationality FROM REFEREES WHERE ID = %s""", (int(UPDATEID),))
+    cursor2 = connection.cursor()
+    query = "SELECT ID, Nationality FROM NATIONALITIES"
+    cursor2.execute(query)
+    cursor.execute("""SELECT ID, RefereeName, RefereeAge FROM REFEREES WHERE ID = %s""", (int(UPDATEID),))
     connection.commit()
-    return render_template('referees_edit.html', referees = cursor)
+    return render_template('referees_edit.html', referees = cursor, nationalities = cursor2)
 
 @app.route('/referees/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
 def referees_page_apply(UPDATEID):
@@ -74,7 +79,7 @@ def referees_page_apply(UPDATEID):
     new_name = request.form['name']
     new_age = request.form['age']
     new_nationality = request.form['nationality']
-    query = """UPDATE REFEREES SET RefereeName = '%s', RefereeAge = %d, RefereeNationality = '%s' WHERE ID = %d""" % (new_name, int(new_age), new_nationality, int(UPDATEID))
+    query = """UPDATE REFEREES SET RefereeName = '%s', RefereeAge = %d, RefereeNationality = %d WHERE ID = %d""" % (new_name, int(new_age), int(new_nationality), int(UPDATEID))
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('referees_page'))

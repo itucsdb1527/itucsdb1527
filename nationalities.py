@@ -13,7 +13,8 @@ def initialize_database_nationalities():
 
     query = """DROP TABLE IF EXISTS NATIONALITIES CASCADE """
     cursor.execute(query)
-    query = """CREATE TABLE NATIONALITIES (ID SERIAL PRIMARY KEY, Nationality VARCHAR NOT NULL)"""
+    query = """CREATE TABLE NATIONALITIES (ID SERIAL PRIMARY KEY, Nationality VARCHAR NOT NULL
+    )"""
     cursor.execute(query)
     query = """INSERT INTO NATIONALITIES (Nationality)
     VALUES ('North Country')"""
@@ -26,6 +27,15 @@ def initialize_database_nationalities():
     cursor.execute(query)
     query = """INSERT INTO NATIONALITIES (Nationality)
     VALUES ('Turkey')"""
+    cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('German')"""
+    cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('USA')"""
+    cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('UK')"""
     cursor.execute(query)
 
     connection.commit()
