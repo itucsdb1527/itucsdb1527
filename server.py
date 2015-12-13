@@ -12,6 +12,7 @@ import arenas
 import matches
 import maillist
 import nationalities
+import scores
 
 import admin
 

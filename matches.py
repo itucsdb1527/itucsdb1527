@@ -48,7 +48,7 @@ def matches_page_update(UPDATEID):
 
     cursor.execute("""SELECT ID, Team1Name, Team2Name, ArenaName, RefereeName, Season FROM MATCHES WHERE ID = %s""", (int(UPDATEID),))
     connection.commit()
-    return render_template('matches_edit.html', leagues = cursor)
+    return render_template('matches_edit.html', matches = cursor)
 
 @app.route('/matches/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
 def matches_page_apply(UPDATEID):

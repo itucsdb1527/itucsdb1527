@@ -8,7 +8,7 @@
 <form action="APPLY" method = "post">
 		<table id="matchesTable">
 
-		{% for ID, Team1Name, Team2Name, ArenaName, RefereeName , Season in leagues %}
+		{% for ID, Team1Name, Team2Name, ArenaName, RefereeName , Season in matches %}
 		<tr>
 			<td class="MatchesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
 			<td class="MatchesTableItem"><input type="text" name="Team1Name" required="required" value="{{Team1Name}}"></td>

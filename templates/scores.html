@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %} Maillist {% endblock %}
+
+{% block content %}
+    	<h1>About Us - Seyma</h1><hr>
+        <a href="{{ url_for('initialize_database_scores') }}">Init DB for Scores</a><br>
+
+		<form action="{{ url_for('scores_page') }}" method = "post">
+		<table id="scoresTable">
+
+		{% for ID, MatchID, Team1Score, Team2Score in scores %}
+		<tr>
+			<td class="ScoresTableItem">{{ID}}</td>
+			<td class="ScoresTableItem">{{MatchID}}</td>
+			<td class="ScoresTableItem">{{Team1Score}}</td>
+			<td class="ScoresTableItem">{{Team2Score}}</td>
+			<td class="MaillistTableItem"><a href="{{ url_for('scores_page_delete', DELETEID=ID) }}">Delete</a></td>
+			<td class="MaillistTableItem"><a href="{{ url_for('scores_page_update', UPDATEID=ID) }}">Update</a></td>
+		</tr>
+		{% endfor %}
+
+		<tr>
+			<td class="ScoresTableNewItem"> </td>
+			<td class="ScoresTableNewItem"><input type="text" name="MatchID" required="required"></td>
+			<td class="ScoresTableNewItem"><input type="text" name="Team1Score" required="required"></td>
+			<td class="ScoresTableNewItem"><input type="text" name="Team2Score" required="required"></td>
+			<td class="ScoresTableNewItem"> </td>
+			<td class="ScoresTableNewItem"> </td>
+		</tr>
+		<tr>
+			<td colspan="5"><input value="Add New Score" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}

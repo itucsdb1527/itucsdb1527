@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %} Scores {% endblock %}
+
+{% block content %}
+    <h1>About Us - Seyma</h1><hr>
+
+<form action="APPLY" method = "post">
+		<table id="scoresTable">
+
+		{% for ID, MatchID, Team1Score, Team2Score in scores %}
+		<tr>
+			<td class="ScoresTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
+			<td class="ScoresTableItem"><input type="text" name="MatchID" value="{{MatchID}}"></td>
+			<td class="ScoresTableItem"><input type="text" name="Team1Score" required="required" value="{{Team1Score}}"></td>
+			<td class="ScoresTableItem"><input type="text" name="Team2Score" required="required" value="{{Team2Score}}"></td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3"><input value="Add New Score" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+{% endblock %}
