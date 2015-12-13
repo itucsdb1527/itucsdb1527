@@ -12,7 +12,7 @@ def players_page():
     cursor = connection.cursor()
 
     if request.method == 'GET':
-        query = "SELECT PLAYERS.ID, NAME,NATIONALITY FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID"
+        query = "SELECT PLAYERS.ID, NAME,NATIONALITY, AGE, NUMBER, POSITION FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID"
         cursor.execute(query)
         cursor2 = connection.cursor()
         query = "SELECT * FROM NATIONALITIES"
@@ -43,7 +43,7 @@ def admin_players_page():
         age_in = request.form['age']
         number_in = request.form['number']
         position_in = request.form['position']
-        query = """INSERT INTO PLAYERS (name,NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('"""+name_in+"', '"+nationality_in+"', '"+age_in+"', '"+number_in+"', '"+position_in+"')"
+        query = """INSERT INTO PLAYERS (NAME, NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('"""+name_in+"', '"+nationality_in+"', '"+age_in+"', '"+number_in+"', '"+position_in+"')"
         cursor.execute(query)
         connection.commit()
         return redirect(url_for('admin_players_page'))
@@ -124,7 +124,10 @@ def admin_players_page_apply(UPDATEID):
 
     new_name = request.form['name']
     new_nationality = request.form['nationalityID']
-    query = "UPDATE PLAYERS SET NAME = '%s', NATIONALITY_ID = %d WHERE ID = %d" % (new_name,int(new_nationality), int(UPDATEID))
+    new_age = request.form['age']
+    new_number = request.form['number']
+    new_position = request.form['position']
+    query = "UPDATE PLAYERS SET NAME = '%s', NATIONALITY_ID = %d, AGE = %d, NUMBER = %d, POSITION = '%s'  WHERE ID = %d" % (new_name,int(new_nationality),int(new_age), int(new_number), new_position, int(UPDATEID))
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_players_page'))
