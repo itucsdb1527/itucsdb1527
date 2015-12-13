@@ -5,7 +5,7 @@
 {% block content %}
     	<h1>About Us - Meral</h1><hr>
 
-   <form action="APPLY" method = "post">
+   <form action="{{ url_for('admin_countries_page') }}" method = "post">
 		<table id="countries">
 			<tr>
 				<td> </td>
@@ -14,8 +14,8 @@
 		{% for ID, name in countries %}
 		<tr>
 			<td class="countryItem">{{name}}</td>
-			<td class="countryItem"><a href="{{ url_for('admin_countries_delete', DELETEID=ID) }}">Delete</a></td>
-			<td class="countryItem"><a href="{{ url_for('admin_countries_update', UPDATEID=ID) }}">Update</a></td>
+			<td class="countryItem"><a href="{{ url_for('admin_countries_page_delete', DELETEID=ID) }}">Delete</a></td>
+			<td class="countryItem"><a href="{{ url_for('admin_countries_page_update', UPDATEID=ID) }}">Update</a></td>
 		</tr>
 		{% endfor %}
 			<tr>
@@ -24,7 +24,7 @@
 			<td> </td>
 		</tr>
 		<tr>
-			<td colspan="2" align="right"><input value="Add New Person" name="add" type="submit"></td>
+			<td colspan="2" align="right"><input value="Add New Country" name="add" type="submit"></td>
 		</tr>
 		</table>
 	</form>
