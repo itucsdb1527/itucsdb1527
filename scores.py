@@ -28,6 +28,7 @@ def scores_page():
         return redirect(url_for('scores_page'))
 
 
+
     return render_template('scores.html')
 
 @app.route('/scores/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
