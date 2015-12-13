@@ -1,18 +1,16 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Teams {% endblock %}
 
 {% block content %}
-    <h1>Admin Teams/Update Page - Meric</h1><hr>
-
 <form action="APPLY" method = "post">
 		<table id="teamsTable">
-		
+
 		<tr>
 			<td class="teamsTableItem"></a>
 			<td class="teamsTableHeader"><b><center>Team Name</b></center></td>
-			<td class="teamsTableHeader"><b><center>League Name</b></center></td>			
-		</tr>			
+			<td class="teamsTableHeader"><b><center>League Name</b></center></td>
+		</tr>
 
 		{% for ID, Team_Name in teams %}
 		<tr>
@@ -22,7 +20,7 @@
 				{% for ID, League_Name in leagues %}
 					<option value="{{ ID }}"{% print("selected") if Leagues_ID == ID %}>{{ League_Name }}</option>
 				{% endfor %}
-			</select></td>				
+			</select></td>
 		</tr>
 		{% endfor %}
 		<tr>

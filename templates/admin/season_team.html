@@ -1,11 +1,9 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Season Team {% endblock %}
 
 {% block content %}
-    <h1>Admin Season Team - Meric</h1><hr>
-    <a href="{{ url_for('teams_page') }}">Teams Page</a><br><br>
-	<form action="{{ url_for('admin_season_team_page') }}" method = "post">
+    <form action="{{ url_for('admin_season_team_page') }}" method = "post">
 		<table id="teamsTable">
 		<tr>
 			<td class="teamsTableHeader"><b><center>Season Name</b></center></td>
