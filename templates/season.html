@@ -3,17 +3,16 @@
 {% block title %} Season {% endblock %}
 
 {% block content %}
-    <h1>About Us - Cemal</h1><hr>
-    <a href="{{ url_for('leagues_page') }}">Leagues Page</a><br><br>
-    <a href="{{ url_for('admin_seasons_page') }}">Admin Seasons Page</a><br><br>
+    <h1>Seasons - Cemal</h1><hr>
+
+
 	<form action="" method = "post">
-		<table >
+	<table  align="center" style="border:hidden;" width="100%">
 		<tr>
-			<td >Search Season Name:</td>
-			<td><input type="text" name="search" required="required" style="margin-left:3px;width:95%"></td>
-		</tr>
-		<tr>
-			<td colspan="2"><input value="Search" name="search" type="submit"></td>
+			<td  width="650px"  style="border:hidden;"><a href="{{ url_for('leagues_page') }}" style="color: green;"><b><< Leagues Page</b></a></td>
+			<td width="150px" align="right" style="border:hidden;">Search Season Name:</td>
+			<td width="200px" style="border:hidden;"><input type="text" name="search" required="required" style="margin-left:3px;width:95%"></td>
+			<td colspan="2"  width="100px" align="center" style="border:hidden;"><input value="Search" name="search" type="submit"></td>
 		</tr>
 		</table>
 	</form>
@@ -24,13 +23,12 @@
 		<td class="LeaguesTableHeader">Season Name</td>
 		<td class="LeaguesTableHeader">Leagues</td>
 	</tr>
-	{% for Season_Name, Leagues_Name in seasons %}
+	{% for ID, Season_Name, Leagues_Name in seasons %}
 	<tr>
-		<td class="LeaguesTableItem">{{ Season_Name }}</td>
+		<td class="LeaguesTableItem"><a href ="{{ url_for('list_season_team_page', SEASONID=ID) }}">{{ Season_Name }}</a></td>
 		<td class="LeaguesTableItem">{{ Leagues_Name }}</td>
 	</tr>
 	{% endfor %}
 
 	</table>
-
 {% endblock %}

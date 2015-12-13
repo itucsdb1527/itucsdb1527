@@ -1,11 +1,9 @@
-{% extends "layout.html" %}
+{% extends "admin/admin_layout.html" %}
 
 {% block title %} Season {% endblock %}
 
 {% block content %}
-    <h1>About Us - Cemal</h1><hr>
-    <a href="{{ url_for('leagues_page') }}">Leagues Page</a><br><br>
-	<form action="{{ url_for('admin_seasons_page') }}" method = "post">
+    <form action="{{ url_for('admin_seasons_page') }}" method = "post">
 		<table id="leaguesTable">
 		<tr>
 			<td class="LeaguesTableHeader">Season Name</td>

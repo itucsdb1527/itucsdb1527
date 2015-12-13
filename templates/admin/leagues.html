@@ -1,27 +1,28 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Leagues {% endblock %}
 
 {% block content %}
-    <h1>About Us - Cemal</h1><hr>
-    <a href="{{ url_for('admin_initialize_database_leagues') }}">Init DB for Leagues</a><br>
-    <a href="{{ url_for('leagues_page') }}">Return Leagues Page</a><br><br>
     <form action="{{ url_for('admin_leagues_page') }}" method = "post">
 		<table id="leaguesTable">
 
-		{% for ID, League_Name, Country_ID in leagues %}
+		{% for LID, CID, League_Name, Country_Name in leagues %}
 		<tr>
-			<td class="LeaguesTableItem">{{ID}}</td>
+			<td class="LeaguesTableItem">{{LID}}</td>
 			<td class="LeaguesTableItem">{{League_Name}}</td>
-			<td class="LeaguesTableItem">{{Country_ID}}</td>
-			<td class="LeaguesTableItem"><a href="{{ url_for('admin_leagues_page_delete', DELETEID=ID) }}">Delete</a>
-			<td class="LeaguesTableItem"><a href="{{ url_for('admin_leagues_page_update', UPDATEID=ID) }}">Update</a></td>
+			<td class="LeaguesTableItem">{{Country_Name}}</td>
+			<td class="LeaguesTableItem"><a href="{{ url_for('admin_leagues_page_delete', DELETEID=LID) }}">Delete</a>
+			<td class="LeaguesTableItem"><a href="{{ url_for('admin_leagues_page_update', UPDATEID=LID) }}">Update</a></td>
 		</tr>
 		{% endfor %}
 		<tr>
 			<td class="LeaguesTableNewItem"> </td>
 			<td class="LeaguesTableNewItem"><input type="text" name="name" required="required" style="margin-left:3px;width:95%"></td>
-			<td class="LeaguesTableNewItem"><input type="number" name="country" required="required" style="margin-left:3px;width:95%"></td>
+			<td class="LeaguesTableNewItem"><select  name="country" required="required">
+				{% for ID, Name in countries %}
+					<option value="{{ ID }}">{{ Name }}</option>
+				{% endfor %}
+				</select></td>
 			<td class="LeaguesTableNewItem"> </td>
 			<td class="LeaguesTableNewItem"> </td>
 		</tr>

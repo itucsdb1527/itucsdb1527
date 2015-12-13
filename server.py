@@ -13,6 +13,8 @@ import matches
 import maillist
 import nationalities
 
+import admin
+
 from flask import render_template
 from flask import redirect
 from flask import request
@@ -34,39 +36,9 @@ def home_page():
     now = datetime.datetime.now()
     return render_template('home.html', current_time=now.ctime())
 
-
-
-@app.route('/initdb')
-def initialize_database():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor =connection.cursor()
-
-    query = """DROP TABLE IF EXISTS COUNTER"""
-    cursor.execute(query)
-    query = """CREATE TABLE COUNTER (N INTEGER)"""
-    cursor.execute(query)
-    query = """INSERT INTO COUNTER(N) VALUES(0)"""
-    cursor.execute(query)
-
-    connection.commit()
-    return redirect(url_for('home_page'))
-
-@app.route('/count')
-def counter_page():
-    connection = dbapi2.connect(app.config['dsn'])
-    cursor = connection.cursor()
-
-    query = "UPDATE COUNTER SET N = N + 1"
-    cursor.execute(query)
-    connection.commit()
-
-    query = "SELECT N FROM COUNTER"
-    cursor.execute(query)
-    count = cursor.fetchone()[0]
-
-    return "This page was accessed %d times." % count
-
-
+@app.route('/ADMIN')
+def admin_home_page():
+    return render_template('/admin/admin_home.html')
 
 if __name__ == '__main__':
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')

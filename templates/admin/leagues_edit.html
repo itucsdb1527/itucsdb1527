@@ -1,18 +1,21 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Leagues {% endblock %}
 
 {% block content %}
-    <h1>About Us - Cemal</h1><hr>
-
 <form action="APPLY" method = "post">
-		<table id="leaguesTable">
+		<table width="500px">
 
 		{% for ID, League_Name, Country_ID in leagues %}
 		<tr>
-			<td class="LeaguesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
-			<td class="LeaguesTableItem"><input type="text" name="name" required="required" value="{{League_Name}}" style="width:95%"></td>
-			<td class="LeaguesTableItem"><input type="number" name="country" required="required" value="{{Country_ID}}" style="margin-left:3px;width:95%"></td>
+			<td><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
+			<td><input type="text" name="name" required="required" value="{{League_Name}}" style="width:95%"></td>
+			<td width="100px"><select  name="country">
+				{% for ID, Name in countries %}
+					<option value="{{ ID }}" {% print("selected") if Country_ID == ID %}>{{ Name }}</option>
+				{% endfor %}
+				</select>
+			</td>
 		</tr>
 		{% endfor %}
 		<tr>

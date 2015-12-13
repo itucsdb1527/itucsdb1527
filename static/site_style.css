@@ -11,6 +11,14 @@ body{
 img{
 	border:none;
 }
+a{
+	color: #000;
+	text-decoration: none;
+}
+a:hover{
+	color: #666;
+	text-decoration: underline;
+}
 h1{
 	font-size:30px;
 	font:Arial, sans-serif;
@@ -233,6 +241,7 @@ h2{
 	font-size:18px;
 	font-weight:bold;
 	text-align:center;
+	color:red;
 }
 .LeaguesTableItem {
 	padding-left: 10px;
