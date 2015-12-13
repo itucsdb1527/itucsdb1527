@@ -197,9 +197,23 @@ def admin_team_players_page():
     cursor = connection.cursor()
 
     if request.method == 'GET':
-        query = "SELECT PLAYERS.ID, SEASONS.ID, TEAMS.ID FROM PLAYERS, SEASONS, TEAMS"
+        query = "SELECT PLAYERS.ID, PLAYERS.NAME, SEASONS.ID, SEASONS.Season_Name, TEAMS.ID, TEAMS.Team_Name FROM PLAYERS, SEASONS, TEAMS"
         cursor.execute(query)
-        return render_template('/ADMIN/teamplayers.html', teamplayers = cursor)
+
+        cursor2 = connection.cursor()
+        query = "SELECT ID, NAME FROM PLAYERS"
+        cursor2.execute(query)
+
+        cursor3 = connection.cursor()
+        query = "SELECT ID, Season_Name FROM SEASONS"
+        cursor3.execute(query)
+
+
+        cursor4 = connection.cursor()
+        query = "SELECT ID, Team_Name FROM TEAMS"
+        cursor4.execute(query)
+
+        return render_template('/ADMIN/teamplayers.html', teamplayers = cursor, players = cursor2, seasons = cursor3, teams = cursor4)
     else:
         playerid_in = request.form['playerid']
         seasonid_in = request.form['seasonid']

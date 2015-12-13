@@ -12,11 +12,11 @@
 				<td>SEASON NAME</td>
 				<td>TEAM NAME</td>
 			</tr>
-		{% for playerid, seasonid, teamid, name, Season_Name, Team_Name in players, seasons, teams %}
+		{% for playerid, playername, seasonid, seasonname, teamid, teamname in teamplayers %}
 		<tr>
-			<td class="teamplayersItem">{{name}}</td>
-			<td class="teamplayersItem">{{Season_Name}}</td>
-			<td class="teamplayersItem">{{Team_Name}}</td>
+			<td class="teamplayersItem">{{playername}}</td>
+			<td class="teamplayersItem">{{seasonname}}</td>
+			<td class="teamplayersItem">{{teamname}}</td>
 			<td class="teamplayersItem"><a href="{{ url_for('admin_team_players_page_delete', DELETEID=playerid) }}">Delete</a></td>
 			<td class="teamplayersItem"><a href="{{ url_for('admin_team_players_page_update', UPDATEID=playerid) }}">Update</a></td>
 		</tr>
