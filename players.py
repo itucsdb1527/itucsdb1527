@@ -199,7 +199,7 @@ def admin_team_players_page():
     if request.method == 'GET':
         query = "SELECT PLAYERS.ID, SEASONS.ID, TEAMS.ID FROM PLAYERS, SEASONS, TEAMS"
         cursor.execute(query)
-        return render_template('/ADMIN/teamplayers', teamplayers = cursor)
+        return render_template('/ADMIN/teamplayers.html', teamplayers = cursor)
     else:
         playerid_in = request.form['playerid']
         seasonid_in = request.form['seasonid']
