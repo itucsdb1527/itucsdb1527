@@ -102,21 +102,21 @@ def admin_initialize_database_teams():
     cursor.execute(query)
     query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 12)"""
     cursor.execute(query)
-    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 13)"""
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (3, 13)"""
     cursor.execute(query)
-    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 14)"""
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (3, 14)"""
     cursor.execute(query)
-    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 15)"""
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (3, 15)"""
     cursor.execute(query)
-    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 16)"""
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (3, 16)"""
     cursor.execute(query)
-    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 17)"""
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (3, 17)"""
     cursor.execute(query)
-    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 18)"""
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (3, 18)"""
     cursor.execute(query)
-    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 19)"""
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (3, 19)"""
     cursor.execute(query)
-    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (1, 20)"""
+    query = """INSERT INTO SEASON_TEAM (Season_ID, Team_ID) VALUES (3, 20)"""
     cursor.execute(query)
 
     #Admin Table
@@ -187,11 +187,11 @@ def admin_teams_page():
     if request.method == 'GET':
         query = "SELECT TEAMS.ID, TEAMS.Team_Name, LEAGUES.League_Name FROM TEAMS INNER JOIN LEAGUES ON TEAMS.Leagues_ID = LEAGUES.ID ORDER BY ID"
         cursor.execute(query)
-        
+
         cursor2 = connection.cursor()
         query = "SELECT ID, League_Name FROM LEAGUES"
-        cursor2.execute(query)        
-                
+        cursor2.execute(query)
+
         return render_template('admin/teams.html', teams = cursor, leagues = cursor2)
     else:
 
@@ -202,8 +202,8 @@ def admin_teams_page():
         cursor.execute(query)
         connection.commit()
         return redirect(url_for('admin_teams_page'))
-    
-    
+
+
 
 @app.route('/ADMIN/teams/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
 def admin_teams_page_delete(DELETEID):
@@ -223,7 +223,7 @@ def admin_teams_page_update(UPDATEID):
 
     cursor2 = connection.cursor()
     query = "SELECT ID, League_Name FROM LEAGUES"
-    cursor2.execute(query)            
+    cursor2.execute(query)
 
     cursor.execute("""SELECT ID, Team_Name FROM TEAMS WHERE ID = %s""", (int(UPDATEID),))
     connection.commit()
