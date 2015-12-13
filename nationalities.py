@@ -31,6 +31,7 @@ def initialize_database_nationalities():
     connection.commit()
     return redirect(url_for('nationalities_page'))
 
+
 @app.route('/nationalities', methods=['GET', 'POST'])
 def nationalities_page():
     connection = dbapi2.connect(app.config['dsn'])
