@@ -187,18 +187,23 @@ def admin_teams_page():
     if request.method == 'GET':
         query = "SELECT TEAMS.ID, TEAMS.Team_Name, LEAGUES.League_Name FROM TEAMS INNER JOIN LEAGUES ON TEAMS.Leagues_ID = LEAGUES.ID ORDER BY ID"
         cursor.execute(query)
-        return render_template('admin/teams.html', teams = cursor)
+        
+        cursor2 = connection.cursor()
+        query = "SELECT ID, League_Name FROM LEAGUES"
+        cursor2.execute(query)        
+                
+        return render_template('admin/teams.html', teams = cursor, leagues = cursor2)
     else:
 
         name = request.form['name']
-        query = """INSERT INTO TEAMS (Team_Name)
-        VALUES ('"""+name+"')"
+        leagues_id = request.form['leagues_id']
+        query = """INSERT INTO TEAMS (Team_Name, Leagues_ID)
+        VALUES ('"""+name+"','"+leagues_id+"')"
         cursor.execute(query)
         connection.commit()
         return redirect(url_for('admin_teams_page'))
-
-
-
+    
+    
 
 @app.route('/ADMIN/teams/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
 def admin_teams_page_delete(DELETEID):
@@ -216,9 +221,13 @@ def admin_teams_page_update(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
     cursor = connection.cursor()
 
+    cursor2 = connection.cursor()
+    query = "SELECT ID, League_Name FROM LEAGUES"
+    cursor2.execute(query)            
+
     cursor.execute("""SELECT ID, Team_Name FROM TEAMS WHERE ID = %s""", (int(UPDATEID),))
     connection.commit()
-    return render_template('admin/teams_edit.html', teams = cursor)
+    return render_template('admin/teams_edit.html', teams = cursor, leagues = cursor2)
 
 @app.route('/ADMIN/teams/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
 def admin_teams_page_apply(UPDATEID):
@@ -226,7 +235,8 @@ def admin_teams_page_apply(UPDATEID):
     cursor = connection.cursor()
 
     new_name = request.form['name']
-    query = """UPDATE TEAMS SET Team_Name = '%s' WHERE ID = %d""" % (new_name, int(UPDATEID))
+    new_leagues_id = request.form['leagues_id']
+    query = """UPDATE TEAMS SET Team_Name = '%s', Leagues_ID = '%d' WHERE ID = %d""" % (new_name, int(new_leagues_id), int(UPDATEID))
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_teams_page'))
