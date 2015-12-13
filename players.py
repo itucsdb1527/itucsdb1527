@@ -197,7 +197,7 @@ def admin_team_players_page():
     cursor = connection.cursor()
 
     if request.method == 'GET':
-        query = "SELECT PLAYERS.ID, SEASONS.ID, TEAMS.ID, FROM PLAYERS, SEASONS, TEAMS"
+        query = "SELECT PLAYERS.ID, SEASONS.ID, TEAMS.ID FROM PLAYERS, SEASONS, TEAMS"
         cursor.execute(query)
         return render_template('/ADMIN/teamplayers', teamplayers = cursor)
     else:
