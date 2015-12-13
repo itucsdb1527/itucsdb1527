@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %} Team Players {% endblock %}
+
+{% block content %}
+    	<h1>About Us - Meral</h1><hr>
+
+   <form action="APPLY" method = "post">
+		<table id="teamplayers">
+			<tr>
+				<td>PLAYER NAME</td>
+				<td>SEASON NAME</td>
+				<td>TEAM NAME</td>
+			</tr>
+		{% for playerid, seasonid, teamid in teamplayers %}
+		<tr>
+			<td class="teamplayersItem"><input type="text" name="playerid" required="required" value="{{newPlayer}}" style="width:95%"></td>
+			<td class="teamplayersItem"><input type="text" name="seasonid" required="required" value="{{newSeason}}" style="width:95%"></td>
+			<td class="teamplayersItem"><input type="text" name="teamid" required="required" value="{{newTeam}}" style="width:95%"></td>
+		</tr>
+		{% endfor %}
+				<tr>
+			<td colspan="3"><input value="Update TeamPlayer" name="update" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+		{% endblock %}

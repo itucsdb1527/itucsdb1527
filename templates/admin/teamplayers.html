@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %} Team Players {% endblock %}
+
+{% block content %}
+    	<h1>About Us - Meral</h1><hr>
+
+   <form action="{{ url_for('admin_team_players_page') }}" method = "post">
+		<table id="teamplayers">
+			<tr>
+				<td>PLAYER NAME</td>
+				<td>SEASON NAME</td>
+				<td>TEAM NAME</td>
+			</tr>
+		{% for playerid, seasonid, teamid, name, Season_Name, Team_Name in players, seasons, teams %}
+		<tr>
+			<td class="teamplayersItem">{{name}}</td>
+			<td class="teamplayersItem">{{Season_Name}}</td>
+			<td class="teamplayersItem">{{Team_Name}}</td>
+			<td class="teamplayersItem"><a href="{{ url_for('admin_team_players_page_delete', DELETEID=playerid) }}">Delete</a></td>
+			<td class="teamplayersItem"><a href="{{ url_for('admin_team_players_page_update', UPDATEID=playerid) }}">Update</a></td>
+		</tr>
+		<tr>
+			<td class=newTeamplayer><select  name="playerid">
+				{% for ID, name in players %}
+					<option value="{{ ID }}" >{{ name }}</option>
+				{% endfor %}
+			</select></td>
+			<td class=newPlayer><select  name="seasonid">
+				{% for ID, Season_Name in seasons %}
+					<option value="{{ ID }}" >{{ Season_Name }}</option>
+				{% endfor %}
+			</select></td>
+			<td class=newPlayer><select  name="teamid">
+				{% for ID, Team_Name in teams %}
+					<option value="{{ ID }}" >{{ Team_Name }}</option>
+				{% endfor %}
+			</select></td>
+			<td> </td>
+			<td> </td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="2" align="right"><input value="Add New TeamPlayer" name="add" type="submit"></td>
+		</tr>
+		</table>
+	</form>
+
+{% endblock %}

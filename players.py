@@ -93,6 +93,20 @@ def admin_initialize_database_players():
     query = """INSERT INTO COUNTRIES (NAME) VALUES ('FRANCE')"""
     cursor.execute(query)
 
+##### TEAMPLAYERS #####
+    query = """DROP TABLE IF EXISTS TEAMPLAYERS CASCADE"""
+    cursor.execute(query)
+    query = """CREATE TABLE TEAMPLAYERS (
+                    PLAYERID INTEGER NOT NULL
+                    TEAMID INTEGER NOT NULL
+                    SEASONID INTEGER NOT NULL
+                    FOREIGN KEY (PLAYERID) REFERENCES PLAYERS(ID) ON DELETE CASCADE ON UPDATE CASCADE
+                    FOREIGN KEY (TEAMID) REFERENCES TEAMS(ID) ON DELETE CASCADE ON UPDATE CASCADE
+                    FOREIGN KEY (SEASONID) REFERENCES SEASONS(ID) ON DELETE CASCADE ON UPDATE CASCADE
+                    PRIMARY KEY (PLAYERID, TEAMID, SEASONID)
+                    )"""
+    cursor.execute(query)
+
     connection.commit()
     return redirect(url_for('admin_players_page'))
 
@@ -176,3 +190,52 @@ def admin_countries_page_apply(UPDATEID):
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_countries_page'))
+
+@app.route('/ADMIN/teamplayers', methods=['GET', 'POST'])
+def admin_team_players_page():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT PLAYERS.ID, SEASONS.ID, TEAMS.ID, FROM PLAYERS, SEASONS, TEAMS"
+        cursor.execute(query)
+        return render_template('/ADMIN/teamplayers', teamplayers = cursor)
+    else:
+        playerid_in = request.form['playerid']
+        seasonid_in = request.form['seasonid']
+        teamid_in = request.form['teamid']
+        query = """INSERT INTO TEAMPLAYERS (PLAYERID, SEASONID, TEAMID) VALUES VALUES ('"""+playerid_in+"', '"+seasonid_in+"', '"+teamid_in+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('admin_team_players_page'))
+
+@app.route('/ADMIN/teamplayers/DELETE/<int:DELETEID>', methods=['GET','POST'])
+def admin_team_players_page_delete(DELETEID):
+    connection=dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM TEAMPLAYERS WHERE PLAYERID = %s", (int(DELETEID),))
+    connection.commit()
+    return redirect(url_for('admin_team_players_page'))
+
+@app.route('/ADMIN/teamplayers/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def admin_team_players_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM TEAMPLAYERS WHERE PLAYERID = %s", (int(UPDATEID),))
+    connection.commit()
+    return render_template('admin/teamplayers_edit.html', teamplayers = cursor)
+
+@app.route('/ADMIN/teamplayers/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
+def admin_team_players_page_apply(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    new_playerid = request.form['newPlayer']
+    new_seasonid = request.form['newSeason']
+    new_teamid = request.form['newTeam']
+    query = "UPDATE TEAMPLAYERS SET PLAYERID = %d, SEASONID = %d, TEAMID = %d WHERE PLAYERID = %d" % (int(new_playerid), int(new_seasonid), int(new_teamid), int(UPDATEID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('admin_team_players_page'))
