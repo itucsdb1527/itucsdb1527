@@ -29,6 +29,8 @@ def scores_page():
 
 
 
+
+
     return render_template('scores.html')
 
 @app.route('/scores/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
