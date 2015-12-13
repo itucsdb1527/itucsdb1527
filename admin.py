@@ -70,7 +70,7 @@ def initialize_database():
 
         Vestibulum sed maximus est. Donec vitae metus porttitor, feugiat purus nec, euismod leo. Vivamus lacus lectus, sollicitudin ac nisl vitae, placerat lobortis ipsum. In eu rutrum ante. Nunc sed convallis magna. Vivamus orci augue, dapibus id ante in, dictum luctus sapien. Integer posuere congue scelerisque.
     '
-    ,'galatasaray.jpg')"""
+    ,'galatasaray.png')"""
     cursor.execute(query)
     query = """INSERT INTO News (News_Title,News_Details,News_Picture) VALUES ('Fenerbahce',
     '
@@ -84,7 +84,7 @@ def initialize_database():
 
         Vestibulum sed maximus est. Donec vitae metus porttitor, feugiat purus nec, euismod leo. Vivamus lacus lectus, sollicitudin ac nisl vitae, placerat lobortis ipsum. In eu rutrum ante. Nunc sed convallis magna. Vivamus orci augue, dapibus id ante in, dictum luctus sapien. Integer posuere congue scelerisque.
     '
-    ,'fenerbahce.jpg')"""
+    ,'fenerbahce.png')"""
     cursor.execute(query)
     query = """INSERT INTO News (News_Title,News_Details,News_Picture) VALUES ('Besiktas',
     '
@@ -98,7 +98,7 @@ def initialize_database():
 
         Vestibulum sed maximus est. Donec vitae metus porttitor, feugiat purus nec, euismod leo. Vivamus lacus lectus, sollicitudin ac nisl vitae, placerat lobortis ipsum. In eu rutrum ante. Nunc sed convallis magna. Vivamus orci augue, dapibus id ante in, dictum luctus sapien. Integer posuere congue scelerisque.
     '
-    ,'besiktas.jpg')"""
+    ,'besiktas.png')"""
     cursor.execute(query)
 
     connection.commit()
@@ -217,3 +217,35 @@ def admin_seasons_page_apply(UPDATEID):
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_seasons_page'))
+
+# NEWS - CEMAL #
+
+@app.route('/ADMIN/news')
+def admin_news_page():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+    query = "SELECT ID, News_Title FROM NEWS ORDER BY ID DESC"
+    cursor.execute(query)
+    return render_template('admin/news.html', news=cursor)
+
+@app.route('/ADMIN/news/UPDATE/<int:NEWSID>/', methods=['GET', 'POST'])
+def admin_news_edit_page(NEWSID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+    query = "SELECT ID,News_Title, News_Details, News_Picture FROM NEWS WHERE ID = %d" % int(NEWSID)
+    cursor.execute(query)
+    return render_template('admin/news_detail.html', news = cursor)
+
+@app.route('/ADMIN/news/UPDATE/<int:NEWSID>/APPLY', methods=['GET', 'POST'])
+def admin_news_edit_apply(NEWSID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    news_title = request.form['title']
+    news_details = request.form['detail']
+    news_picture = request.form['picture']
+    news_ID = request.form['News_ID']
+    query = """UPDATE NEWS SET News_Title = '%s', News_Details = '%s' , News_Picture = '%s' WHERE ID = %d""" % (news_title,news_details,news_picture, int(news_ID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('admin_news_page'))

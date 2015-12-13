@@ -39,6 +39,16 @@ h2{
 	border-bottom-left-radius:10px;
 
 }
+h3{
+	font-size:20px;
+	font:Arial, sans-serif;
+	font-style:normal;
+	font-weight:bold;
+	color:black;
+	text-indent:10px;
+
+
+}
 /*
  div{
 	border:double;
@@ -72,12 +82,10 @@ h2{
 
 /* Content */
 #content p{
-	font-size:14px;
-	font:Arial, sans-serif;
-	font-style:oblique;
-	font-weight:bolder;
-	color:#222;
 	text-indent:20px;
+	text-decoration: none;
+	font-stretch: normal;
+	font-weight: normal;
 }
 #content table,th,td{
 	border:1px #000000 solid;
