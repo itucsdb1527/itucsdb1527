@@ -1,0 +1,12 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+
+
+		{% for ID, News_Title in news %}
+			<b>-</b> <a href="{{ url_for('admin_news_edit_page', NEWSID=ID) }}" title="Click for details">{{ News_Title }}</a><br>
+		{% endfor %}
+
+{% endblock %}
