@@ -153,7 +153,7 @@ def teams_page():
         return render_template('teams.html', teams = cursor)
     else:
         search = request.form['search']
-        query = "SELECT ID, Team_Name FROM TEAMS WHERE Team_Name LIKE '%" + search +"%'"
+        query = "SELECT TEAMS.ID, TEAMS.Team_Name, LEAGUES.League_Name FROM TEAMS INNER JOIN LEAGUES ON TEAMS.Leagues_ID = LEAGUES.ID WHERE TEAMS.Team_Name LIKE '%" + search +"%'"
         cursor.execute(query)
         connection.commit()
         return render_template('teams.html', teams = cursor)
