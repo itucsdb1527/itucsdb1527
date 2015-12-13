@@ -8,14 +8,23 @@
 <form action="APPLY" method = "post">
 		<table id="matchesTable">
 
-		{% for ID, Team1Name, Team2Name, ArenaName, RefereeName , Season in matches %}
+		{% for ID, Team1ID, Team2ID, ArenaName, RefereeName in matches %}
 		<tr>
 			<td class="MatchesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
-			<td class="MatchesTableItem"><input type="text" name="Team1Name" required="required" value="{{Team1Name}}"></td>
-			<td class="MatchesTableItem"><input type="text" name="Team2Name" required="required" value="{{Team2Name}}"></td>
+			<td class="MatchesTableItem"><select name="Team1Name">
+			{% for ID, Team_Name in teams %}
+			<option value="{{ID}}"{% print("selected") if Team1ID == ID %}> {{Team_Name}} </option>
+			{% endfor %}
+			</select>
+			</td>
+			<td class="MatchesTableItem"><select name="Team2Name">
+			{% for ID, Team_Name in teams %}
+			<option value="{{ID}}"{% print("selected") if Team2ID == ID %}> {{Team_Name}} </option>
+			{% endfor %}
+			</select>
+			</td>
 			<td class="MatchesTableItem"><input type="text" name="ArenaName" value="{{ArenaName}}"></td>
 			<td class="MatchesTableItem"><input type="text" name="RefereeName" value="{{RefereeName}}"></td>
-			<td class="MatchesTableItem"><input type="number" name="Season" value="{{Season}}"></td>
 		</tr>
 		{% endfor %}
 		<tr>

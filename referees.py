@@ -53,7 +53,7 @@ def initialize_database_referees():
     cursor.execute(query)
     query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cedric All Runner',40,2)"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir',39,3)"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir',39,5)"""
     cursor.execute(query)
 
     connection.commit()

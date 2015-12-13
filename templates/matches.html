@@ -11,14 +11,13 @@
 
 
 
-		{% for ID, Team1Name, Team2Name , ArenaName , RefereeName , Season in matches %}
+		{% for ID, Team1ID, Team2ID , ArenaName , RefereeName in matches %}
 		<tr>
 			<td class="MatchesTableItem">{{ID}}</td>
-			<td class="MatchesTableItem">{{Team1Name}}</td>
-			<td class="MatchesTableItem">{{Team2Name}}</td>
+			<td class="MatchesTableItem">{{Team1ID}}</td>
+			<td class="MatchesTableItem">{{Team2ID}}</td>
 			<td class="MatchesTableItem">{{ArenaName}}</td>
 			<td class="MatchesTableItem">{{RefereeName}}</td>
-			<td class="MatchesTableItem">{{Season}}</td>
 			<td class="MatchesTableItem"><a href="{{ url_for('matches_page_delete', DELETEID=ID) }}">Delete</a></td>
 			<td class="MatchesTableItem"><a href="{{ url_for('matches_page_update', UPDATEID=ID) }}">Update</a></td>
 		</tr>
@@ -26,11 +25,10 @@
 
 		<tr>
 			<td class="MatchesTableNewItem"> </td>
-			<td class="MatchesTableNewItem"><input type="text" name="Team1Name" required="required"></td>
-			<td class="MatchesTableNewItem"><input type="text" name="Team2Name" required="required"></td>
+			<td class="MatchesTableNewItem"><input type="number" name="Team1Name" required="required"></td>
+			<td class="MatchesTableNewItem"><input type="number" name="Team2Name" required="required"></td>
 			<td class="MatchesTableNewItem"><input type="text" name="ArenaName"></td>
 			<td class="MatchesTableNewItem"><input type="text" name="RefereeName"></td>
-			<td class="MatchesTableNewItem"><input type="number" name="Season"></td>
 			<td class="MatchesTableNewItem"> </td>
 			<td class="MatchesTableNewItem"> </td>
 		</tr>
