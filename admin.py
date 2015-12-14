@@ -228,9 +228,67 @@ def initialize_database():
     query = """INSERT INTO SITE (Admin_Name, Admin_Password, Site_Name, Slogan) VALUES ('Volleybase','uyar','itucsdb1527','Cimbombom')"""
     cursor.execute(query)
 
+# PLAYERS - MERAL #
+    query = """DROP TABLE IF EXISTS PLAYERS CASCADE"""
+    cursor.execute(query)
+    query = """CREATE TABLE PLAYERS (
+                    ID SERIAL PRIMARY KEY,
+                    NAME VARCHAR NOT NULL,
+                    NATIONALITY_ID INTEGER NOT NULL,
+                    AGE INTEGER NOT NULL,
+                    NUMBER INTEGER NOT NULL,
+                    POSITION VARCHAR NOT NULL,
+                    FOREIGN KEY (NATIONALITY_ID) REFERENCES NATIONALITIES(ID) ON DELETE CASCADE ON UPDATE CASCADE
+                    )"""
+    cursor.execute(query)
+    query = """INSERT INTO PLAYERS (NAME,NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('MERAL',1, 20, 8,'Right Side Hitter')"""
+    cursor.execute(query)
+    query = """INSERT INTO PLAYERS (NAME,NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('CEMAL',1, 24, 15,'Opposite')"""
+    cursor.execute(query)
+    query = """INSERT INTO PLAYERS (NAME,NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('SEYMA',1, 21, 9,'Outside Hitter')"""
+    cursor.execute(query)
+
+
+# COUNTRIES - MERAL #
+    query = """DROP TABLE IF EXISTS COUNTRIES CASCADE"""
+    cursor.execute(query)
+    query = """CREATE TABLE COUNTRIES (
+                    ID SERIAL PRIMARY KEY,
+                    NAME VARCHAR NOT NULL
+                    )"""
+    cursor.execute(query)
+
+    query = """INSERT INTO COUNTRIES (NAME) VALUES ('TURKEY')"""
+    cursor.execute(query)
+    query = """INSERT INTO COUNTRIES (NAME) VALUES ('ENGLAND')"""
+    cursor.execute(query)
+    query = """INSERT INTO COUNTRIES (NAME) VALUES ('USA')"""
+    cursor.execute(query)
+    query = """INSERT INTO COUNTRIES (NAME) VALUES ('GERMANY')"""
+    cursor.execute(query)
+    query = """INSERT INTO COUNTRIES (NAME) VALUES ('FRANCE')"""
+    cursor.execute(query)
+
+# TEAMPLAYERS - MERAL #
+    query = """DROP TABLE IF EXISTS TEAMPLAYERS CASCADE"""
+    cursor.execute(query)
+    query = """CREATE TABLE TEAMPLAYERS (
+                    PLAYERID INTEGER NOT NULL,
+                    TEAMID INTEGER NOT NULL,
+                    SEASONID INTEGER NOT NULL,
+                    FOREIGN KEY (PLAYERID) REFERENCES PLAYERS(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+                    FOREIGN KEY (TEAMID) REFERENCES TEAMS(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+                    FOREIGN KEY (SEASONID) REFERENCES SEASONS(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+                    PRIMARY KEY (PLAYERID, TEAMID, SEASONID)
+                    )"""
+    cursor.execute(query)
 
     connection.commit()
     return redirect(url_for('admin_home_page'))
+
+
+
+
 
 ################################### CEMAL #######################################################
 
@@ -258,6 +316,7 @@ def admin_leagues_page():
         connection.commit()
         return redirect(url_for('admin_leagues_page'))
 
+
 @app.route('/ADMIN/leagues/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
 def admin_leagues_page_delete(DELETEID):
     connection = dbapi2.connect(app.config['dsn'])
@@ -266,6 +325,7 @@ def admin_leagues_page_delete(DELETEID):
     cursor.execute("DELETE FROM LEAGUES WHERE ID = %s", (int(DELETEID),))
     connection.commit()
     return redirect(url_for('admin_leagues_page'))
+
 
 @app.route('/ADMIN/leagues/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
 def admin_leagues_page_update(UPDATEID):
@@ -279,6 +339,7 @@ def admin_leagues_page_update(UPDATEID):
     connection.commit()
     return render_template('admin/leagues_edit.html', leagues = cursor, countries = cursor2)
 
+
 @app.route('/ADMIN/leagues/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
 def admin_leagues_page_apply(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
@@ -290,6 +351,8 @@ def admin_leagues_page_apply(UPDATEID):
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_leagues_page'))
+
+
 
 # SEASON - CEMAL #
 
@@ -314,6 +377,7 @@ def admin_seasons_page():
         connection.commit()
         return redirect(url_for('admin_seasons_page'))
 
+
 @app.route('/ADMIN/seasons/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
 def admin_seasons_page_delete(DELETEID):
     connection = dbapi2.connect(app.config['dsn'])
@@ -322,6 +386,7 @@ def admin_seasons_page_delete(DELETEID):
     cursor.execute("DELETE FROM SEASONS WHERE ID = %s", (int(DELETEID),))
     connection.commit()
     return redirect(url_for('admin_seasons_page'))
+
 
 @app.route('/ADMIN/seasons/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
 def admin_seasons_page_update(UPDATEID):
@@ -335,6 +400,7 @@ def admin_seasons_page_update(UPDATEID):
     cursor2.execute(query)
     return render_template('admin/seasons_edit.html', seasons = cursor, leagues = cursor2)
 
+
 @app.route('/ADMIN/seasons/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
 def admin_seasons_page_apply(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
@@ -347,6 +413,8 @@ def admin_seasons_page_apply(UPDATEID):
     connection.commit()
     return redirect(url_for('admin_seasons_page'))
 
+
+
 # NEWS - CEMAL #
 
 @app.route('/ADMIN/news')
@@ -357,6 +425,7 @@ def admin_news_page():
     cursor.execute(query)
     return render_template('admin/news.html', news=cursor)
 
+
 @app.route('/ADMIN/news/UPDATE/<int:NEWSID>/', methods=['GET', 'POST'])
 def admin_news_edit_page(NEWSID):
     connection = dbapi2.connect(app.config['dsn'])
@@ -364,6 +433,7 @@ def admin_news_edit_page(NEWSID):
     query = "SELECT ID,News_Title, News_Details, News_Picture FROM NEWS WHERE ID = %d" % int(NEWSID)
     cursor.execute(query)
     return render_template('admin/news_detail.html', news = cursor)
+
 
 @app.route('/ADMIN/news/UPDATE/<int:NEWSID>/APPLY', methods=['GET', 'POST'])
 def admin_news_edit_apply(NEWSID):
@@ -378,6 +448,12 @@ def admin_news_edit_apply(NEWSID):
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_news_page'))
+
+
+
+
+
+
 
 
 
@@ -447,6 +523,8 @@ def admin_teams_page_apply(UPDATEID):
     connection.commit()
     return redirect(url_for('admin_teams_page'))
 
+
+
 # SEASON TEAM - MERIC #
 
 @app.route('/ADMIN/teams/season_team', methods=['GET', 'POST'])
@@ -515,6 +593,8 @@ def admin_season_team_page_apply(UPDATEID):
     connection.commit()
     return redirect(url_for('admin_season_team_page'))
 
+
+
 # ADMIN - MERIC #
 
 @app.route('/ADMIN/admin', methods=['GET', 'POST'])
@@ -574,3 +654,207 @@ def admin_admin_page_apply(UPDATEID):
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('admin_admin_page'))
+
+
+################################### MERAL ################################
+
+# PLAYERS - MERAL #
+
+@app.route('/ADMIN/players', methods=['GET', 'POST'])
+def admin_players_page():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT PLAYERS.ID, NAME, NATIONALITY, AGE, NUMBER, POSITION FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID"
+        cursor.execute(query)
+        cursor2 = connection.cursor()
+        query = "SELECT * FROM NATIONALITIES"
+        cursor2.execute(query)
+        return render_template('admin/players.html', players = cursor, nationalities = cursor2)
+    else:
+        name_in = request.form['name']
+        nationality_in = request.form['nationalityID']
+        age_in = request.form['age']
+        number_in = request.form['number']
+        position_in = request.form['position']
+        query = """INSERT INTO PLAYERS (NAME, NATIONALITY_ID, AGE, NUMBER, POSITION) VALUES ('"""+name_in+"', '"+nationality_in+"', '"+age_in+"', '"+number_in+"', '"+position_in+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('admin_players_page'))
+
+
+@app.route('/ADMIN/players/DELETE/<int:DELETEID>', methods=['GET','POST'])
+def admin_players_page_delete(DELETEID):
+    connection=dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM PLAYERS WHERE ID = %s", (int(DELETEID),))
+    connection.commit()
+    return redirect(url_for('admin_players_page'))
+
+
+@app.route('/ADMIN/players/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def admin_players_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM PLAYERS WHERE ID = %s", (int(UPDATEID),))
+    cursor2 = connection.cursor()
+    query = "SELECT * FROM NATIONALITIES"
+    cursor2.execute(query)
+    connection.commit()
+    return render_template('admin/players_edit.html', players = cursor, nationalities = cursor2)
+
+
+@app.route('/ADMIN/players/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
+def admin_players_page_apply(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    new_name = request.form['name']
+    new_nationality = request.form['nationalityID']
+    new_age = request.form['age']
+    new_number = request.form['number']
+    new_position = request.form['position']
+    query = "UPDATE PLAYERS SET NAME = '%s', NATIONALITY_ID = %d, AGE = %d, NUMBER = %d, POSITION = '%s'  WHERE ID = %d" % (new_name,int(new_nationality),int(new_age), int(new_number), new_position, int(UPDATEID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('admin_players_page'))
+
+
+
+# COUNTRIES - MERAL #
+
+@app.route('/ADMIN/countries', methods=['GET', 'POST'])
+def admin_countries_page():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT * FROM COUNTRIES"
+        cursor.execute(query)
+        return render_template('admin/countries.html', countries = cursor)
+    else:
+        name_in = request.form['name']
+        query = """INSERT INTO COUNTRIES (name) VALUES ('"""+name_in+"')"
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('admin_countries_page'))
+
+
+@app.route('/ADMIN/countries/DELETE/<int:DELETEID>', methods=['GET','POST'])
+def admin_countries_page_delete(DELETEID):
+    connection=dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM COUNTRIES WHERE ID = %s", (int(DELETEID),))
+    connection.commit()
+    return redirect(url_for('admin_countries_page'))
+
+
+@app.route('/ADMIN/countries/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def admin_countries_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM COUNTRIES WHERE ID = %s", (int(UPDATEID),))
+    connection.commit()
+    return render_template('admin/countries_edit.html', countries = cursor)
+
+
+@app.route('/ADMIN/countries/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
+def admin_countries_page_apply(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    new_name = request.form['name']
+    query = """UPDATE COUNTRIES SET NAME = '%s' WHERE ID = %d""" % (new_name, int(UPDATEID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('admin_countries_page'))
+
+
+
+# TEAMPLAYERS - MERAL #
+
+@app.route('/ADMIN/teamplayers', methods=['GET', 'POST'])
+def admin_team_players_page():
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    if request.method == 'GET':
+        query = "SELECT PLAYERS.ID, PLAYERS.NAME, SEASONS.ID, SEASONS.Season_Name, TEAMS.ID, TEAMS.Team_Name FROM TEAMPLAYERS, PLAYERS, SEASONS, TEAMS WHERE PLAYERID = PLAYERS.ID AND TEAMID = TEAMS.ID AND SEASONID = SEASONS.ID"
+        cursor.execute(query)
+
+        cursor2 = connection.cursor()
+        query = "SELECT ID, NAME FROM PLAYERS"
+        cursor2.execute(query)
+
+        cursor3 = connection.cursor()
+        query = "SELECT ID, Season_Name FROM SEASONS"
+        cursor3.execute(query)
+
+
+        cursor4 = connection.cursor()
+        query = "SELECT ID, Team_Name FROM TEAMS"
+        cursor4.execute(query)
+
+        return render_template('/ADMIN/teamplayers.html', teamplayers = cursor, players = cursor2, seasons = cursor3, teams = cursor4)
+    else:
+        playerid_in = request.form['playerid']
+        seasonid_in = request.form['seasonid']
+        teamid_in = request.form['teamid']
+        query = """INSERT INTO TEAMPLAYERS (PLAYERID, SEASONID, TEAMID) VALUES (%d,%d,%d)""" % (int(playerid_in), int(seasonid_in), int(teamid_in))
+        cursor.execute(query)
+        connection.commit()
+        return redirect(url_for('admin_team_players_page'))
+
+
+@app.route('/ADMIN/teamplayers/DELETE/<int:DELETEID>', methods=['GET','POST'])
+def admin_team_players_page_delete(DELETEID):
+    connection=dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM TEAMPLAYERS WHERE PLAYERID = %s", (int(DELETEID),))
+    connection.commit()
+    return redirect(url_for('admin_team_players_page'))
+
+
+@app.route('/ADMIN/teamplayers/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
+def admin_team_players_page_update(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+
+    cursor = connection.cursor()
+    query = "SELECT playerid, seasonid, teamid FROM TEAMPLAYERS WHERE PLAYERID = %d" % int(UPDATEID)
+    cursor.execute(query)
+
+    cursor2 = connection.cursor()
+    query = "SELECT ID, NAME FROM PLAYERS"
+    cursor2.execute(query)
+
+    cursor3 = connection.cursor()
+    query = "SELECT ID, Season_Name FROM SEASONS"
+    cursor3.execute(query)
+
+    cursor4 = connection.cursor()
+    query = "SELECT ID, Team_Name FROM TEAMS"
+    cursor4.execute(query)
+
+    connection.commit()
+    return render_template('admin/teamplayers_edit.html', teamplayers = cursor, players = cursor2, seasons = cursor3, teams = cursor4)
+
+
+@app.route('/ADMIN/teamplayers/UPDATE/<int:UPDATEID>/APPLY', methods=['GET', 'POST'])
+def admin_team_players_page_apply(UPDATEID):
+    connection = dbapi2.connect(app.config['dsn'])
+    cursor = connection.cursor()
+
+    new_playerid = request.form['playerid']
+    new_seasonid = request.form['seasonid']
+    new_teamid = request.form['teamid']
+    query = "UPDATE TEAMPLAYERS SET PLAYERID = %d, SEASONID = %d, TEAMID = %d WHERE PLAYERID = %d" % (int(new_playerid), int(new_seasonid), int(new_teamid), int(UPDATEID))
+    cursor.execute(query)
+    connection.commit()
+    return redirect(url_for('admin_team_players_page'))
+

@@ -1,11 +1,9 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Players {% endblock %}
 
 {% block content %}
-    <h1>About Us - Meral</h1><hr>
-		<a href="{{ url_for('admin_initialize_database_players') }}">Init DB for Players</a><br>
-		<a href="{{ url_for('players_page') }}">Return Players Page</a><br><br>
+
 		<form action="{{ url_for('admin_players_page') }}" method = "post">
 			<table id="playerpool">
 				<tr>
@@ -45,7 +43,6 @@
 				  <option value="Middle Blocker">Middle Blocker</option>
 				  <option value="Opposite">Opposite</option>
 				  <option value="Setter">Setter</option>
-				  <option value="Middle Blocker">Middle Blocker</option>
 				  <option value="Outside Hitter">Outside Hitter</option>
 			</select></td>
 			<td> </td>

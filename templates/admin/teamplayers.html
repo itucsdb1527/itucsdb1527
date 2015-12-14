@@ -1,9 +1,9 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Team Players {% endblock %}
 
 {% block content %}
-    	<h1>About Us - Meral</h1><hr>
+
 
    <form action="{{ url_for('admin_team_players_page') }}" method = "post">
 		<table id="teamplayers">
@@ -20,6 +20,8 @@
 			<td class="teamplayersItem"><a href="{{ url_for('admin_team_players_page_delete', DELETEID=playerid) }}">Delete</a></td>
 			<td class="teamplayersItem"><a href="{{ url_for('admin_team_players_page_update', UPDATEID=playerid) }}">Update</a></td>
 		</tr>
+		{% endfor %}
+
 		<tr>
 			<td class=newTeamplayer><select  name="playerid">
 				{% for ID, name in players %}
@@ -39,9 +41,9 @@
 			<td> </td>
 			<td> </td>
 		</tr>
-		{% endfor %}
+
 		<tr>
-			<td colspan="2" align="right"><input value="Add New TeamPlayer" name="add" type="submit"></td>
+			<td colspan="3" align="right"><input value="Add New TeamPlayer" name="add" type="submit"></td>
 		</tr>
 		</table>
 	</form>
