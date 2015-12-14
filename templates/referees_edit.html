@@ -5,10 +5,11 @@
 {% block content %}
     <h1>About Us - Tugba</h1><hr>
 
+
 <form action="APPLY" method = "post">
 		<table id="refereesTable">
 
-		{% for ID, RefereeName, RefereeAge, Nationality in referees %}
+		{% for ID, RefereeName, RefereeAge in referees %}
 		<tr>
 			<td class="RefereesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
 			<td class="RefereesTableItem"><input type="text" name="name" required="required" value="{{RefereeName}}"></td>
@@ -16,7 +17,7 @@
 			<td class="RefereesTableItem"><select name="nationality">
 				{% for ID, Nationality in nationalities %}
 				<option value="{{ID}}"{% print("selected") if RefereeNationality == ID %}>{{ Nationality }}</option>
-				{ % endfor %}
+				{% endfor %}
 				</select>
 			</td>
 		</tr>
