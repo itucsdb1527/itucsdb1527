@@ -51,10 +51,19 @@ def initialize_database_referees():
     cursor.execute(query)
     query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Keith Aidun',40,2)"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cedric All Runner',40,2)"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cedric All Runner',40,9)"""
     cursor.execute(query)
-    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Cuneyt Cakir',39,5)"""
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Dan Apol',35,4)"""
     cursor.execute(query)
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Mary Black',28,3)"""
+    cursor.execute(query)
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Rose Atkinson',42,7)"""
+    cursor.execute(query)
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Stephen Arichea',37,6)"""
+    cursor.execute(query)
+    query = """INSERT INTO REFEREES (RefereeName,RefereeAge,RefereeNationality) VALUES ('Fred Buchler',39,5)"""
+    cursor.execute(query)
+
 
     connection.commit()
     return redirect(url_for('referees_page'))
