@@ -20,7 +20,7 @@ def players_page():
         return render_template('players.html', players = cursor, nationalities = cursor2)
     else:
         search = request.form['search']
-        query = "SELECT PLAYERS.ID, NAME, NATIONALITY, AGE, NUMBER, POSITION FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID AND Name LIKE '%" + search +"%'"
+        query = "SELECT PLAYERS.ID, NAME, NATIONALITY, AGE, NUMBER, POSITION FROM PLAYERS, NATIONALITIES WHERE NATIONALITY_ID = NATIONALITIES.ID AND NAME LIKE '%" + search +"%'"
         cursor.execute(query)
         connection.commit()
         return render_template('players.html', players = cursor)
