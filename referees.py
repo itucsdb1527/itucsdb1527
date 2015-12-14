@@ -59,7 +59,6 @@ def initialize_database_referees():
     connection.commit()
     return redirect(url_for('referees_page'))
 
-
 @app.route('/referees/UPDATE/<int:UPDATEID>/', methods=['GET', 'POST'])
 def referees_page_update(UPDATEID):
     connection = dbapi2.connect(app.config['dsn'])
