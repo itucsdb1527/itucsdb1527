@@ -9,7 +9,13 @@
 		<form action="{{ url_for('matches_page') }}" method = "post">
 		<table id="matchesTable">
 
-
+		<tr>
+			<th>Match ID</th>
+			<th>Team #1</th>
+    		<th>Team #2</th>
+    		<th>Arena Name</th>
+    		<th>Referee Name</th>
+  		</tr>
 
 		{% for ID, Team1ID, Team2ID , ArenaName , RefereeName in matches %}
 		<tr>
@@ -25,8 +31,8 @@
 
 		<tr>
 			<td class="MatchesTableNewItem"> </td>
-			<td class="MatchesTableNewItem"><input type="number" name="Team1Name" required="required"></td>
-			<td class="MatchesTableNewItem"><input type="number" name="Team2Name" required="required"></td>
+			<td class="MatchesTableNewItem"><input type="number" name="Team1ID" required="required"></td>
+			<td class="MatchesTableNewItem"><input type="number" name="Team2ID" required="required"></td>
 			<td class="MatchesTableNewItem"><input type="text" name="ArenaName"></td>
 			<td class="MatchesTableNewItem"><input type="text" name="RefereeName"></td>
 			<td class="MatchesTableNewItem"> </td>
@@ -37,6 +43,10 @@
 		</tr>
 		</table>
 	</form>
+	<br>
+	<br>
+	<br>
+	<br>
 	<br>
 	<a href="{{ url_for('maillist_page') }}">Maillist</a><br>
 	<a href="{{ url_for('scores_page') }}">Scores Page</a><br><br>

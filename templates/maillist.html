@@ -9,6 +9,11 @@
 		<form action="{{ url_for('maillist_page') }}" method = "post">
 		<table id="maillistTable">
 
+		<tr>
+			<th>Mail</th>
+			<th>Team ID</th>
+  		</tr>
+
 		{% for ID, Mail, TeamID in maillist %}
 		<tr>
 			<td class="MaillistTableItem">{{ID}}</td>

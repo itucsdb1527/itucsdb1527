@@ -27,10 +27,6 @@ def scores_page():
         connection.commit()
         return redirect(url_for('scores_page'))
 
-
-
-
-
     return render_template('scores.html')
 
 @app.route('/scores/DELETE/<int:DELETEID>', methods=['GET', 'POST'])
@@ -75,9 +71,17 @@ def initialize_database_scores():
     cursor.execute(query)
     query = """CREATE TABLE SCORES (ID SERIAL PRIMARY KEY, MatchID INTEGER NOT NULL, Team1Score VARCHAR NOT NULL, Team2Score VARCHAR NOT NULL)"""
     cursor.execute(query)
-    query = """INSERT INTO SCORES (MatchID, Team1Score, Team2Score) VALUES ('12', '25', '23')"""
+    query = """INSERT INTO SCORES (MatchID, Team1Score, Team2Score) VALUES ('3001', '0', '3')"""
     cursor.execute(query)
-    query = """INSERT INTO SCORES (MatchID, Team1Score, Team2Score) VALUES ('1', '23', '25')"""
+    query = """INSERT INTO SCORES (MatchID, Team1Score, Team2Score) VALUES ('1012', '1', '3')"""
+    cursor.execute(query)
+    query = """INSERT INTO SCORES (MatchID, Team1Score, Team2Score) VALUES ('1104', '2', '3')"""
+    cursor.execute(query)
+    query = """INSERT INTO SCORES (MatchID, Team1Score, Team2Score) VALUES ('2003', '3', '0')"""
+    cursor.execute(query)
+    query = """INSERT INTO SCORES (MatchID, Team1Score, Team2Score) VALUES ('1705', '1', '3')"""
+    cursor.execute(query)
+    query = """INSERT INTO SCORES (MatchID, Team1Score, Team2Score) VALUES ('2705', '3', '0')"""
     cursor.execute(query)
 
     connection.commit()

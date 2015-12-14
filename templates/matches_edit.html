@@ -11,18 +11,21 @@
 		{% for ID, Team1ID, Team2ID, ArenaName, RefereeName in matches %}
 		<tr>
 			<td class="MatchesTableItem"><input type="hidden" name="ID" required="required" value="{{ID}}"></td>
-			<td class="MatchesTableItem"><select name="Team1Name">
+
+			<td class="MatchesTableItem"><select name="Team1ID">
 			{% for ID, Team_Name in teams %}
 			<option value="{{ID}}"{% print("selected") if Team1ID == ID %}> {{Team_Name}} </option>
 			{% endfor %}
 			</select>
 			</td>
-			<td class="MatchesTableItem"><select name="Team2Name">
+
+			<td class="MatchesTableItem"><select name="Team2ID">
 			{% for ID, Team_Name in teams %}
 			<option value="{{ID}}"{% print("selected") if Team2ID == ID %}> {{Team_Name}} </option>
 			{% endfor %}
 			</select>
 			</td>
+
 			<td class="MatchesTableItem"><input type="text" name="ArenaName" value="{{ArenaName}}"></td>
 			<td class="MatchesTableItem"><input type="text" name="RefereeName" value="{{RefereeName}}"></td>
 		</tr>
@@ -32,4 +35,5 @@
 		</tr>
 		</table>
 	</form>
+	<a href="{{ url_for('matches_page') }}">Cancel The Operation</a><br>
 {% endblock %}

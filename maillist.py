@@ -69,9 +69,17 @@ def initialize_database_maillist():
     cursor.execute(query)
     query = """CREATE TABLE MAILLIST (ID SERIAL PRIMARY KEY, Mail VARCHAR NOT NULL, TeamID VARCHAR NOT NULL)"""
     cursor.execute(query)
-    query = """INSERT INTO MAILLIST (Mail, TeamID) VALUES ('ozkalt@itu.edu.tr', 'itucsdb27')"""
+    query = """INSERT INTO MAILLIST (Mail, TeamID) VALUES ('ozkalt@itu.edu.tr', 'itucsdb1527')"""
     cursor.execute(query)
-    query = """INSERT INTO MAILLIST (Mail, TeamID) VALUES ('umutlus@itu.edu.tr','itucsdb27')"""
+    query = """INSERT INTO MAILLIST (Mail, TeamID) VALUES ('umutlus@itu.edu.tr','itucsdb1527')"""
+    cursor.execute(query)
+    query = """INSERT INTO MAILLIST (Mail, TeamID) VALUES ('turanmeri@itu.edu.tr','itucsdb1527')"""
+    cursor.execute(query)
+    query = """INSERT INTO MAILLIST (Mail, TeamID) VALUES ('tugs@itu.edu.tr','itucsdb1516')"""
+    cursor.execute(query)
+    query = """INSERT INTO MAILLIST (Mail, TeamID) VALUES ('korkmazmer@itu.edu.tr','itucsdb1527')"""
+    cursor.execute(query)
+    query = """INSERT INTO MAILLIST (Mail, TeamID) VALUES ('kuyucuc@itu.edu.tr','itucsdb1527')"""
     cursor.execute(query)
 
     connection.commit()
