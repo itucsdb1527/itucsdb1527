@@ -5,13 +5,13 @@ Welcome to itucsdb1527's documentation!
 
 :Members:
 
-   * Member 1
-   * Member 2
-   * Member 3
-   * Member 4
-   * Member 5
+   * Meral Korkmaz
+   * Cemal Fatih Kuyucu
+   * Meriç Turan
+   * Seyma Umutlu
+   * Tugba Özkal
 
-**project description goes here (a few paragraphs)**
+**Our project info!**
 
 Contents:
 
