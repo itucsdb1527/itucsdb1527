@@ -1,7 +1,7 @@
 Welcome to itucsdb1527's documentation!
 =======================================
 
-:Team: Team Name
+:Team: itucsdb1527
 
 :Members:
 
