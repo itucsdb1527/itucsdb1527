@@ -92,7 +92,7 @@ Teams table is created as seen above. It is cascade on both update and delete. I
 |
 Datas for teams table are added as seen above.
 
-   ID is not added above because it is auto increment (by using SERİAL).
+   ID is not added above because it is auto increment (by using SERIAL).
 
    Team_Name is added between quotes ('') because it is varchar.
 
@@ -302,7 +302,7 @@ Season team table is created as seen above. It is cascade on both update and del
 |
 Datas for season team table are added as seen above.
 
-   ID is not added above because it is auto increment (by using SERİAL).
+   ID is not added above because it is auto increment (by using SERIAL).
 
    Season_ID is added by writing an integer which is ID of seasons table.
 
@@ -490,7 +490,7 @@ Site table is created as seen above. It has 5 columns which are ID, Admin_Name, 
 |
 Datas for site table are added as seen above.
 
-   ID is not added above because it is auto increment (by using SERİAL).
+   ID is not added above because it is auto increment (by using SERIAL).
 
    Admin_Name is added between quotes ('') because it is varchar.
 
