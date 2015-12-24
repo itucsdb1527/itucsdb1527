@@ -62,7 +62,7 @@ def matches_page_apply(UPDATEID):
     new_name2 = request.form['Team2ID']
     new_arena = request.form['ArenaName']
     new_referee = request.form['RefereeName']
-    query = """UPDATE MATCHES SET Team1ID = %d, Team2ID = %d, ArenaName = '%s', RefereeName = '%s' WHERE ID = %d""" % (int(new_name1), int(new_name2), new_arena, new_referee , int(UPDATEID))
+    query = """UPDATE MATCHES SET Team1ID = %d, Team2ID = %d, ArenaName = '%s', RefereeName = '%s' WHERE ID = %d""" % (int(new_name1), int(new_name2), new_arena, new_referee, int(UPDATEID))
     cursor.execute(query)
     connection.commit()
     return redirect(url_for('matches_page'))
@@ -80,10 +80,19 @@ def initialize_database_matches():
             FOREIGN KEY (Team2ID) REFERENCES TEAMS(ID) ON UPDATE CASCADE ON DELETE CASCADE
             )"""
     cursor.execute(query)
-    query = """INSERT INTO MATCHES (Team1ID, Team2ID, ArenaName, RefereeName) VALUES (1, 3, 'Brad Aaberg','Akatlar')"""
+    query = """INSERT INTO MATCHES (Team1ID, Team2ID, ArenaName, RefereeName) VALUES (1, 3, 'Sinan Erdem', 'Brad Aaberg')"""
     cursor.execute(query)
-    query = """INSERT INTO MATCHES (Team1ID, Team2ID, ArenaName, RefereeName) VALUES (2, 11 , 'Cuneyt Cakir','Inonu')"""
+    query = """INSERT INTO MATCHES (Team1ID, Team2ID, ArenaName, RefereeName) VALUES (2, 11 , 'Abdi Ipekci', 'Stephen Arichea')"""
     cursor.execute(query)
+    query = """INSERT INTO MATCHES (Team1ID, Team2ID, ArenaName, RefereeName) VALUES (8, 9 , 'FB Ulker', 'Rose Atkinson')"""
+    cursor.execute(query)
+    query = """INSERT INTO MATCHES (Team1ID, Team2ID, ArenaName, RefereeName) VALUES (13, 4 , 'Volkswagen Arena', 'Dan Apol')"""
+    cursor.execute(query)
+    query = """INSERT INTO MATCHES (Team1ID, Team2ID, ArenaName, RefereeName) VALUES (18, 1 , 'Burhan Felek', 'Mary Black')"""
+    cursor.execute(query)
+    query = """INSERT INTO MATCHES (Team1ID, Team2ID, ArenaName, RefereeName) VALUES (15, 7 , 'Pavilhao Rosa Mota', 'Fred Buchler')"""
+    cursor.execute(query)
+
 
     connection.commit()
     return redirect(url_for('matches_page'))

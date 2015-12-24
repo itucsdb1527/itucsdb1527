@@ -1,9 +1,8 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Players {% endblock %}
 
 {% block content %}
-    	<h1>About Us - Meral</h1><hr>
 
    <form action="APPLY" method = "post">
 		<table id="playerpool">
@@ -21,19 +20,18 @@
 			<td class="playerItem"><input type="hidden" name="ID" required="required" value="{{ID}}" style="width:95%"></td>
 			<td class="playerItem"><input type="text" name="name" required="required" value="{{name}}" style="width:95%"></td>
 			<td class="playerItem"><select  name="nationalityID">
-				{% for ID, nationality in nationalities %}
-					<option value="{{ ID }}" {% print("selected") if nationality_ID == ID %}>{{ nationality }}</option>
+				{% for ID, nationalityname in nationalities %}
+					<option value="{{ ID }}" {% print("selected") if nationality == ID %}>{{ nationalityname }}</option>
 				{% endfor %}
 			</select></td>
 			<td class="playerItem"><input type="text" name="age" required="required" value="{{age}}" style="width:95%"></td>
 			<td class="playerItem"><input type="text" name="number" required="required" value="{{number}}" style="width:95%"></td>
 			<td class=newPlayer><select  name="position">
-				  <option value="Right Side Hitter">Right Side Hitter</option>
-				  <option value="Middle Blocker">Middle Blocker</option>
-				  <option value="Opposite">Opposite</option>
-				  <option value="Setter">Setter</option>
-				  <option value="Middle Blocker">Middle Blocker</option>
-				  <option value="Outside Hitter">Outside Hitter</option>
+				  <option value="Right Side Hitter" {% print("selected") if position == "Right Side Hitter" %}>Right Side Hitter</option>
+				  <option value="Opposite" {% print("selected") if position == "Opposite" %}>Opposite</option>
+				  <option value="Setter" {% print("selected") if position == "Setter" %}>Setter</option>
+				  <option value="Middle Blocker" {% print("selected") if position == "Middle Blocker" %}>Middle Blocker</option>
+				  <option value="Outside Hitter" {% print("selected") if position == "Outside Hitter" %}>Outside Hitter</option>
 			</select></td>
 		</tr>
 		{% endfor %}

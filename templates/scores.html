@@ -9,6 +9,13 @@
 		<form action="{{ url_for('scores_page') }}" method = "post">
 		<table id="scoresTable">
 
+		<tr>
+			<th>Score ID</th>
+			<th>Match Ref. Num.</th>
+    		<th>1st Team Score</th>
+    		<th>2nd Team Score</th>
+  		</tr>
+
 		{% for ID, MatchID, Team1Score, Team2Score in scores %}
 		<tr>
 			<td class="ScoresTableItem">{{ID}}</td>

@@ -1,9 +1,9 @@
-{% extends "layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %} Team Players {% endblock %}
 
 {% block content %}
-    	<h1>About Us - Meral</h1><hr>
+
 
    <form action="APPLY" method = "post">
 		<table id="teamplayers">
@@ -14,9 +14,21 @@
 			</tr>
 		{% for playerid, seasonid, teamid in teamplayers %}
 		<tr>
-			<td class="teamplayersItem"><input type="text" name="playerid" required="required" value="{{newPlayer}}" style="width:95%"></td>
-			<td class="teamplayersItem"><input type="text" name="seasonid" required="required" value="{{newSeason}}" style="width:95%"></td>
-			<td class="teamplayersItem"><input type="text" name="teamid" required="required" value="{{newTeam}}" style="width:95%"></td>
+			<td class=newTeamplayer><select  name="playerid">
+				{% for ID, name in players %}
+					<option value="{{ ID }}" {% print("selected") if playerid == ID %} >{{ name }}</option>
+				{% endfor %}
+			</select></td>
+			<td class=newPlayer><select  name="seasonid">
+				{% for ID, Season_Name in seasons %}
+					<option value="{{ ID }}" {% print("selected") if seasonid == ID %}>{{ Season_Name }}</option>
+				{% endfor %}
+			</select></td>
+			<td class=newPlayer><select  name="teamid">
+				{% for ID, Team_Name in teams %}
+					<option value="{{ ID }}" {% print("selected") if teamid == ID %}>{{ Team_Name }}</option>
+				{% endfor %}
+			</select></td>
 		</tr>
 		{% endfor %}
 				<tr>

@@ -37,6 +37,15 @@ def initialize_database_nationalities():
     query = """INSERT INTO NATIONALITIES (Nationality)
     VALUES ('UK')"""
     cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('Portuguese')"""
+    cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('Korea')"""
+    cursor.execute(query)
+    query = """INSERT INTO NATIONALITIES (Nationality)
+    VALUES ('India')"""
+    cursor.execute(query)
 
     connection.commit()
     return redirect(url_for('nationalities_page'))

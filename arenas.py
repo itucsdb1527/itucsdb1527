@@ -73,6 +73,12 @@ def initialize_database_arenas():
     cursor.execute(query)
     query = """INSERT INTO ARENAS (ArenaName,ArenaBuiltDate,ArenaCity,ArenaCapacity) VALUES ('Memorial Coliseum',1976,'Kentucky',23000)"""
     cursor.execute(query)
+    query = """INSERT INTO ARENAS (ArenaName,ArenaBuiltDate,ArenaCity,ArenaCapacity) VALUES ('Volkswagen Arena',1998,'Istanbul',8000)"""
+    cursor.execute(query)
+    query = """INSERT INTO ARENAS (ArenaName,ArenaBuiltDate,ArenaCity,ArenaCapacity) VALUES ('Sinan Erdem',2000,'Afyonkarahisar',25357)"""
+    cursor.execute(query)
+    query = """INSERT INTO ARENAS (ArenaName,ArenaBuiltDate,ArenaCity,ArenaCapacity) VALUES ('Pavilhao Rosa Mota',1991,'Porto',5400)"""
+    cursor.execute(query)
 
     connection.commit()
     return redirect(url_for('arenas_page'))

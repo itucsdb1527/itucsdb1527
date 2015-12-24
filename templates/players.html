@@ -3,27 +3,27 @@
 {% block title %} Players {% endblock %}
 
 {% block content %}
-    	<h1>About Us - Meral</h1><hr>
-    	<a href="{{ url_for('admin_players_page') }}">ADMIN Players Page</a><br><br>
-        <form action="{{ url_for('players_page') }}" method = "post">
-		<table >
-		<tr>
-			<td >Search Player Name:</td>
-			<td><input type="text" name="search" required="required" style="margin-left:3px;width:95%"></td>
-		</tr>
-		<tr>
-			<td colspan="2"><input value="Search" name="search" type="submit"></td>
-		</tr>
+    	<h1>Players - Meral</h1><hr>
+
+    <form action="{{ url_for('players_page') }}" method = "post">
+		<table>
+			<tr>
+				<td >Search Player Name:</td>
+				<td><input type="text" name="search" required="required" style="margin-left:3px;width:95%"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input value="Search" name="search" type="submit"></td>
+			</tr>
 		</table>
 	</form>
 	<br><br>
-		<table id="playerpool">
+		<table id="playerpool" width="600px">
 			<tr>
-				<td>NAME</td>
-				<td>NATIONALITY</td>
-				<td>AGE</td>
-				<td>NUMBER</td>
-				<td>POSITION</td>
+				<td><b>NAME</b></td>
+				<td><b>NATIONALITY</b></td>
+				<td><b>AGE</b></td>
+				<td><b>NUMBER</b></td>
+				<td><b>POSITION</b></td>
 			</tr>
 		{% for ID, name, nationality, age, number, position in players %}
 		<tr>
