@@ -45,7 +45,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'itucsdb1527'
-copyright = '2015, Team Name'
+copyright = '2015, itucsdb1527'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -198,7 +198,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'itucsdb1527.tex', 'itucsdb1527 Documentation',
-   'Team Name', 'manual'),
+   'itucsdb1527', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -228,7 +228,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'itucsdb1527', 'itucsdb1527 Documentation',
-     ['Team Name'], 1)
+     ['itucsdb1527'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -242,7 +242,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'itucsdb1527', 'itucsdb1527 Documentation',
-   'Team Name', 'itucsdb1527', 'One line description of project.',
+   'itucsdb1527', 'itucsdb1527', 'A VolleyBASE to keep track of your favorite volleyball players.',
    'Miscellaneous'),
 ]
 

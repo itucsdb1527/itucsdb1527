@@ -11,12 +11,12 @@ Welcome to itucsdb1527's documentation!
    * Seyma Umutlu
    * Tugba Özkal
 
-**Our project info!**
+A VolleyBASE to keep track of the newest information on Volleyball. Information on VolleyBALL teams, players, leagues, teams and much more.
 
 Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
 
    user/index
    developer/index
