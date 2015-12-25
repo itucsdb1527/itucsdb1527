@@ -12,7 +12,7 @@ Matches
 -------
 
 |
-The contents of the matches table and the initialized version of tuples are shown below.
+The contents of the matches table and the initialized version of tuples are shown in the figure 3.2.1.
 |
 
 .. figure:: seyma/4.png
@@ -146,7 +146,7 @@ Scores
 ------
 
 |
-The contents of the scores table and the initialized version of tuples are shown below.
+The contents of the scores table and the initialized version of tuples are shown in the figure 3.2.2.
 |
 
 .. figure:: seyma/5.png
@@ -274,7 +274,7 @@ Maillist
 --------
 
 |
-The contents of the maillist table and the initialized version of tuples are shown below.
+The contents of the maillist table and the initialized version of tuples are shown in the figure 3.2.3.
 |
 
 .. figure:: seyma/6.png
