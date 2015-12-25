@@ -1,2 +1,2 @@
-Parts Implemented by C. Fatih Kuyucu
-====================================
+Parts Implemented by C. F. Kuyucu
+=================================
