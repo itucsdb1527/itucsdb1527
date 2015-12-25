@@ -6,14 +6,12 @@ General View
 
 |
 In this section, firstly the contents of the tables will be explained and later the details of the codes for database operation will be given.
-|
 
 Matches
 -------
 
 |
 The contents of the matches table and the initialized version of tuples are shown in the figure 3.2.1.
-|
 
 .. figure:: seyma/4.PNG
    :figclass: align-center
@@ -40,7 +38,6 @@ The contents of the matches table and the initialized version of tuples are show
 |
 The code above shows the create table function. Firstly it checks if there exists a matches table, if so it drops the table, then creates a new table.
 When creating, primary key and foreign keys from team table are assigned. In order to keep tables coordinated, cascade operation is done on update and delete functions.
-|
 
 **Inserting Initialized Version**
 
@@ -89,7 +86,6 @@ When creating, primary key and foreign keys from team table are assigned. In ord
 |
 With the code above, the listing function is done using select command. Later inserting operation is done using the values which are gotten
 from forms.
-|
 
 **Update Function**
 
@@ -124,7 +120,6 @@ from forms.
 |
 The first part of the code, opens a new page when 'update' button is pushed. With the index gotten from the first page, the values which are
 obtained from forms is updated to the tuple the user wants to update.
-|
 
 **Delete Function**
 
@@ -140,14 +135,12 @@ obtained from forms is updated to the tuple the user wants to update.
            return redirect(url_for('matches_page'))
 |
 This code deletes the tuple that user wants to delete using delete operation of SQL and index which is obtained from the page.
-|
 
 Scores
 ------
 
 |
 The contents of the scores table and the initialized version of tuples are shown in the figure 3.2.2.
-|
 
 .. figure:: seyma/5.PNG
    :figclass: align-center
@@ -171,7 +164,6 @@ The contents of the scores table and the initialized version of tuples are shown
 |
 The code above shows the create table function. Firstly it checks if there exists a scores table, if so it drops the table, then creates a new table.
 When creating, primary key is assigned.
-|
 
 **Inserting Initialized Version**
 
@@ -221,7 +213,6 @@ When creating, primary key is assigned.
 |
 With the code above, the listing function is done using select command. Later inserting operation is done using the values which are gotten
 from forms.
-|
 
 **Update Function**
 
@@ -252,7 +243,6 @@ from forms.
 |
 The first part of the code, opens a new page when 'update' button is pushed. With the index gotten from the first page, the values which are
 obtained from forms is updated to the tuple the user wants to update.
-|
 
 **Delete Function**
 
@@ -268,14 +258,12 @@ obtained from forms is updated to the tuple the user wants to update.
            return redirect(url_for('scores_page'))
 |
 This code deletes the tuple that user wants to delete using delete operation of SQL and index which is obtained from the page.
-|
 
 Maillist
 --------
 
 |
 The contents of the maillist table and the initialized version of tuples are shown in the figure 3.2.3.
-|
 
 .. figure:: seyma/6.PNG
    :figclass: align-center
@@ -299,7 +287,6 @@ The contents of the maillist table and the initialized version of tuples are sho
 |
 The code above shows the create table function. Firstly it checks if there exists a maillist table, if so it drops the table, then creates a new table.
 When creating, primary key is assigned.
-|
 
 **Inserting Initialized Version**
 
@@ -347,7 +334,6 @@ When creating, primary key is assigned.
 |
 With the code above, the listing function is done using select command. Later inserting operation is done using the values which are gotten
 from forms.
-|
 
 **Update Function**
 
@@ -377,7 +363,6 @@ from forms.
 |
 The first part of the code, opens a new page when 'update' button is pushed. With the index gotten from the first page, the values which are
 obtained from forms is updated to the tuple the user wants to update.
-|
 
 **Delete Function**
 
@@ -393,5 +378,3 @@ obtained from forms is updated to the tuple the user wants to update.
            return redirect(url_for('maillist_page'))
 |
 This code deletes the tuple that user wants to delete using delete operation of SQL and index which is obtained from the page.
-|
-

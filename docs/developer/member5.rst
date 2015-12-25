@@ -6,15 +6,12 @@ General View
 
 |
 Codes of database operations and contents of tables will be explained in this part.
-|
 
 Referees
 --------
 
 |
 Attributes of the referee table and initialized records are shown in the figure 5.2.1.
-
-|
 
 .. figure:: tugba/1.PNG
    :figclass: align-center
@@ -43,7 +40,6 @@ Attributes of the referee table and initialized records are shown in the figure 
 |
 In the code above, the table is created. If the table is already created, it will drop it and create it again. Also primary and foreign keys assigned.
 Keeping the integrity stable, the cascade operations are applied on delete and update.
-|
 
 **Initilize Insert**
 
@@ -94,7 +90,6 @@ Keeping the integrity stable, the cascade operations are applied on delete and u
 
 |
 In this piece of code, the table is listed and values which comes from the users are inserted into the table.
-|
 
 
 **Update Function**
@@ -128,7 +123,6 @@ In this piece of code, the table is listed and values which comes from the users
 
 |
 In this code, inserted values before can be updated in the new opened page.
-|
 
 **Delete Function**
 
@@ -146,14 +140,12 @@ In this code, inserted values before can be updated in the new opened page.
 
 |
 Here, a referee which is wanted to be removed can be remove.
-|
 
 Nationality
 -----------
 
 |
 Attributes of the nationality table and initialized records are shown in the figure 5.2.2.
-|
 
 .. figure:: tugba/3.PNG
    :figclass: align-center
@@ -180,7 +172,6 @@ Attributes of the nationality table and initialized records are shown in the fig
 |
 In the code above, the table is created. If the table is already created, it will drop it and create it again. Also primary and foreign keys assigned.
 Keeping the integrity stable, the cascade operations are applied on delete and update.
-|
 
 **Initilize Insert**
 
@@ -241,7 +232,6 @@ Keeping the integrity stable, the cascade operations are applied on delete and u
            return redirect(url_for('nationalities_page'))
 |
 In this piece of code, the table is listed and values which comes from the users are inserted into the table.
-|
 
 **Update Function**
 
@@ -268,7 +258,6 @@ In this piece of code, the table is listed and values which comes from the users
        return redirect(url_for('nationalities_page'))
 |
 In this code, inserted values before can be updated in the new opened page.
-|
 
 **Delete Function**
 
@@ -286,14 +275,12 @@ In this code, inserted values before can be updated in the new opened page.
 
 |
 Here, a nationality which is wanted to be removed can be remove.
-|
 
 Arena
 -----
 
 |
 Attributes of the arena table and initialized records are shown in the figure 5.2.3.
-|
 
 .. figure:: tugba/2.PNG
    :figclass: align-center
@@ -318,7 +305,6 @@ Attributes of the arena table and initialized records are shown in the figure 5.
 |
 In the code above, the table is created. If the table is already created, it will drop it and create it again. Also primary and foreign keys assigned.
 Keeping the integrity stable, the cascade operations are applied on delete and update.
-|
 
 **Initilize Insert**
 
@@ -360,7 +346,6 @@ Keeping the integrity stable, the cascade operations are applied on delete and u
            return redirect(url_for('arenas_page'))
 |
 In this piece of code, the table is listed and values which comes from the users are inserted into the table.
-|
 
 **Update Function**
 
@@ -390,7 +375,6 @@ In this piece of code, the table is listed and values which comes from the users
        return redirect(url_for('arenas_page'))
 |
 In this code, inserted values before can be updated in the new opened page.
-|
 
 **Delete Function**
 
@@ -409,4 +393,3 @@ In this code, inserted values before can be updated in the new opened page.
 
 |
 Here, a arena which is wanted to be removed can be remove.
-|
