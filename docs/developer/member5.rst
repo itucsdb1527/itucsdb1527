@@ -1,32 +1,25 @@
 Parts Implemented by Tugba Ozkal
 ================================
 
-
 General View
 ------------
 
-
 |
-
 Codes of database operations and contents of tables will be explained in this part.
-
 |
-
 
 Referees
 --------
 
-
 |
-
 Attributes of the referee table and initialized records are shown in the figure below.
-
 
 |
 
 .. figure:: tugba/1.png
    :figclass: align-center
 
+   figure 5.2.1
 
 **Create Function**
 
@@ -50,9 +43,7 @@ Attributes of the referee table and initialized records are shown in the figure 
 |
 In the code above, the table is created. If the table is already created, it will drop it and create it again. Also primary and foreign keys assigned.
 Keeping the integrity stable, the cascade operations are applied on delete and update.
-
 |
-
 
 **Initilize Insert**
 
@@ -78,7 +69,6 @@ Keeping the integrity stable, the cascade operations are applied on delete and u
 
 
 **List and Insert**
-
 
 .. code-block:: python
 
@@ -108,7 +98,6 @@ In this piece of code, the table is listed and values which comes from the users
 
 
 **Update Function**
-
 
 .. code-block:: python
 
@@ -141,9 +130,7 @@ In this piece of code, the table is listed and values which comes from the users
 In this code, inserted values before can be updated in the new opened page.
 |
 
-
 **Delete Function**
-
 
 .. code-block:: python
 
@@ -161,23 +148,17 @@ In this code, inserted values before can be updated in the new opened page.
 Here, a referee which is wanted to be removed can be remove.
 |
 
-
-
 Nationality
 -----------
 
-
 |
-
 Attributes of the nationality table and initialized records are shown in the figure below.
-
-
 |
-
 
 .. figure:: tugba/3.png
    :figclass: align-center
 
+   figure 5.2.2
 
 **Create Function**
 
@@ -199,12 +180,9 @@ Attributes of the nationality table and initialized records are shown in the fig
 |
 In the code above, the table is created. If the table is already created, it will drop it and create it again. Also primary and foreign keys assigned.
 Keeping the integrity stable, the cascade operations are applied on delete and update.
-
 |
 
-
 **Initilize Insert**
-
 
 .. code-block:: python
 
@@ -261,15 +239,11 @@ Keeping the integrity stable, the cascade operations are applied on delete and u
            cursor.execute(query)
            connection.commit()
            return redirect(url_for('nationalities_page'))
-
-
 |
 In this piece of code, the table is listed and values which comes from the users are inserted into the table.
 |
 
-
 **Update Function**
-
 
 .. code-block:: python
 
@@ -292,15 +266,11 @@ In this piece of code, the table is listed and values which comes from the users
        cursor.execute(query)
        connection.commit()
        return redirect(url_for('nationalities_page'))
-
-
 |
 In this code, inserted values before can be updated in the new opened page.
 |
 
-
 **Delete Function**
-
 
 .. code-block:: python
 
@@ -318,26 +288,20 @@ In this code, inserted values before can be updated in the new opened page.
 Here, a nationality which is wanted to be removed can be remove.
 |
 
-
-
 Arena
 -----
 
-
 |
-
 Attributes of the arena table and initialized records are shown in the figure below.
-
-
 |
-
 
 .. figure:: tugba/2.png
    :figclass: align-center
 
+   figure 5.2.3
+
 
 **Create Function**
-
 
 .. code-block:: python
 
@@ -351,16 +315,12 @@ Attributes of the arena table and initialized records are shown in the figure be
        query = """CREATE TABLE ARENAS (ID SERIAL PRIMARY KEY, ArenaName VARCHAR NOT NULL, ArenaBuiltDate INTEGER, ArenaCity VARCHAR NOT NULL, ArenaCapacity INTEGER)"""
        cursor.execute(query)
 
-
 |
 In the code above, the table is created. If the table is already created, it will drop it and create it again. Also primary and foreign keys assigned.
 Keeping the integrity stable, the cascade operations are applied on delete and update.
-
 |
 
-
 **Initilize Insert**
-
 
 .. code-block:: python
 
@@ -375,9 +335,7 @@ Keeping the integrity stable, the cascade operations are applied on delete and u
     query = """INSERT INTO ARENAS (ArenaName,ArenaBuiltDate,ArenaCity,ArenaCapacity) VALUES ('Pavilhao Rosa Mota',1991,'Porto',5400)"""
     cursor.execute(query)
 
-
 **List and Insert**
-
 
 .. code-block:: python
 
@@ -400,15 +358,11 @@ Keeping the integrity stable, the cascade operations are applied on delete and u
            cursor.execute(query)
            connection.commit()
            return redirect(url_for('arenas_page'))
-
-
 |
 In this piece of code, the table is listed and values which comes from the users are inserted into the table.
 |
 
-
 **Update Function**
-
 
 .. code-block:: python
 
@@ -434,12 +388,9 @@ In this piece of code, the table is listed and values which comes from the users
        cursor.execute(query)
        connection.commit()
        return redirect(url_for('arenas_page'))
-
-
 |
 In this code, inserted values before can be updated in the new opened page.
 |
-
 
 **Delete Function**
 
@@ -459,4 +410,3 @@ In this code, inserted values before can be updated in the new opened page.
 |
 Here, a arena which is wanted to be removed can be remove.
 |
-
