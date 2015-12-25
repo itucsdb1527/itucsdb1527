@@ -17,7 +17,7 @@ For each referee, there is a unique number which is designated by the system, th
 The table of referees can be seen in the figure 5.1.1.
 |
 
-.. figure:: referee_images/1.PNG
+.. figure:: referee_images/1.png
    :figclass: align-center
 
    figure 5.1.1
@@ -26,7 +26,7 @@ The table of referees can be seen in the figure 5.1.1.
 To update a tuple, user should click to 'update' button (figure 5.1.1). After that, another window (figure 5.1.2) which includes many boxes to enter new information will be opened.
 |
 
-.. figure:: referee_images/2.PNG
+.. figure:: referee_images/2.png
    :figclass: align-center
 
    figure 5.1.2
@@ -36,7 +36,7 @@ To add a new referee, user should enter new features into the boxes under the ta
 button as can be seen in the figure 5.1.3.
 |
 
-.. figure:: referee_images/3.PNG
+.. figure:: referee_images/3.png
    :figclass: align-center
 
    figure 5.1.3
@@ -54,7 +54,7 @@ by the system, that is ID.
 Nationality table can be seen in the figure 5.1.4.
 |
 
-.. figure:: nationality_images/5.PNG
+.. figure:: nationality_images/5.png
    :figclass: align-center
 
    figure 5.1.4
@@ -71,7 +71,7 @@ Arena table includes five attributes such as the name, the built date, the city 
 Arena table can be seen in the figure 5.1.5.
 |
 
-.. figure:: arena_images/6.PNG
+.. figure:: arena_images/6.png
    :figclass: align-center
 
    figure 5.1.5
@@ -81,7 +81,7 @@ As seen in the figure 5.1.5, arenas can be updated or deleted clicking buttons. 
 Search page can be seen in the figure 5.1.6.
 |
 
-.. figure:: arena_images/7.PNG
+.. figure:: arena_images/7.png
    :figclass: align-center
 
    figure 5.1.6
