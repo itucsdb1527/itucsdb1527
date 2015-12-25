@@ -18,7 +18,7 @@ First of all, the matches table is shown the figure 3.1.1. The blank boxes under
 After filling the boxes, user can push the 'add new match' button and easily add a new match.
 |
 
-.. figure:: match_images/1.png
+.. figure:: match_images/1.PNG
    :figclass: align-center
 
    figure 3.1.1
@@ -30,7 +30,7 @@ If a user wants to update a record, s/he needs to push the 'update' button at th
 then the user will get the page in the figure 3.1.2 and when the blank boxes are filled or selected, the update operation will be done.
 |
 
-.. figure:: match_images/2.png
+.. figure:: match_images/2.PNG
    :figclass: align-center
 
    figure 3.1.2
@@ -46,7 +46,7 @@ is a unique number that is designated by the system, ID.
 Adding and deleting operations are basically the same with matches table and it can be seen in the figure 3.1.3.
 |
 
-.. figure:: scores_images/4.png
+.. figure:: scores_images/4.PNG
    :figclass: align-center
 
    figure 3.1.3
@@ -56,7 +56,7 @@ The update operation can be done by clicking the 'update' button which is shown 
 new scores of the matches as shown in the figure 3.1.4.
 |
 
-.. figure:: score_images/up_su.png
+.. figure:: score_images/up_su.PNG
    :figclass: align-center
 
    figure 3.1.4
@@ -70,12 +70,12 @@ The table is kept the contact information of viistors for future purposes.
 Adding, deleting and updating are the same with the tables which are mentioned above and can be seen in the figures 3.1.5 and 3.1.6, respectively.
 |
 
-.. figure:: maillist_images/3.png
+.. figure:: maillist_images/3.PNG
    :figclass: align-center
 
    figure 3.1.5
 
-.. figure:: maillist_images/up_ml.png
+.. figure:: maillist_images/up_ml.PNG
    :figclass: align-center
 
    figure 3.1.6

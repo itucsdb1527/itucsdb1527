@@ -15,7 +15,7 @@ Matches
 The contents of the matches table and the initialized version of tuples are shown in the figure 3.2.1.
 |
 
-.. figure:: seyma/4.png
+.. figure:: seyma/4.PNG
    :figclass: align-center
 
    figure 3.2.1
@@ -149,7 +149,7 @@ Scores
 The contents of the scores table and the initialized version of tuples are shown in the figure 3.2.2.
 |
 
-.. figure:: seyma/5.png
+.. figure:: seyma/5.PNG
    :figclass: align-center
 
    figure 3.2.2
@@ -277,7 +277,7 @@ Maillist
 The contents of the maillist table and the initialized version of tuples are shown in the figure 3.2.3.
 |
 
-.. figure:: seyma/6.png
+.. figure:: seyma/6.PNG
    :figclass: align-center
 
    figure 3.2.3

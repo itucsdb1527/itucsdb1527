@@ -16,7 +16,7 @@ Attributes of the referee table and initialized records are shown in the figure 
 
 |
 
-.. figure:: tugba/1.png
+.. figure:: tugba/1.PNG
    :figclass: align-center
 
    figure 5.2.1
@@ -155,7 +155,7 @@ Nationality
 Attributes of the nationality table and initialized records are shown in the figure 5.2.2.
 |
 
-.. figure:: tugba/3.png
+.. figure:: tugba/3.PNG
    :figclass: align-center
 
    figure 5.2.2
@@ -295,7 +295,7 @@ Arena
 Attributes of the arena table and initialized records are shown in the figure 5.2.3.
 |
 
-.. figure:: tugba/2.png
+.. figure:: tugba/2.PNG
    :figclass: align-center
 
    figure 5.2.3
